@@ -1,0 +1,2280 @@
+{
+  "dynamicRoutes": [
+    {
+      "authenticated": false,
+      "handlerName": "toNodeHandler",
+      "includeInCoverage": false,
+      "line": 189,
+      "method": "ALL",
+      "middlewareNames": [],
+      "path": "<betterAuthConfig.basePath>",
+      "rawPath": "`${betterAuthPath}`",
+      "routerName": "app",
+      "sourceFile": "src/routes/index.ts",
+      "fullPath": "/<betterAuthConfig.basePath>"
+    },
+    {
+      "authenticated": false,
+      "handlerName": "toNodeHandler",
+      "includeInCoverage": false,
+      "line": 190,
+      "method": "ALL",
+      "middlewareNames": [],
+      "path": "<betterAuthConfig.basePath>/*",
+      "rawPath": "`${betterAuthPath}/*`",
+      "routerName": "app",
+      "sourceFile": "src/routes/index.ts",
+      "fullPath": "/<betterAuthConfig.basePath>/*"
+    }
+  ],
+  "generatedFrom": {
+    "repository": "samanhappy/mcphub",
+    "version": "1.0.15"
+  },
+  "routes": [
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getMarketplaceWellKnown",
+      "line": 437,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_marketplace_well_known"
+      },
+      "method": "GET",
+      "notes": "Public discovery metadata for the local marketplace catalog.",
+      "path": "/.well-known/mcp-marketplace",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getMetadata",
+      "line": 212,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/.well-known/oauth-authorization-server",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getProtectedResourceMetadata",
+      "line": 213,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/.well-known/oauth-protected-resource",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getGroupOpenAPISpec",
+      "line": 446,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_group_downstream_openapi_spec"
+      },
+      "method": "GET",
+      "notes": "Group-scoped downstream OpenAPI document for MCPHub tool execution.",
+      "path": "/api/:name/openapi.json",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "unsupported",
+      "handlerName": "executeToolViaOpenAPI",
+      "line": 453,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/:name/tools/:serverName/:toolName",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "unsupported",
+      "handlerName": "executeToolViaOpenAPI",
+      "line": 454,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/:name/tools/:serverName/:toolName",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getActivities",
+      "line": 315,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_activities"
+      },
+      "method": "GET",
+      "notes": "Lists activity records when MCPHub runs in database mode.",
+      "path": "/api/activities",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getActivityById",
+      "line": 318,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_activity"
+      },
+      "method": "GET",
+      "notes": "Returns a single activity record by id.",
+      "path": "/api/activities/:id",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "checkActivityAvailable",
+      "line": 314,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_check_activities_available"
+      },
+      "method": "GET",
+      "notes": "Reports whether activity endpoints are available on the current MCPHub instance.",
+      "path": "/api/activities/available",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteOldActivities",
+      "line": 319,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_cleanup_activities"
+      },
+      "method": "DELETE",
+      "notes": "Activity cleanup deletes history and therefore remains destructive.",
+      "path": "/api/activities/cleanup",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getActivityFilterOptions",
+      "line": 317,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_activity_filters"
+      },
+      "method": "GET",
+      "notes": "Returns available filter values for the activity feed.",
+      "path": "/api/activities/filters",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getActivityStats",
+      "line": 316,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_activity_stats"
+      },
+      "method": "GET",
+      "notes": "Returns aggregate activity statistics in database mode.",
+      "path": "/api/activities/stats",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "internal",
+      "handlerName": "changePassword",
+      "line": 415,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "Authentication mutation routes are used by the REST client in JWT mode but are not exposed as management tools.",
+      "path": "/api/auth/change-password",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "getBearerKeys",
+      "line": 308,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_bearer_keys"
+      },
+      "method": "GET",
+      "notes": "Bearer key listings are secret-sensitive and remain administrative.",
+      "path": "/api/auth/keys",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createBearerKey",
+      "line": 309,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_bearer_key"
+      },
+      "method": "POST",
+      "notes": "Creating a bearer key changes control-plane access and remains dangerous configuration.",
+      "path": "/api/auth/keys",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteBearerKey",
+      "line": 311,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_bearer_key"
+      },
+      "method": "DELETE",
+      "notes": "Deleting a bearer key is destructive for existing clients and remains dangerous configuration.",
+      "path": "/api/auth/keys/:id",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "updateBearerKey",
+      "line": 310,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_bearer_key"
+      },
+      "method": "PUT",
+      "notes": "Updating bearer key properties changes privileged API access.",
+      "path": "/api/auth/keys/:id",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "login",
+      "line": 394,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "Authentication mutation routes are used by the REST client in JWT mode but are not exposed as management tools.",
+      "path": "/api/auth/login",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "register",
+      "line": 403,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "Authentication mutation routes are used by the REST client in JWT mode but are not exposed as management tools.",
+      "path": "/api/auth/register",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getCurrentUser",
+      "line": 412,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_current_user"
+      },
+      "method": "GET",
+      "notes": "Returns the current authenticated MCPHub user.",
+      "path": "/api/auth/user",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getBetterAuthUser",
+      "line": 392,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_better_auth_user"
+      },
+      "method": "GET",
+      "notes": "Returns the resolved Better Auth user for the current request when Better Auth is enabled.",
+      "path": "/api/better-auth/user",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getChangelogUpdateInfoHandler",
+      "line": 381,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_changelog_update_info"
+      },
+      "method": "GET",
+      "notes": "Returns MCPHub update metadata proxied from the changelog service.",
+      "path": "/api/changelog/update-info",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllCloudCategories",
+      "line": 368,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_cloud_categories"
+      },
+      "method": "GET",
+      "notes": "Lists cloud market categories.",
+      "path": "/api/cloud/categories",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getCloudServersByCategory",
+      "line": 369,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_cloud_servers_by_category"
+      },
+      "method": "GET",
+      "notes": "Lists cloud market servers for a category.",
+      "path": "/api/cloud/categories/:category",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllCloudServers",
+      "line": 365,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_cloud_servers"
+      },
+      "method": "GET",
+      "notes": "Lists cloud market servers.",
+      "path": "/api/cloud/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getCloudServer",
+      "line": 367,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_cloud_server"
+      },
+      "method": "GET",
+      "notes": "Returns a single cloud market entry.",
+      "path": "/api/cloud/servers/:name",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getCloudServerToolsList",
+      "line": 372,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_cloud_server_tools"
+      },
+      "method": "GET",
+      "notes": "Lists callable tools for a cloud market server.",
+      "path": "/api/cloud/servers/:serverName/tools",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "all",
+      "handlerName": "callCloudTool",
+      "line": 373,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_call_cloud_tool"
+      },
+      "method": "POST",
+      "notes": "Calling a cloud market tool is intentionally reserved for the all profile because it crosses into downstream execution.",
+      "path": "/api/cloud/servers/:serverName/tools/:toolName/call",
+      "profile": "all",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "searchCloudServersByQuery",
+      "line": 366,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_search_cloud_servers"
+      },
+      "method": "GET",
+      "notes": "Searches cloud market servers by query string.",
+      "path": "/api/cloud/servers/search",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllCloudTags",
+      "line": 370,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_cloud_tags"
+      },
+      "method": "GET",
+      "notes": "Lists cloud market tags.",
+      "path": "/api/cloud/tags",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getCloudServersByTag",
+      "line": 371,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_cloud_servers_by_tag"
+      },
+      "method": "GET",
+      "notes": "Lists cloud market servers for a tag.",
+      "path": "/api/cloud/tags/:tag",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroupCostsHandler",
+      "line": 265,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_group_costs"
+      },
+      "method": "GET",
+      "notes": "Returns context footprint cost data for groups.",
+      "path": "/api/cost/groups",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getServerCostsHandler",
+      "line": 264,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_server_costs"
+      },
+      "method": "GET",
+      "notes": "Returns context footprint cost data for servers.",
+      "path": "/api/cost/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroups",
+      "line": 268,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_groups"
+      },
+      "method": "GET",
+      "notes": "Lists MCPHub groups and their high-level metadata.",
+      "path": "/api/groups",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createNewGroup",
+      "line": 270,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_group"
+      },
+      "method": "POST",
+      "notes": "Creates a new group and changes routing behavior for downstream tools.",
+      "path": "/api/groups",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteExistingGroup",
+      "line": 273,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_group"
+      },
+      "method": "DELETE",
+      "notes": "Deleting a group is destructive and must require explicit confirmation.",
+      "path": "/api/groups/:id",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroup",
+      "line": 269,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_group"
+      },
+      "method": "GET",
+      "notes": "Returns a single group definition and summary metadata.",
+      "path": "/api/groups/:id",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "updateExistingGroup",
+      "line": 272,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_group"
+      },
+      "method": "PUT",
+      "notes": "Updates group metadata and membership behavior.",
+      "path": "/api/groups/:id",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroupServerConfigs",
+      "line": 280,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_group_server_configs"
+      },
+      "method": "GET",
+      "notes": "Returns all per-server group overrides for a group.",
+      "path": "/api/groups/:id/server-configs",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroupServerConfig",
+      "line": 281,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_group_server_config"
+      },
+      "method": "GET",
+      "notes": "Returns a single per-server group configuration override.",
+      "path": "/api/groups/:id/server-configs/:serverName",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateGroupServerTools",
+      "line": 282,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_group_server_tools"
+      },
+      "method": "PUT",
+      "notes": "Updates group-scoped tool selection for a server.",
+      "path": "/api/groups/:id/server-configs/:serverName/tools",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getGroupServers",
+      "line": 276,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_group_servers"
+      },
+      "method": "GET",
+      "notes": "Lists server membership for a single group.",
+      "path": "/api/groups/:id/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "addServerToExistingGroup",
+      "line": 274,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_add_server_to_group"
+      },
+      "method": "POST",
+      "notes": "Adds an existing server to a group without changing the server definition itself.",
+      "path": "/api/groups/:id/servers",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "removeServerFromExistingGroup",
+      "line": 275,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_remove_server_from_group"
+      },
+      "method": "DELETE",
+      "notes": "Removes a server from a group while preserving the server definition.",
+      "path": "/api/groups/:id/servers/:serverName",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateGroupServersBatch",
+      "line": 278,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_replace_group_servers"
+      },
+      "method": "PUT",
+      "notes": "Batch replacement of group membership is operational but broad enough to require careful audit context.",
+      "path": "/api/groups/:id/servers/batch",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "batchCreateGroups",
+      "line": 271,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_batch_create_groups"
+      },
+      "method": "POST",
+      "notes": "Batch group creation is a broad infrastructure mutation and stays destructive.",
+      "path": "/api/groups/batch",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "clearLogs",
+      "line": 385,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_clear_logs"
+      },
+      "method": "DELETE",
+      "notes": "Log clearing is destructive because it deletes audit evidence.",
+      "path": "/api/logs",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllLogs",
+      "line": 384,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_logs"
+      },
+      "method": "GET",
+      "notes": "Returns MCPHub logs and must redact tokens, headers, and environment values.",
+      "path": "/api/logs",
+      "profile": "safe",
+      "risk": "secret_sensitive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "streaming-only",
+      "handlerName": "streamLogs",
+      "line": 386,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "Log streaming should be modeled as a future MCP resource subscription, not a request/response tool.",
+      "path": "/api/logs/stream",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllMarketCategories",
+      "line": 359,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_market_categories"
+      },
+      "method": "GET",
+      "notes": "Lists market categories.",
+      "path": "/api/market/categories",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getMarketServersByCategory",
+      "line": 360,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_market_servers_by_category"
+      },
+      "method": "GET",
+      "notes": "Lists market servers for a category.",
+      "path": "/api/market/categories/:category",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllMarketServers",
+      "line": 356,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_market_servers"
+      },
+      "method": "GET",
+      "notes": "Lists local market catalog servers.",
+      "path": "/api/market/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getMarketServer",
+      "line": 358,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_market_server"
+      },
+      "method": "GET",
+      "notes": "Returns a single market catalog entry.",
+      "path": "/api/market/servers/:name",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "searchMarketServersByQuery",
+      "line": 357,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_search_market_servers"
+      },
+      "method": "GET",
+      "notes": "Searches market catalog servers by query string.",
+      "path": "/api/market/servers/search",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllMarketTags",
+      "line": 361,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_market_tags"
+      },
+      "method": "GET",
+      "notes": "Lists market tags.",
+      "path": "/api/market/tags",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getMarketServersByTag",
+      "line": 362,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_market_servers_by_tag"
+      },
+      "method": "GET",
+      "notes": "Lists market servers for a tag.",
+      "path": "/api/market/tags/:tag",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getMcpSettingsJson",
+      "line": 389,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_export_settings"
+      },
+      "method": "GET",
+      "notes": "Settings export remains secret-sensitive and should only expose redacted content unless explicitly overridden.",
+      "path": "/api/mcp-settings/export",
+      "profile": "safe",
+      "risk": "secret_sensitive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "unsupported",
+      "handlerName": "getPrompt",
+      "line": 335,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/mcp/:serverName/prompts/:promptName",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "all",
+      "handlerName": "uploadMcpbFile",
+      "line": 353,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_upload_mcpb_bundle"
+      },
+      "method": "POST",
+      "notes": "MCPB upload accepts multipart content and remains dangerous configuration.",
+      "path": "/api/mcpb/upload",
+      "profile": "all",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "getAllClients",
+      "line": 293,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_oauth_clients"
+      },
+      "method": "GET",
+      "notes": "OAuth client management is administrative and secret-sensitive.",
+      "path": "/api/oauth/clients",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createClient",
+      "line": 295,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_oauth_client"
+      },
+      "method": "POST",
+      "notes": "Creating an OAuth client introduces new credentials and remains dangerous configuration.",
+      "path": "/api/oauth/clients",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteClient",
+      "line": 304,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_oauth_client"
+      },
+      "method": "DELETE",
+      "notes": "Deleting an OAuth client is destructive and changes auth posture.",
+      "path": "/api/oauth/clients/:clientId",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "getClient",
+      "line": 294,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_oauth_client"
+      },
+      "method": "GET",
+      "notes": "OAuth client inspection remains administrative because secrets and redirect URIs require careful redaction.",
+      "path": "/api/oauth/clients/:clientId",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "updateClient",
+      "line": 303,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_oauth_client"
+      },
+      "method": "PUT",
+      "notes": "Updating OAuth client configuration can break auth flows and is classified as dangerous configuration.",
+      "path": "/api/oauth/clients/:clientId",
+      "profile": "admin",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "all",
+      "handlerName": "regenerateSecret",
+      "line": 305,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_regenerate_oauth_client_secret"
+      },
+      "method": "POST",
+      "notes": "Secret regeneration is highly sensitive because it invalidates existing integrations immediately.",
+      "path": "/api/oauth/clients/:clientId/regenerate-secret",
+      "profile": "all",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getOpenAPISpec",
+      "line": 445,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_downstream_openapi_spec"
+      },
+      "method": "GET",
+      "notes": "This OpenAPI document describes downstream MCP tool execution, not the management API itself.",
+      "path": "/api/openapi.json",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getOpenAPIServers",
+      "line": 447,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_openapi_servers"
+      },
+      "method": "GET",
+      "notes": "Lists downstream servers visible to the OpenAPI generator.",
+      "path": "/api/openapi/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getOpenAPIStats",
+      "line": 448,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_openapi_stats"
+      },
+      "method": "GET",
+      "notes": "OpenAPI generator statistics for downstream tool exposure.",
+      "path": "/api/openapi/stats",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "listBuiltinPrompts",
+      "line": 338,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_builtin_prompts"
+      },
+      "method": "GET",
+      "notes": "Lists built-in MCPHub prompts.",
+      "path": "/api/prompts",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createBuiltinPrompt",
+      "line": 340,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_builtin_prompt"
+      },
+      "method": "POST",
+      "notes": "Creates a built-in prompt exposed by MCPHub itself.",
+      "path": "/api/prompts",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteBuiltinPrompt",
+      "line": 342,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_builtin_prompt"
+      },
+      "method": "DELETE",
+      "notes": "Deletes a built-in prompt and therefore requires destructive confirmation.",
+      "path": "/api/prompts/:id",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getBuiltinPrompt",
+      "line": 339,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_builtin_prompt"
+      },
+      "method": "GET",
+      "notes": "Returns a built-in prompt definition by id.",
+      "path": "/api/prompts/:id",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateBuiltinPrompt",
+      "line": 341,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_builtin_prompt"
+      },
+      "method": "PUT",
+      "notes": "Updating a built-in prompt changes model-facing instructions and remains an operational write.",
+      "path": "/api/prompts/:id",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllRegistryServers",
+      "line": 376,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_registry_servers"
+      },
+      "method": "GET",
+      "notes": "Lists MCP registry entries proxied by MCPHub.",
+      "path": "/api/registry/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getRegistryServerVersion",
+      "line": 378,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_registry_server_version"
+      },
+      "method": "GET",
+      "notes": "Returns a specific registry server version payload.",
+      "path": "/api/registry/servers/version",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getRegistryServerVersions",
+      "line": 377,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_registry_server_versions"
+      },
+      "method": "GET",
+      "notes": "Returns available versions for a registry server entry.",
+      "path": "/api/registry/servers/versions",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "listBuiltinResources",
+      "line": 345,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_builtin_resources"
+      },
+      "method": "GET",
+      "notes": "Lists built-in MCPHub resources.",
+      "path": "/api/resources",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createBuiltinResource",
+      "line": 347,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_builtin_resource"
+      },
+      "method": "POST",
+      "notes": "Creates a built-in resource exposed by MCPHub itself.",
+      "path": "/api/resources",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteBuiltinResource",
+      "line": 349,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_builtin_resource"
+      },
+      "method": "DELETE",
+      "notes": "Deletes a built-in resource and therefore requires destructive confirmation.",
+      "path": "/api/resources/:id",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getBuiltinResource",
+      "line": 346,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_builtin_resource"
+      },
+      "method": "GET",
+      "notes": "Returns a built-in resource definition by id.",
+      "path": "/api/resources/:id",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateBuiltinResource",
+      "line": 348,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_builtin_resource"
+      },
+      "method": "PUT",
+      "notes": "Updating a built-in resource changes model-visible context and remains an operational write.",
+      "path": "/api/resources/:id",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "readResource",
+      "line": 350,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_read_builtin_resource"
+      },
+      "method": "POST",
+      "notes": "Reads built-in resource content and should stay read-only in the MCP surface.",
+      "path": "/api/resources/read",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllServers",
+      "line": 225,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_servers"
+      },
+      "method": "GET",
+      "notes": "Lists MCPHub server definitions with secret-bearing fields redacted in tool output.",
+      "path": "/api/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createServer",
+      "line": 228,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_server"
+      },
+      "method": "POST",
+      "notes": "Creates a server definition; stdio command-based servers remain gated by policy flags.",
+      "path": "/api/servers",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteServer",
+      "line": 231,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_server"
+      },
+      "method": "DELETE",
+      "notes": "Deleting a server is destructive and must require explicit confirmation fields.",
+      "path": "/api/servers/:name",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getServerConfig",
+      "line": 226,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_server"
+      },
+      "method": "GET",
+      "notes": "Returns a single server configuration with secret-bearing fields redacted.",
+      "path": "/api/servers/:name",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "updateServer",
+      "line": 230,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_server"
+      },
+      "method": "PUT",
+      "notes": "Updates server configuration and requires destructive-style confirmation because a bad update can disable service access.",
+      "path": "/api/servers/:name",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "reloadServer",
+      "line": 233,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_reload_server"
+      },
+      "method": "POST",
+      "notes": "Reload is operational and reversible but still affects active sessions.",
+      "path": "/api/servers/:name/reload",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "toggleServer",
+      "line": 232,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_toggle_server"
+      },
+      "method": "POST",
+      "notes": "Enable or disable a managed server without deleting it; dry-run support should be preserved in the MCP layer.",
+      "path": "/api/servers/:name/toggle",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "resetPromptDescription",
+      "line": 248,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_reset_server_prompt_description"
+      },
+      "method": "DELETE",
+      "notes": "Resets server prompt description overrides.",
+      "path": "/api/servers/:serverName/prompts/:promptName/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updatePromptDescription",
+      "line": 244,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_server_prompt_description"
+      },
+      "method": "PUT",
+      "notes": "Prompt description overrides influence model-facing guidance and remain operational writes.",
+      "path": "/api/servers/:serverName/prompts/:promptName/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "togglePrompt",
+      "line": 243,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_toggle_server_prompt"
+      },
+      "method": "POST",
+      "notes": "Toggles a downstream prompt inside a managed server definition.",
+      "path": "/api/servers/:serverName/prompts/:promptName/toggle",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "resetResourceDescription",
+      "line": 257,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_reset_server_resource_description"
+      },
+      "method": "DELETE",
+      "notes": "Resets server resource description overrides.",
+      "path": "/api/servers/:serverName/resources/:resourceUri/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateResourceDescription",
+      "line": 253,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_server_resource_description"
+      },
+      "method": "PUT",
+      "notes": "Resource description overrides affect model context and stay in the ops profile.",
+      "path": "/api/servers/:serverName/resources/:resourceUri/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "toggleResource",
+      "line": 252,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_toggle_server_resource"
+      },
+      "method": "POST",
+      "notes": "Toggles a downstream resource inside a managed server definition.",
+      "path": "/api/servers/:serverName/resources/:resourceUri/toggle",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "resetToolDescription",
+      "line": 239,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_reset_server_tool_description"
+      },
+      "method": "DELETE",
+      "notes": "Resets server tool description overrides to upstream defaults.",
+      "path": "/api/servers/:serverName/tools/:toolName/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "updateToolDescription",
+      "line": 235,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_server_tool_description"
+      },
+      "method": "PUT",
+      "notes": "Description overrides affect agent behavior and therefore stay in the ops profile with audit context.",
+      "path": "/api/servers/:serverName/tools/:toolName/description",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "toggleTool",
+      "line": 234,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_toggle_server_tool"
+      },
+      "method": "POST",
+      "notes": "Toggles a downstream tool inside a managed server definition.",
+      "path": "/api/servers/:serverName/tools/:toolName/toggle",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "batchCreateServers",
+      "line": 229,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_batch_create_servers"
+      },
+      "method": "POST",
+      "notes": "Batch server creation remains destructive because it mutates managed infrastructure at scale.",
+      "path": "/api/servers/batch",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getAllSettings",
+      "line": 227,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_settings_snapshot"
+      },
+      "method": "GET",
+      "notes": "Returns a settings snapshot with secrets redacted by default in the MCP output layer.",
+      "path": "/api/settings",
+      "profile": "safe",
+      "risk": "secret_sensitive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "all",
+      "handlerName": "updateSystemConfig",
+      "line": 261,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_system_config"
+      },
+      "method": "PUT",
+      "notes": "System config writes can lock users out or weaken auth posture and therefore remain all-profile dangerous operations.",
+      "path": "/api/system-config",
+      "profile": "all",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "exportConfigTemplate",
+      "line": 322,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_export_config_template"
+      },
+      "method": "POST",
+      "notes": "Exports a configuration template for operational reuse.",
+      "path": "/api/templates/export",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "ops",
+      "handlerName": "exportGroupAsTemplate",
+      "line": 323,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_export_group_template"
+      },
+      "method": "GET",
+      "notes": "Exports a group as a reusable configuration template.",
+      "path": "/api/templates/export/groups/:id",
+      "profile": "ops",
+      "risk": "safe_write",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "all",
+      "handlerName": "importConfigTemplate",
+      "line": 329,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_import_config_template"
+      },
+      "method": "POST",
+      "notes": "Template import can introduce arbitrary server definitions and remains dangerous configuration.",
+      "path": "/api/templates/import",
+      "profile": "all",
+      "risk": "dangerous_config",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "unsupported",
+      "handlerName": "executeToolViaOpenAPI",
+      "line": 451,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/tools/:serverName/:toolName",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "unsupported",
+      "handlerName": "executeToolViaOpenAPI",
+      "line": 452,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/tools/:serverName/:toolName",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "unsupported",
+      "handlerName": "callTool",
+      "line": 332,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.",
+      "path": "/api/tools/call/:server",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "getUsers",
+      "line": 285,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_users"
+      },
+      "method": "GET",
+      "notes": "User listings are administrative and should stay behind trusted profiles.",
+      "path": "/api/users",
+      "profile": "admin",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "createUser",
+      "line": 287,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_create_user"
+      },
+      "method": "POST",
+      "notes": "Creating a user mutates access control and remains destructive.",
+      "path": "/api/users",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "safe",
+      "handlerName": "getUserStats",
+      "line": 290,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_user_stats"
+      },
+      "method": "GET",
+      "notes": "User statistics are read-only and useful for diagnostics, even though upstream still requires authenticated access.",
+      "path": "/api/users-stats",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "deleteExistingUser",
+      "line": 289,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_delete_user"
+      },
+      "method": "DELETE",
+      "notes": "Deleting a user is destructive and must require explicit confirmation.",
+      "path": "/api/users/:username",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "getUser",
+      "line": 286,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_user"
+      },
+      "method": "GET",
+      "notes": "User record inspection remains administrative because it exposes identity and role data.",
+      "path": "/api/users/:username",
+      "profile": "admin",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": true,
+      "classification": "admin",
+      "handlerName": "updateExistingUser",
+      "line": 288,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_update_user"
+      },
+      "method": "PUT",
+      "notes": "Updating a user changes access control and remains destructive.",
+      "path": "/api/users/:username",
+      "profile": "admin",
+      "risk": "destructive",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getRuntimeConfig",
+      "line": 427,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_runtime_config"
+      },
+      "method": "GET",
+      "notes": "Public runtime bootstrap configuration for the MCPHub frontend.",
+      "path": "/config",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "listDiscoveryCategories",
+      "line": 441,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_discovery_categories"
+      },
+      "method": "GET",
+      "notes": "Public discovery categories exposed by MCPHub.",
+      "path": "/discovery/categories",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "listDiscoveryServers",
+      "line": 438,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_discovery_servers"
+      },
+      "method": "GET",
+      "notes": "Public discovery catalog listing for external installers and MCP clients.",
+      "path": "/discovery/servers",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getDiscoveryServer",
+      "line": 439,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_discovery_server"
+      },
+      "method": "GET",
+      "notes": "Public discovery details for a single catalog server.",
+      "path": "/discovery/servers/:name",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getDiscoveryServerInstall",
+      "line": 440,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_discovery_server_install"
+      },
+      "method": "GET",
+      "notes": "Public install payload for a discovery server entry.",
+      "path": "/discovery/servers/:name/install",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "listDiscoveryTags",
+      "line": 442,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_list_discovery_tags"
+      },
+      "method": "GET",
+      "notes": "Public discovery tags exposed by MCPHub.",
+      "path": "/discovery/tags",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "healthCheck",
+      "line": 194,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_health_check"
+      },
+      "method": "GET",
+      "notes": "Basic health endpoint for liveness and quick diagnostics.",
+      "path": "/health",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "receiveHostedInternalEvent",
+      "line": 197,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "Hosted internal event ingress is not suitable for MCP exposure.",
+      "path": "/internal/v1/events",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getHostedInternalRuntimeCatalog",
+      "line": 198,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "Hosted internal runtime catalog is HMAC-protected infrastructure plumbing.",
+      "path": "/internal/v1/hosted/runtime-catalog",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getAuthorize",
+      "line": 208,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/authorize",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "postAuthorize",
+      "line": 209,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/authorize",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "handleOAuthCallback",
+      "line": 205,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/callback",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "registerClient",
+      "line": 216,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/register",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "deleteClientRegistration",
+      "line": 219,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "DELETE",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/register/:clientId",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getClientConfiguration",
+      "line": 217,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/register/:clientId",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "updateClientConfiguration",
+      "line": 218,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "PUT",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/register/:clientId",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "postToken",
+      "line": 210,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "POST",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/token",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "internal",
+      "handlerName": "getUserInfo",
+      "line": 211,
+      "mcp": {
+        "kind": "none",
+        "name": null
+      },
+      "method": "GET",
+      "notes": "OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.",
+      "path": "/oauth/userinfo",
+      "profile": null,
+      "risk": null,
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    },
+    {
+      "authenticated": false,
+      "classification": "safe",
+      "handlerName": "getPublicConfig",
+      "line": 430,
+      "mcp": {
+        "kind": "tool",
+        "name": "mcphub_get_public_config"
+      },
+      "method": "GET",
+      "notes": "Public configuration snapshot; useful for diagnosing skip-auth and similar public flags.",
+      "path": "/public-config",
+      "profile": "safe",
+      "risk": "read",
+      "sourceFile": "src/routes/index.ts",
+      "sinceMcphubVersion": "1.0.15"
+    }
+  ]
+}

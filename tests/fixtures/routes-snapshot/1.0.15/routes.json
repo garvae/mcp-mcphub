@@ -1,0 +1,2027 @@
+[
+  {
+    "authenticated": false,
+    "handlerName": "getMarketplaceWellKnown",
+    "includeInCoverage": true,
+    "line": 437,
+    "method": "GET",
+    "middlewareNames": [
+      "getMarketplaceWellKnown"
+    ],
+    "path": "/.well-known/mcp-marketplace",
+    "rawPath": "'/.well-known/mcp-marketplace'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/.well-known/mcp-marketplace"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getMetadata",
+    "includeInCoverage": true,
+    "line": 212,
+    "method": "GET",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "getMetadata"
+    ],
+    "path": "/.well-known/oauth-authorization-server",
+    "rawPath": "'/.well-known/oauth-authorization-server'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/.well-known/oauth-authorization-server"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getProtectedResourceMetadata",
+    "includeInCoverage": true,
+    "line": 213,
+    "method": "GET",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "getProtectedResourceMetadata"
+    ],
+    "path": "/.well-known/oauth-protected-resource",
+    "rawPath": "'/.well-known/oauth-protected-resource'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/.well-known/oauth-protected-resource"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "toNodeHandler",
+    "includeInCoverage": false,
+    "line": 189,
+    "method": "ALL",
+    "middlewareNames": [],
+    "path": "<betterAuthConfig.basePath>",
+    "rawPath": "`${betterAuthPath}`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/<betterAuthConfig.basePath>"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "toNodeHandler",
+    "includeInCoverage": false,
+    "line": 190,
+    "method": "ALL",
+    "middlewareNames": [],
+    "path": "<betterAuthConfig.basePath>/*",
+    "rawPath": "`${betterAuthPath}/*`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/<betterAuthConfig.basePath>/*"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getGroupOpenAPISpec",
+    "includeInCoverage": true,
+    "line": 446,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroupOpenAPISpec"
+    ],
+    "path": "/api/:name/openapi.json",
+    "rawPath": "`${config.basePath}/api/:name/openapi.json`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/:name/openapi.json"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "executeToolViaOpenAPI",
+    "includeInCoverage": true,
+    "line": 453,
+    "method": "GET",
+    "middlewareNames": [
+      "executeToolViaOpenAPI"
+    ],
+    "path": "/api/:name/tools/:serverName/:toolName",
+    "rawPath": "`${config.basePath}/api/:name/tools/:serverName/:toolName`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/:name/tools/:serverName/:toolName"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "executeToolViaOpenAPI",
+    "includeInCoverage": true,
+    "line": 454,
+    "method": "POST",
+    "middlewareNames": [
+      "executeToolViaOpenAPI"
+    ],
+    "path": "/api/:name/tools/:serverName/:toolName",
+    "rawPath": "`${config.basePath}/api/:name/tools/:serverName/:toolName`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/:name/tools/:serverName/:toolName"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getActivities",
+    "includeInCoverage": true,
+    "line": 315,
+    "method": "GET",
+    "middlewareNames": [
+      "getActivities"
+    ],
+    "path": "/activities",
+    "rawPath": "'/activities'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getActivityById",
+    "includeInCoverage": true,
+    "line": 318,
+    "method": "GET",
+    "middlewareNames": [
+      "getActivityById"
+    ],
+    "path": "/activities/:id",
+    "rawPath": "'/activities/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "checkActivityAvailable",
+    "includeInCoverage": true,
+    "line": 314,
+    "method": "GET",
+    "middlewareNames": [
+      "checkActivityAvailable"
+    ],
+    "path": "/activities/available",
+    "rawPath": "'/activities/available'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities/available"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteOldActivities",
+    "includeInCoverage": true,
+    "line": 319,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteOldActivities"
+    ],
+    "path": "/activities/cleanup",
+    "rawPath": "'/activities/cleanup'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities/cleanup"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getActivityFilterOptions",
+    "includeInCoverage": true,
+    "line": 317,
+    "method": "GET",
+    "middlewareNames": [
+      "getActivityFilterOptions"
+    ],
+    "path": "/activities/filters",
+    "rawPath": "'/activities/filters'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities/filters"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getActivityStats",
+    "includeInCoverage": true,
+    "line": 316,
+    "method": "GET",
+    "middlewareNames": [
+      "getActivityStats"
+    ],
+    "path": "/activities/stats",
+    "rawPath": "'/activities/stats'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/activities/stats"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "changePassword",
+    "includeInCoverage": true,
+    "line": 415,
+    "method": "POST",
+    "middlewareNames": [
+      "authenticatedRouteRateLimiter",
+      "auth",
+      "changePassword"
+    ],
+    "path": "/auth/change-password",
+    "rawPath": "'/auth/change-password'",
+    "routerName": "router",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/change-password"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getBearerKeys",
+    "includeInCoverage": true,
+    "line": 308,
+    "method": "GET",
+    "middlewareNames": [
+      "getBearerKeys"
+    ],
+    "path": "/auth/keys",
+    "rawPath": "'/auth/keys'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/keys"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createBearerKey",
+    "includeInCoverage": true,
+    "line": 309,
+    "method": "POST",
+    "middlewareNames": [
+      "createBearerKey"
+    ],
+    "path": "/auth/keys",
+    "rawPath": "'/auth/keys'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/keys"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteBearerKey",
+    "includeInCoverage": true,
+    "line": 311,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteBearerKey"
+    ],
+    "path": "/auth/keys/:id",
+    "rawPath": "'/auth/keys/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/keys/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateBearerKey",
+    "includeInCoverage": true,
+    "line": 310,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateBearerKey"
+    ],
+    "path": "/auth/keys/:id",
+    "rawPath": "'/auth/keys/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/keys/:id"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "login",
+    "includeInCoverage": true,
+    "line": 394,
+    "method": "POST",
+    "middlewareNames": [
+      "login"
+    ],
+    "path": "/auth/login",
+    "rawPath": "'/auth/login'",
+    "routerName": "router",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/login"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "register",
+    "includeInCoverage": true,
+    "line": 403,
+    "method": "POST",
+    "middlewareNames": [
+      "register"
+    ],
+    "path": "/auth/register",
+    "rawPath": "'/auth/register'",
+    "routerName": "router",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/register"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getCurrentUser",
+    "includeInCoverage": true,
+    "line": 412,
+    "method": "GET",
+    "middlewareNames": [
+      "authenticatedRouteRateLimiter",
+      "auth",
+      "getCurrentUser"
+    ],
+    "path": "/auth/user",
+    "rawPath": "'/auth/user'",
+    "routerName": "router",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/auth/user"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getBetterAuthUser",
+    "includeInCoverage": true,
+    "line": 392,
+    "method": "GET",
+    "middlewareNames": [
+      "getBetterAuthUser"
+    ],
+    "path": "/better-auth/user",
+    "rawPath": "'/better-auth/user'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/better-auth/user"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getChangelogUpdateInfoHandler",
+    "includeInCoverage": true,
+    "line": 381,
+    "method": "GET",
+    "middlewareNames": [
+      "getChangelogUpdateInfoHandler"
+    ],
+    "path": "/changelog/update-info",
+    "rawPath": "'/changelog/update-info'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/changelog/update-info"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllCloudCategories",
+    "includeInCoverage": true,
+    "line": 368,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllCloudCategories"
+    ],
+    "path": "/cloud/categories",
+    "rawPath": "'/cloud/categories'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/categories"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getCloudServersByCategory",
+    "includeInCoverage": true,
+    "line": 369,
+    "method": "GET",
+    "middlewareNames": [
+      "getCloudServersByCategory"
+    ],
+    "path": "/cloud/categories/:category",
+    "rawPath": "'/cloud/categories/:category'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/categories/:category"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllCloudServers",
+    "includeInCoverage": true,
+    "line": 365,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllCloudServers"
+    ],
+    "path": "/cloud/servers",
+    "rawPath": "'/cloud/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getCloudServer",
+    "includeInCoverage": true,
+    "line": 367,
+    "method": "GET",
+    "middlewareNames": [
+      "getCloudServer"
+    ],
+    "path": "/cloud/servers/:name",
+    "rawPath": "'/cloud/servers/:name'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/servers/:name"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getCloudServerToolsList",
+    "includeInCoverage": true,
+    "line": 372,
+    "method": "GET",
+    "middlewareNames": [
+      "getCloudServerToolsList"
+    ],
+    "path": "/cloud/servers/:serverName/tools",
+    "rawPath": "'/cloud/servers/:serverName/tools'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/servers/:serverName/tools"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "callCloudTool",
+    "includeInCoverage": true,
+    "line": 373,
+    "method": "POST",
+    "middlewareNames": [
+      "callCloudTool"
+    ],
+    "path": "/cloud/servers/:serverName/tools/:toolName/call",
+    "rawPath": "'/cloud/servers/:serverName/tools/:toolName/call'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/servers/:serverName/tools/:toolName/call"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "searchCloudServersByQuery",
+    "includeInCoverage": true,
+    "line": 366,
+    "method": "GET",
+    "middlewareNames": [
+      "searchCloudServersByQuery"
+    ],
+    "path": "/cloud/servers/search",
+    "rawPath": "'/cloud/servers/search'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/servers/search"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllCloudTags",
+    "includeInCoverage": true,
+    "line": 370,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllCloudTags"
+    ],
+    "path": "/cloud/tags",
+    "rawPath": "'/cloud/tags'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/tags"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getCloudServersByTag",
+    "includeInCoverage": true,
+    "line": 371,
+    "method": "GET",
+    "middlewareNames": [
+      "getCloudServersByTag"
+    ],
+    "path": "/cloud/tags/:tag",
+    "rawPath": "'/cloud/tags/:tag'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cloud/tags/:tag"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroupCostsHandler",
+    "includeInCoverage": true,
+    "line": 265,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroupCostsHandler"
+    ],
+    "path": "/cost/groups",
+    "rawPath": "'/cost/groups'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cost/groups"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getServerCostsHandler",
+    "includeInCoverage": true,
+    "line": 264,
+    "method": "GET",
+    "middlewareNames": [
+      "getServerCostsHandler"
+    ],
+    "path": "/cost/servers",
+    "rawPath": "'/cost/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/cost/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroups",
+    "includeInCoverage": true,
+    "line": 268,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroups"
+    ],
+    "path": "/groups",
+    "rawPath": "'/groups'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createNewGroup",
+    "includeInCoverage": true,
+    "line": 270,
+    "method": "POST",
+    "middlewareNames": [
+      "createNewGroup"
+    ],
+    "path": "/groups",
+    "rawPath": "'/groups'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteExistingGroup",
+    "includeInCoverage": true,
+    "line": 273,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteExistingGroup"
+    ],
+    "path": "/groups/:id",
+    "rawPath": "'/groups/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroup",
+    "includeInCoverage": true,
+    "line": 269,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroup"
+    ],
+    "path": "/groups/:id",
+    "rawPath": "'/groups/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateExistingGroup",
+    "includeInCoverage": true,
+    "line": 272,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateExistingGroup"
+    ],
+    "path": "/groups/:id",
+    "rawPath": "'/groups/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroupServerConfigs",
+    "includeInCoverage": true,
+    "line": 280,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroupServerConfigs"
+    ],
+    "path": "/groups/:id/server-configs",
+    "rawPath": "'/groups/:id/server-configs'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/server-configs"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroupServerConfig",
+    "includeInCoverage": true,
+    "line": 281,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroupServerConfig"
+    ],
+    "path": "/groups/:id/server-configs/:serverName",
+    "rawPath": "'/groups/:id/server-configs/:serverName'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/server-configs/:serverName"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateGroupServerTools",
+    "includeInCoverage": true,
+    "line": 282,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateGroupServerTools"
+    ],
+    "path": "/groups/:id/server-configs/:serverName/tools",
+    "rawPath": "'/groups/:id/server-configs/:serverName/tools'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/server-configs/:serverName/tools"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getGroupServers",
+    "includeInCoverage": true,
+    "line": 276,
+    "method": "GET",
+    "middlewareNames": [
+      "getGroupServers"
+    ],
+    "path": "/groups/:id/servers",
+    "rawPath": "'/groups/:id/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "addServerToExistingGroup",
+    "includeInCoverage": true,
+    "line": 274,
+    "method": "POST",
+    "middlewareNames": [
+      "addServerToExistingGroup"
+    ],
+    "path": "/groups/:id/servers",
+    "rawPath": "'/groups/:id/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "removeServerFromExistingGroup",
+    "includeInCoverage": true,
+    "line": 275,
+    "method": "DELETE",
+    "middlewareNames": [
+      "removeServerFromExistingGroup"
+    ],
+    "path": "/groups/:id/servers/:serverName",
+    "rawPath": "'/groups/:id/servers/:serverName'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/servers/:serverName"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateGroupServersBatch",
+    "includeInCoverage": true,
+    "line": 278,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateGroupServersBatch"
+    ],
+    "path": "/groups/:id/servers/batch",
+    "rawPath": "'/groups/:id/servers/batch'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/:id/servers/batch"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "batchCreateGroups",
+    "includeInCoverage": true,
+    "line": 271,
+    "method": "POST",
+    "middlewareNames": [
+      "batchCreateGroups"
+    ],
+    "path": "/groups/batch",
+    "rawPath": "'/groups/batch'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/groups/batch"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "clearLogs",
+    "includeInCoverage": true,
+    "line": 385,
+    "method": "DELETE",
+    "middlewareNames": [
+      "clearLogs"
+    ],
+    "path": "/logs",
+    "rawPath": "'/logs'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/logs"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllLogs",
+    "includeInCoverage": true,
+    "line": 384,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllLogs"
+    ],
+    "path": "/logs",
+    "rawPath": "'/logs'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/logs"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "streamLogs",
+    "includeInCoverage": true,
+    "line": 386,
+    "method": "GET",
+    "middlewareNames": [
+      "streamLogs"
+    ],
+    "path": "/logs/stream",
+    "rawPath": "'/logs/stream'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/logs/stream"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllMarketCategories",
+    "includeInCoverage": true,
+    "line": 359,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllMarketCategories"
+    ],
+    "path": "/market/categories",
+    "rawPath": "'/market/categories'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/categories"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getMarketServersByCategory",
+    "includeInCoverage": true,
+    "line": 360,
+    "method": "GET",
+    "middlewareNames": [
+      "getMarketServersByCategory"
+    ],
+    "path": "/market/categories/:category",
+    "rawPath": "'/market/categories/:category'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/categories/:category"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllMarketServers",
+    "includeInCoverage": true,
+    "line": 356,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllMarketServers"
+    ],
+    "path": "/market/servers",
+    "rawPath": "'/market/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getMarketServer",
+    "includeInCoverage": true,
+    "line": 358,
+    "method": "GET",
+    "middlewareNames": [
+      "getMarketServer"
+    ],
+    "path": "/market/servers/:name",
+    "rawPath": "'/market/servers/:name'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/servers/:name"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "searchMarketServersByQuery",
+    "includeInCoverage": true,
+    "line": 357,
+    "method": "GET",
+    "middlewareNames": [
+      "searchMarketServersByQuery"
+    ],
+    "path": "/market/servers/search",
+    "rawPath": "'/market/servers/search'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/servers/search"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllMarketTags",
+    "includeInCoverage": true,
+    "line": 361,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllMarketTags"
+    ],
+    "path": "/market/tags",
+    "rawPath": "'/market/tags'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/tags"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getMarketServersByTag",
+    "includeInCoverage": true,
+    "line": 362,
+    "method": "GET",
+    "middlewareNames": [
+      "getMarketServersByTag"
+    ],
+    "path": "/market/tags/:tag",
+    "rawPath": "'/market/tags/:tag'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/market/tags/:tag"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getMcpSettingsJson",
+    "includeInCoverage": true,
+    "line": 389,
+    "method": "GET",
+    "middlewareNames": [
+      "getMcpSettingsJson"
+    ],
+    "path": "/mcp-settings/export",
+    "rawPath": "'/mcp-settings/export'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/mcp-settings/export"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getPrompt",
+    "includeInCoverage": true,
+    "line": 335,
+    "method": "POST",
+    "middlewareNames": [
+      "getPrompt"
+    ],
+    "path": "/mcp/:serverName/prompts/:promptName",
+    "rawPath": "'/mcp/:serverName/prompts/:promptName'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/mcp/:serverName/prompts/:promptName"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "uploadMcpbFile",
+    "includeInCoverage": true,
+    "line": 353,
+    "method": "POST",
+    "middlewareNames": [
+      "uploadMiddleware",
+      "uploadMcpbFile"
+    ],
+    "path": "/mcpb/upload",
+    "rawPath": "'/mcpb/upload'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/mcpb/upload"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllClients",
+    "includeInCoverage": true,
+    "line": 293,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllClients"
+    ],
+    "path": "/oauth/clients",
+    "rawPath": "'/oauth/clients'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createClient",
+    "includeInCoverage": true,
+    "line": 295,
+    "method": "POST",
+    "middlewareNames": [
+      "createClient"
+    ],
+    "path": "/oauth/clients",
+    "rawPath": "'/oauth/clients'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteClient",
+    "includeInCoverage": true,
+    "line": 304,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteClient"
+    ],
+    "path": "/oauth/clients/:clientId",
+    "rawPath": "'/oauth/clients/:clientId'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients/:clientId"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getClient",
+    "includeInCoverage": true,
+    "line": 294,
+    "method": "GET",
+    "middlewareNames": [
+      "getClient"
+    ],
+    "path": "/oauth/clients/:clientId",
+    "rawPath": "'/oauth/clients/:clientId'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients/:clientId"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateClient",
+    "includeInCoverage": true,
+    "line": 303,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateClient"
+    ],
+    "path": "/oauth/clients/:clientId",
+    "rawPath": "'/oauth/clients/:clientId'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients/:clientId"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "regenerateSecret",
+    "includeInCoverage": true,
+    "line": 305,
+    "method": "POST",
+    "middlewareNames": [
+      "regenerateSecret"
+    ],
+    "path": "/oauth/clients/:clientId/regenerate-secret",
+    "rawPath": "'/oauth/clients/:clientId/regenerate-secret'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/oauth/clients/:clientId/regenerate-secret"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getOpenAPISpec",
+    "includeInCoverage": true,
+    "line": 445,
+    "method": "GET",
+    "middlewareNames": [
+      "getOpenAPISpec"
+    ],
+    "path": "/api/openapi.json",
+    "rawPath": "`${config.basePath}/api/openapi.json`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/openapi.json"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getOpenAPIServers",
+    "includeInCoverage": true,
+    "line": 447,
+    "method": "GET",
+    "middlewareNames": [
+      "getOpenAPIServers"
+    ],
+    "path": "/api/openapi/servers",
+    "rawPath": "`${config.basePath}/api/openapi/servers`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/openapi/servers"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getOpenAPIStats",
+    "includeInCoverage": true,
+    "line": 448,
+    "method": "GET",
+    "middlewareNames": [
+      "getOpenAPIStats"
+    ],
+    "path": "/api/openapi/stats",
+    "rawPath": "`${config.basePath}/api/openapi/stats`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/openapi/stats"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "listBuiltinPrompts",
+    "includeInCoverage": true,
+    "line": 338,
+    "method": "GET",
+    "middlewareNames": [
+      "listBuiltinPrompts"
+    ],
+    "path": "/prompts",
+    "rawPath": "'/prompts'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/prompts"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createBuiltinPrompt",
+    "includeInCoverage": true,
+    "line": 340,
+    "method": "POST",
+    "middlewareNames": [
+      "createBuiltinPrompt"
+    ],
+    "path": "/prompts",
+    "rawPath": "'/prompts'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/prompts"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteBuiltinPrompt",
+    "includeInCoverage": true,
+    "line": 342,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteBuiltinPrompt"
+    ],
+    "path": "/prompts/:id",
+    "rawPath": "'/prompts/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/prompts/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getBuiltinPrompt",
+    "includeInCoverage": true,
+    "line": 339,
+    "method": "GET",
+    "middlewareNames": [
+      "getBuiltinPrompt"
+    ],
+    "path": "/prompts/:id",
+    "rawPath": "'/prompts/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/prompts/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateBuiltinPrompt",
+    "includeInCoverage": true,
+    "line": 341,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateBuiltinPrompt"
+    ],
+    "path": "/prompts/:id",
+    "rawPath": "'/prompts/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/prompts/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllRegistryServers",
+    "includeInCoverage": true,
+    "line": 376,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllRegistryServers"
+    ],
+    "path": "/registry/servers",
+    "rawPath": "'/registry/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/registry/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getRegistryServerVersion",
+    "includeInCoverage": true,
+    "line": 378,
+    "method": "GET",
+    "middlewareNames": [
+      "getRegistryServerVersion"
+    ],
+    "path": "/registry/servers/version",
+    "rawPath": "'/registry/servers/version'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/registry/servers/version"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getRegistryServerVersions",
+    "includeInCoverage": true,
+    "line": 377,
+    "method": "GET",
+    "middlewareNames": [
+      "getRegistryServerVersions"
+    ],
+    "path": "/registry/servers/versions",
+    "rawPath": "'/registry/servers/versions'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/registry/servers/versions"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "listBuiltinResources",
+    "includeInCoverage": true,
+    "line": 345,
+    "method": "GET",
+    "middlewareNames": [
+      "listBuiltinResources"
+    ],
+    "path": "/resources",
+    "rawPath": "'/resources'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createBuiltinResource",
+    "includeInCoverage": true,
+    "line": 347,
+    "method": "POST",
+    "middlewareNames": [
+      "createBuiltinResource"
+    ],
+    "path": "/resources",
+    "rawPath": "'/resources'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteBuiltinResource",
+    "includeInCoverage": true,
+    "line": 349,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteBuiltinResource"
+    ],
+    "path": "/resources/:id",
+    "rawPath": "'/resources/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getBuiltinResource",
+    "includeInCoverage": true,
+    "line": 346,
+    "method": "GET",
+    "middlewareNames": [
+      "getBuiltinResource"
+    ],
+    "path": "/resources/:id",
+    "rawPath": "'/resources/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateBuiltinResource",
+    "includeInCoverage": true,
+    "line": 348,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateBuiltinResource"
+    ],
+    "path": "/resources/:id",
+    "rawPath": "'/resources/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "readResource",
+    "includeInCoverage": true,
+    "line": 350,
+    "method": "POST",
+    "middlewareNames": [
+      "readResource"
+    ],
+    "path": "/resources/read",
+    "rawPath": "'/resources/read'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/resources/read"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllServers",
+    "includeInCoverage": true,
+    "line": 225,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllServers"
+    ],
+    "path": "/servers",
+    "rawPath": "'/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createServer",
+    "includeInCoverage": true,
+    "line": 228,
+    "method": "POST",
+    "middlewareNames": [
+      "createServer"
+    ],
+    "path": "/servers",
+    "rawPath": "'/servers'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteServer",
+    "includeInCoverage": true,
+    "line": 231,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteServer"
+    ],
+    "path": "/servers/:name",
+    "rawPath": "'/servers/:name'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:name"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getServerConfig",
+    "includeInCoverage": true,
+    "line": 226,
+    "method": "GET",
+    "middlewareNames": [
+      "getServerConfig"
+    ],
+    "path": "/servers/:name",
+    "rawPath": "'/servers/:name'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:name"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateServer",
+    "includeInCoverage": true,
+    "line": 230,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateServer"
+    ],
+    "path": "/servers/:name",
+    "rawPath": "'/servers/:name'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:name"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "reloadServer",
+    "includeInCoverage": true,
+    "line": 233,
+    "method": "POST",
+    "middlewareNames": [
+      "reloadServer"
+    ],
+    "path": "/servers/:name/reload",
+    "rawPath": "'/servers/:name/reload'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:name/reload"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "toggleServer",
+    "includeInCoverage": true,
+    "line": 232,
+    "method": "POST",
+    "middlewareNames": [
+      "toggleServer"
+    ],
+    "path": "/servers/:name/toggle",
+    "rawPath": "'/servers/:name/toggle'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:name/toggle"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "resetPromptDescription",
+    "includeInCoverage": true,
+    "line": 248,
+    "method": "DELETE",
+    "middlewareNames": [
+      "resetPromptDescription"
+    ],
+    "path": "/servers/:serverName/prompts/:promptName/description",
+    "rawPath": "'/servers/:serverName/prompts/:promptName/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/prompts/:promptName/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updatePromptDescription",
+    "includeInCoverage": true,
+    "line": 244,
+    "method": "PUT",
+    "middlewareNames": [
+      "updatePromptDescription"
+    ],
+    "path": "/servers/:serverName/prompts/:promptName/description",
+    "rawPath": "'/servers/:serverName/prompts/:promptName/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/prompts/:promptName/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "togglePrompt",
+    "includeInCoverage": true,
+    "line": 243,
+    "method": "POST",
+    "middlewareNames": [
+      "togglePrompt"
+    ],
+    "path": "/servers/:serverName/prompts/:promptName/toggle",
+    "rawPath": "'/servers/:serverName/prompts/:promptName/toggle'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/prompts/:promptName/toggle"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "resetResourceDescription",
+    "includeInCoverage": true,
+    "line": 257,
+    "method": "DELETE",
+    "middlewareNames": [
+      "resetResourceDescription"
+    ],
+    "path": "/servers/:serverName/resources/:resourceUri/description",
+    "rawPath": "'/servers/:serverName/resources/:resourceUri/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/resources/:resourceUri/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateResourceDescription",
+    "includeInCoverage": true,
+    "line": 253,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateResourceDescription"
+    ],
+    "path": "/servers/:serverName/resources/:resourceUri/description",
+    "rawPath": "'/servers/:serverName/resources/:resourceUri/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/resources/:resourceUri/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "toggleResource",
+    "includeInCoverage": true,
+    "line": 252,
+    "method": "POST",
+    "middlewareNames": [
+      "toggleResource"
+    ],
+    "path": "/servers/:serverName/resources/:resourceUri/toggle",
+    "rawPath": "'/servers/:serverName/resources/:resourceUri/toggle'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/resources/:resourceUri/toggle"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "resetToolDescription",
+    "includeInCoverage": true,
+    "line": 239,
+    "method": "DELETE",
+    "middlewareNames": [
+      "resetToolDescription"
+    ],
+    "path": "/servers/:serverName/tools/:toolName/description",
+    "rawPath": "'/servers/:serverName/tools/:toolName/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/tools/:toolName/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateToolDescription",
+    "includeInCoverage": true,
+    "line": 235,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateToolDescription"
+    ],
+    "path": "/servers/:serverName/tools/:toolName/description",
+    "rawPath": "'/servers/:serverName/tools/:toolName/description'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/tools/:toolName/description"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "toggleTool",
+    "includeInCoverage": true,
+    "line": 234,
+    "method": "POST",
+    "middlewareNames": [
+      "toggleTool"
+    ],
+    "path": "/servers/:serverName/tools/:toolName/toggle",
+    "rawPath": "'/servers/:serverName/tools/:toolName/toggle'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/:serverName/tools/:toolName/toggle"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "batchCreateServers",
+    "includeInCoverage": true,
+    "line": 229,
+    "method": "POST",
+    "middlewareNames": [
+      "batchCreateServers"
+    ],
+    "path": "/servers/batch",
+    "rawPath": "'/servers/batch'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/servers/batch"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getAllSettings",
+    "includeInCoverage": true,
+    "line": 227,
+    "method": "GET",
+    "middlewareNames": [
+      "getAllSettings"
+    ],
+    "path": "/settings",
+    "rawPath": "'/settings'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/settings"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateSystemConfig",
+    "includeInCoverage": true,
+    "line": 261,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateSystemConfig"
+    ],
+    "path": "/system-config",
+    "rawPath": "'/system-config'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/system-config"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "exportConfigTemplate",
+    "includeInCoverage": true,
+    "line": 322,
+    "method": "POST",
+    "middlewareNames": [
+      "templateRateLimiter",
+      "auth",
+      "exportConfigTemplate"
+    ],
+    "path": "/templates/export",
+    "rawPath": "'/templates/export'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/templates/export"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "exportGroupAsTemplate",
+    "includeInCoverage": true,
+    "line": 323,
+    "method": "GET",
+    "middlewareNames": [
+      "templateRateLimiter",
+      "auth",
+      "exportGroupAsTemplate"
+    ],
+    "path": "/templates/export/groups/:id",
+    "rawPath": "'/templates/export/groups/:id'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/templates/export/groups/:id"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "importConfigTemplate",
+    "includeInCoverage": true,
+    "line": 329,
+    "method": "POST",
+    "middlewareNames": [
+      "templateRateLimiter",
+      "auth",
+      "importConfigTemplate"
+    ],
+    "path": "/templates/import",
+    "rawPath": "'/templates/import'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/templates/import"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "executeToolViaOpenAPI",
+    "includeInCoverage": true,
+    "line": 451,
+    "method": "GET",
+    "middlewareNames": [
+      "executeToolViaOpenAPI"
+    ],
+    "path": "/api/tools/:serverName/:toolName",
+    "rawPath": "`${config.basePath}/api/tools/:serverName/:toolName`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/tools/:serverName/:toolName"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "executeToolViaOpenAPI",
+    "includeInCoverage": true,
+    "line": 452,
+    "method": "POST",
+    "middlewareNames": [
+      "executeToolViaOpenAPI"
+    ],
+    "path": "/api/tools/:serverName/:toolName",
+    "rawPath": "`${config.basePath}/api/tools/:serverName/:toolName`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/tools/:serverName/:toolName"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "callTool",
+    "includeInCoverage": true,
+    "line": 332,
+    "method": "POST",
+    "middlewareNames": [
+      "callTool"
+    ],
+    "path": "/tools/call/:server",
+    "rawPath": "'/tools/call/:server'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/tools/call/:server"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getUsers",
+    "includeInCoverage": true,
+    "line": 285,
+    "method": "GET",
+    "middlewareNames": [
+      "getUsers"
+    ],
+    "path": "/users",
+    "rawPath": "'/users'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "createUser",
+    "includeInCoverage": true,
+    "line": 287,
+    "method": "POST",
+    "middlewareNames": [
+      "createUser"
+    ],
+    "path": "/users",
+    "rawPath": "'/users'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getUserStats",
+    "includeInCoverage": true,
+    "line": 290,
+    "method": "GET",
+    "middlewareNames": [
+      "getUserStats"
+    ],
+    "path": "/users-stats",
+    "rawPath": "'/users-stats'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users-stats"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "deleteExistingUser",
+    "includeInCoverage": true,
+    "line": 289,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteExistingUser"
+    ],
+    "path": "/users/:username",
+    "rawPath": "'/users/:username'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users/:username"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "getUser",
+    "includeInCoverage": true,
+    "line": 286,
+    "method": "GET",
+    "middlewareNames": [
+      "getUser"
+    ],
+    "path": "/users/:username",
+    "rawPath": "'/users/:username'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users/:username"
+  },
+  {
+    "authenticated": true,
+    "handlerName": "updateExistingUser",
+    "includeInCoverage": true,
+    "line": 288,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateExistingUser"
+    ],
+    "path": "/users/:username",
+    "rawPath": "'/users/:username'",
+    "routerName": "authenticatedRouter",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/api/users/:username"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getRuntimeConfig",
+    "includeInCoverage": true,
+    "line": 427,
+    "method": "GET",
+    "middlewareNames": [
+      "getRuntimeConfig"
+    ],
+    "path": "/config",
+    "rawPath": "`${config.basePath}/config`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/config"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "listDiscoveryCategories",
+    "includeInCoverage": true,
+    "line": 441,
+    "method": "GET",
+    "middlewareNames": [
+      "listDiscoveryCategories"
+    ],
+    "path": "/discovery/categories",
+    "rawPath": "`${config.basePath}/discovery/categories`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/discovery/categories"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "listDiscoveryServers",
+    "includeInCoverage": true,
+    "line": 438,
+    "method": "GET",
+    "middlewareNames": [
+      "listDiscoveryServers"
+    ],
+    "path": "/discovery/servers",
+    "rawPath": "`${config.basePath}/discovery/servers`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/discovery/servers"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getDiscoveryServer",
+    "includeInCoverage": true,
+    "line": 439,
+    "method": "GET",
+    "middlewareNames": [
+      "getDiscoveryServer"
+    ],
+    "path": "/discovery/servers/:name",
+    "rawPath": "`${config.basePath}/discovery/servers/:name`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/discovery/servers/:name"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getDiscoveryServerInstall",
+    "includeInCoverage": true,
+    "line": 440,
+    "method": "GET",
+    "middlewareNames": [
+      "getDiscoveryServerInstall"
+    ],
+    "path": "/discovery/servers/:name/install",
+    "rawPath": "`${config.basePath}/discovery/servers/:name/install`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/discovery/servers/:name/install"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "listDiscoveryTags",
+    "includeInCoverage": true,
+    "line": 442,
+    "method": "GET",
+    "middlewareNames": [
+      "listDiscoveryTags"
+    ],
+    "path": "/discovery/tags",
+    "rawPath": "`${config.basePath}/discovery/tags`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/discovery/tags"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "healthCheck",
+    "includeInCoverage": true,
+    "line": 194,
+    "method": "GET",
+    "middlewareNames": [
+      "healthCheck"
+    ],
+    "path": "/health",
+    "rawPath": "'/health'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/health"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "receiveHostedInternalEvent",
+    "includeInCoverage": true,
+    "line": 197,
+    "method": "POST",
+    "middlewareNames": [
+      "hostedInternalEventRateLimiter",
+      "receiveHostedInternalEvent"
+    ],
+    "path": "/internal/v1/events",
+    "rawPath": "'/internal/v1/events'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/internal/v1/events"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getHostedInternalRuntimeCatalog",
+    "includeInCoverage": true,
+    "line": 198,
+    "method": "GET",
+    "middlewareNames": [
+      "hostedInternalEventRateLimiter",
+      "getHostedInternalRuntimeCatalog"
+    ],
+    "path": "/internal/v1/hosted/runtime-catalog",
+    "rawPath": "'/internal/v1/hosted/runtime-catalog'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/internal/v1/hosted/runtime-catalog"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getAuthorize",
+    "includeInCoverage": true,
+    "line": 208,
+    "method": "GET",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "getAuthorize"
+    ],
+    "path": "/oauth/authorize",
+    "rawPath": "'/oauth/authorize'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/authorize"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "postAuthorize",
+    "includeInCoverage": true,
+    "line": 209,
+    "method": "POST",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "postAuthorize"
+    ],
+    "path": "/oauth/authorize",
+    "rawPath": "'/oauth/authorize'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/authorize"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "handleOAuthCallback",
+    "includeInCoverage": true,
+    "line": 205,
+    "method": "GET",
+    "middlewareNames": [
+      "handleOAuthCallback"
+    ],
+    "path": "/oauth/callback",
+    "rawPath": "'/oauth/callback'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/callback"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "registerClient",
+    "includeInCoverage": true,
+    "line": 216,
+    "method": "POST",
+    "middlewareNames": [
+      "registerClient"
+    ],
+    "path": "/oauth/register",
+    "rawPath": "'/oauth/register'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/register"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "deleteClientRegistration",
+    "includeInCoverage": true,
+    "line": 219,
+    "method": "DELETE",
+    "middlewareNames": [
+      "deleteClientRegistration"
+    ],
+    "path": "/oauth/register/:clientId",
+    "rawPath": "'/oauth/register/:clientId'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/register/:clientId"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getClientConfiguration",
+    "includeInCoverage": true,
+    "line": 217,
+    "method": "GET",
+    "middlewareNames": [
+      "getClientConfiguration"
+    ],
+    "path": "/oauth/register/:clientId",
+    "rawPath": "'/oauth/register/:clientId'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/register/:clientId"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "updateClientConfiguration",
+    "includeInCoverage": true,
+    "line": 218,
+    "method": "PUT",
+    "middlewareNames": [
+      "updateClientConfiguration"
+    ],
+    "path": "/oauth/register/:clientId",
+    "rawPath": "'/oauth/register/:clientId'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/register/:clientId"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "postToken",
+    "includeInCoverage": true,
+    "line": 210,
+    "method": "POST",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "postToken"
+    ],
+    "path": "/oauth/token",
+    "rawPath": "'/oauth/token'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/token"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getUserInfo",
+    "includeInCoverage": true,
+    "line": 211,
+    "method": "GET",
+    "middlewareNames": [
+      "mcpConnectionRateLimiter",
+      "getUserInfo"
+    ],
+    "path": "/oauth/userinfo",
+    "rawPath": "'/oauth/userinfo'",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/oauth/userinfo"
+  },
+  {
+    "authenticated": false,
+    "handlerName": "getPublicConfig",
+    "includeInCoverage": true,
+    "line": 430,
+    "method": "GET",
+    "middlewareNames": [
+      "getPublicConfig"
+    ],
+    "path": "/public-config",
+    "rawPath": "`${config.basePath}/public-config`",
+    "routerName": "app",
+    "sourceFile": "src/routes/index.ts",
+    "fullPath": "/public-config"
+  }
+]

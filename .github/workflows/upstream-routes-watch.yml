@@ -1,0 +1,44 @@
+name: upstream-routes-watch
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  verify-upstream-routes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --ignore-workspace
+
+      - name: Fetch upstream HEAD routes snapshot
+        run: pnpm --ignore-workspace tsx scripts/fetch-routes-snapshot.ts --ref main --version-label upstream-head --output-dir tests/fixtures/routes-snapshot/upstream-head
+
+      - name: Verify coverage against upstream HEAD
+        run: pnpm --ignore-workspace tsx scripts/verify-coverage.ts --routes tests/fixtures/routes-snapshot/upstream-head/routes.json

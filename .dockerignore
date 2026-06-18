@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+.artifacts
+.git
+.github
+.changeset
+tests
+scripts
+tmp
+*.log
+.env
+.env.*
+!.env.example
+!scripts/copy-runtime-fixtures.ts
+!tests/fixtures/routes-snapshot/**
