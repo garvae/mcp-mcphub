@@ -1,0 +1,231 @@
+name: repo-guardrails
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: lint (shellcheck, yamllint, markdownlint, actionlint)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect lint-relevant changes
+        id: changes
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git fetch --no-tags origin "${{ github.base_ref }}" --depth=1
+          changed_files="$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD)"
+          printf '%s\n' "$changed_files"
+
+          if printf '%s\n' "$changed_files" | grep -Eq '^(\.github/workflows/|\.markdownlint-cli2\.yaml$|\.yamllint\.yml$|README\.md$|CHANGELOG\.md$|docs/.*\.md$|docker-compose\.example\.yml$|pnpm-workspace\.yaml$|.*\.sh$|.*\.bash$|.*\.zsh$)'; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node.js
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install lint tooling
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck python3-pip
+          python3 -m pip install --user yamllint
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Run shellcheck
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        shell: bash
+        run: |
+          mapfile -t shell_files < <(git ls-files '*.sh' '*.bash' '*.zsh')
+          if [ "${#shell_files[@]}" -eq 0 ]; then
+            echo "No shell scripts to lint."
+            exit 0
+          fi
+
+          shellcheck "${shell_files[@]}"
+
+      - name: Run yamllint
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: |
+          yamllint -c .yamllint.yml \
+            .github/workflows \
+            docker-compose.example.yml \
+            .markdownlint-cli2.yaml \
+            pnpm-workspace.yaml
+
+      - name: Run markdownlint
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: npx --yes markdownlint-cli2 README.md CHANGELOG.md "docs/**/*.md"
+
+      - name: Install actionlint
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        shell: bash
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash \
+            | bash -s -- latest "$HOME/.local/bin"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Run actionlint
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: actionlint -color
+
+      - name: Skip lint guardrails
+        if: ${{ steps.changes.outputs.should_run != 'true' }}
+        run: |
+          echo "Skipping guardrail lint: no markdown/yaml/workflow/shell changes in this pull request."
+
+  compose-config:
+    name: compose-config (parse against .env.example)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect compose-relevant changes
+        id: changes
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git fetch --no-tags origin "${{ github.base_ref }}" --depth=1
+          changed_files="$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD)"
+          printf '%s\n' "$changed_files"
+
+          if printf '%s\n' "$changed_files" | grep -Eq '^(\.env\.example$|docker-compose\.example\.yml$|\.github/workflows/repo-guardrails\.yml$)'; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepare example env file
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: cp .env.example .env
+
+      - name: Validate compose configuration
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: docker compose --env-file .env.example -f docker-compose.example.yml config -q
+
+      - name: Skip compose validation
+        if: ${{ steps.changes.outputs.should_run != 'true' }}
+        run: |
+          echo "Skipping compose validation: no compose-relevant changes in this pull request."
+
+  secret-scan:
+    name: secret-scan (gitleaks + placeholder guard)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Detect secret-scan-relevant changes
+        id: changes
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git fetch --no-tags origin "${{ github.base_ref }}" --depth=1
+          changed_files="$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD)"
+          printf '%s\n' "$changed_files"
+
+          filtered="$(printf '%s\n' "$changed_files" | grep -Ev '^docs/generated/' || true)"
+          if [ -n "$filtered" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install gitleaks
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        shell: bash
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz \
+            -o /tmp/gitleaks.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp
+          sudo install /tmp/gitleaks /usr/local/bin/gitleaks
+
+      - name: Run gitleaks
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        run: gitleaks dir . --redact --no-banner
+
+      - name: Verify example placeholders stay non-sensitive
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        shell: bash
+        run: |
+          python3 <<'PY'
+          import pathlib
+          import re
+          import sys
+
+          repo_root = pathlib.Path.cwd()
+          env_example = repo_root / ".env.example"
+          compose_example = repo_root / "docker-compose.example.yml"
+
+          secret_key_pattern = re.compile(r"(TOKEN|PASSWORD|SECRET|COOKIE|PRIVATE_KEY|API_KEY)$")
+          allowed_placeholder_pattern = re.compile(r"(REPLACE|PLACEHOLDER|EXAMPLE|YOUR_|MCPHUB_TOKEN)", re.IGNORECASE)
+
+          violations: list[str] = []
+
+          for raw_line in env_example.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+              continue
+
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip("'\"")
+
+            if not secret_key_pattern.search(key):
+              continue
+
+            if allowed_placeholder_pattern.search(value):
+              continue
+
+            violations.append(f".env.example:{key} must keep a placeholder value, found {value!r}")
+
+          compose_text = compose_example.read_text(encoding="utf-8")
+          if "MCP_HTTP_AUTH_TOKENS_JSON" in compose_text and "REPLACE_" not in compose_text:
+            violations.append(
+              "docker-compose.example.yml:MCP_HTTP_AUTH_TOKENS_JSON must use explicit REPLACE_* placeholder tokens."
+            )
+
+          if violations:
+            for violation in violations:
+              print(violation)
+            sys.exit(1)
+          PY
+
+      - name: Skip secret scan
+        if: ${{ steps.changes.outputs.should_run != 'true' }}
+        run: |
+          echo "Skipping secret scan: only generated docs changed in this pull request."

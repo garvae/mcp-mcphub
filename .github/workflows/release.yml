@@ -1,0 +1,89 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the package to npm after release validation
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  id-token: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate release branch state
+        env:
+          MCPHUB_COMPAT_IMAGE_TAG: latest
+          REAL_TEST_FIXTURE_PREFIX: gha-mcp-mcphub
+          RELEASE_COMPAT_TESTS_REQUIRED: '1'
+          REAL_TEST_HTTP_AUTH_TOKEN: ${{ secrets.REAL_TEST_HTTP_AUTH_TOKEN }}
+          REAL_TEST_MCPHUB_AUTH_HEADER: ${{ secrets.REAL_TEST_MCPHUB_AUTH_HEADER }}
+          REAL_TEST_MCPHUB_PROFILE: ${{ secrets.REAL_TEST_MCPHUB_PROFILE }}
+          REAL_TEST_MCPHUB_TOKEN: ${{ secrets.REAL_TEST_MCPHUB_TOKEN }}
+          REAL_TEST_MCPHUB_TOKEN_KIND: ${{ secrets.REAL_TEST_MCPHUB_TOKEN_KIND }}
+          REAL_TEST_MCPHUB_URL: ${{ secrets.REAL_TEST_MCPHUB_URL }}
+          RELEASE_REAL_TESTS_REQUIRED: ${{ vars.RELEASE_REAL_TESTS_REQUIRED }}
+          RUN_REAL_MCPHUB_TESTS: ${{ vars.RUN_REAL_MCPHUB_TESTS }}
+        run: pnpm test:release-gate
+
+      - name: Verify npm release dry-run
+        env:
+          SKIP_PREPUBLISH_GATE: '1'
+        run: pnpm publish:dry-run
+
+      - name: Create release PR or publish package
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish && vars.ENABLE_NPM_PUBLISH == '1' }}
+        uses: changesets/action@v1
+        with:
+          version: pnpm version:packages
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish skipped
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.publish && vars.ENABLE_NPM_PUBLISH == '1') }}
+        run: |
+          echo "Release validation completed."
+          echo "Real npm publish is disabled unless workflow_dispatch publish=true and ENABLE_NPM_PUBLISH=1."

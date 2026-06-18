@@ -1,0 +1,449 @@
+/**
+ * OAuth Callback Controller
+ *
+ * Handles OAuth 2.0 authorization callbacks for upstream MCP servers.
+ *
+ * This controller implements a simplified callback flow that relies on the MCP SDK
+ * to handle the complete OAuth token exchange:
+ *
+ * 1. Extract authorization code from callback URL
+ * 2. Find the corresponding server using the state parameter
+ * 3. Store the authorization code temporarily
+ * 4. Reconnect the server - SDK's auth() function will:
+ *    - Automatically discover OAuth endpoints
+ *    - Exchange the code for tokens using PKCE
+ *    - Save tokens via our OAuthClientProvider.saveTokens()
+ */
+
+import { Request, Response } from 'express';
+import {
+  getServerByName,
+  getServerByOAuthState,
+  createTransportFromConfig,
+  updateServerToolsCache,
+} from '../services/mcpService.js';
+import { replaceEnvVars } from '../config/index.js';
+import { loadServerConfig } from '../services/oauthSettingsStore.js';
+import type { ServerInfo } from '../types/index.js';
+
+/**
+ * Basic HTML escaping helper to prevent XSS in generated pages.
+ */
+const escapeHtml = (value: string): string =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+/**
+ * Generate HTML response page with i18n support
+ */
+const generateHtmlResponse = (
+  type: 'error' | 'success',
+  title: string,
+  message: string,
+  details?: { label: string; value: string }[],
+  autoClose: boolean = false,
+): string => {
+  const backgroundColor = type === 'error' ? '#fee' : '#efe';
+  const borderColor = type === 'error' ? '#fcc' : '#cfc';
+  const titleColor = type === 'error' ? '#c33' : '#3c3';
+  const buttonColor = type === 'error' ? '#c33' : '#3c3';
+
+  const safeTitle = escapeHtml(title);
+  const safeMessage = escapeHtml(message);
+
+  return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>${safeTitle}</title>
+        <style>
+          body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+          .container { background-color: ${backgroundColor}; border: 1px solid ${borderColor}; padding: 20px; border-radius: 8px; }
+          h1 { color: ${titleColor}; margin-top: 0; }
+          .detail { margin-top: 10px; padding: 10px; background: #f9f9f9; border-radius: 4px; ${type === 'error' ? 'font-family: monospace; font-size: 12px; white-space: pre-wrap;' : ''} }
+          .close-btn { margin-top: 20px; padding: 10px 20px; background: ${buttonColor}; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        </style>
+        ${autoClose ? '<script>setTimeout(() => { window.close(); }, 3000);</script>' : ''}
+      </head>
+      <body>
+        <div class="container">
+          <h1>${type === 'success' ? '✓ ' : ''}${safeTitle}</h1>
+          ${
+            details
+              ? details
+                  .map(
+                    (d) =>
+                      `<div class="detail"><strong>${escapeHtml(d.label)}:</strong> ${escapeHtml(d.value)}</div>`,
+                  )
+                  .join('')
+              : ''
+          }
+          <p>${safeMessage}</p>
+          ${autoClose ? '<p>This window will close automatically in 3 seconds...</p>' : ''}
+          <button class="close-btn" onclick="window.close()">${autoClose ? 'Close Now' : 'Close Window'}</button>
+        </div>
+      </body>
+    </html>
+  `;
+};
+
+const normalizeQueryParam = (value: unknown): string | undefined => {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (Array.isArray(value) && value.length > 0) {
+    const [first] = value;
+    return typeof first === 'string' ? first : undefined;
+  }
+
+  return undefined;
+};
+
+const extractServerNameFromState = (stateValue: string): string | undefined => {
+  try {
+    const normalized = stateValue.replace(/-/g, '+').replace(/_/g, '/');
+    const padding = (4 - (normalized.length % 4)) % 4;
+    const base64 = normalized + '='.repeat(padding);
+    const decoded = Buffer.from(base64, 'base64').toString('utf8');
+    const payload = JSON.parse(decoded);
+
+    if (payload && typeof payload.server === 'string') {
+      return payload.server;
+    }
+  } catch (error) {
+    // Ignore decoding errors and fall back to delimiter-based parsing
+  }
+
+  const separatorIndex = stateValue.indexOf(':');
+  if (separatorIndex > 0) {
+    return stateValue.slice(0, separatorIndex);
+  }
+
+  return undefined;
+};
+
+/**
+ * Handle OAuth callback after user authorization
+ *
+ * This endpoint receives the authorization code from the OAuth provider
+ * and initiates the server reconnection process.
+ *
+ * Expected query parameters:
+ * - code: Authorization code from OAuth provider
+ * - state: Encoded server identifier used for OAuth session validation
+ * - error: Optional error code if authorization failed
+ * - error_description: Optional error description
+ */
+export const handleOAuthCallback = async (req: Request, res: Response) => {
+  try {
+    const { code, state, error, error_description } = req.query;
+    const codeParam = normalizeQueryParam(code);
+    const stateParam = normalizeQueryParam(state);
+
+    // Get translation function from request (set by i18n middleware)
+    const t = (req as any).t || ((key: string) => key);
+
+    // Check for authorization errors
+    if (error) {
+      console.error('OAuth authorization failed', {
+        error,
+        errorDescription: error_description || '',
+      });
+      return res.status(400).send(
+        generateHtmlResponse('error', t('oauthCallback.authorizationFailed'), '', [
+          { label: t('oauthCallback.authorizationFailedError'), value: String(error) },
+          ...(error_description
+            ? [
+                {
+                  label: t('oauthCallback.authorizationFailedDetails'),
+                  value: String(error_description),
+                },
+              ]
+            : []),
+        ]),
+      );
+    }
+
+    // Validate required parameters
+    if (!stateParam) {
+      console.error('OAuth callback missing state parameter');
+      return res
+        .status(400)
+        .send(
+          generateHtmlResponse(
+            'error',
+            t('oauthCallback.invalidRequest'),
+            t('oauthCallback.missingStateParameter'),
+          ),
+        );
+    }
+
+    if (!codeParam) {
+      console.error('OAuth callback missing authorization code');
+      return res
+        .status(400)
+        .send(
+          generateHtmlResponse(
+            'error',
+            t('oauthCallback.invalidRequest'),
+            t('oauthCallback.missingCodeParameter'),
+          ),
+        );
+    }
+
+    console.log('OAuth callback received', { hasCode: true, state: stateParam });
+
+    // Find server by state parameter
+    let serverInfo: ServerInfo | undefined;
+
+    serverInfo = getServerByOAuthState(stateParam);
+
+    let decodedServerName: string | undefined;
+    if (!serverInfo) {
+      decodedServerName = extractServerNameFromState(stateParam);
+      if (decodedServerName) {
+        console.log('State lookup failed; decoded server name from state', {
+          decodedServerName,
+        });
+        serverInfo = getServerByName(decodedServerName);
+      }
+    }
+
+    if (!serverInfo) {
+      console.error('No server found for OAuth callback', {
+        state: stateParam,
+        decodedServerName,
+      });
+      return res
+        .status(400)
+        .send(
+          generateHtmlResponse(
+            'error',
+            t('oauthCallback.serverNotFound'),
+            `${t('oauthCallback.serverNotFoundMessage')}\n${t('oauthCallback.sessionExpiredMessage')}`,
+          ),
+        );
+    }
+
+    // Optional: Validate state parameter for additional security
+    if (serverInfo.oauth?.state && serverInfo.oauth.state !== stateParam) {
+      console.warn('OAuth state mismatch detected', {
+        serverName: serverInfo.name,
+        // State values are considered sensitive and are not logged
+        expectedState: '<redacted>',
+        receivedState: '<redacted>',
+      });
+      // Note: We log a warning but don't fail the request since we have server name as primary identifier
+    }
+
+    console.log('Processing OAuth callback for server', { serverName: serverInfo.name });
+
+    // For StreamableHTTPClientTransport, we need to call finishAuth() on the transport
+    // This will exchange the authorization code for tokens automatically
+    if (serverInfo.transport && 'finishAuth' in serverInfo.transport) {
+      try {
+        console.log('Calling transport.finishAuth for server', { serverName: serverInfo.name });
+        const currentTransport = serverInfo.transport as any;
+        await currentTransport.finishAuth(codeParam);
+
+        console.log('Successfully exchanged authorization code for tokens', {
+          serverName: serverInfo.name,
+        });
+
+        // Refresh server configuration from storage (DB or file) to pick up newly saved tokens.
+        // loadServerConfig is DAO-backed and handles both DB and file modes, so a redundant
+        // loadSettings() call is not needed. Apply replaceEnvVars so fields like url/command
+        // have environment variable references expanded, consistent with initial server setup.
+        const freshConfig = await loadServerConfig(serverInfo.name);
+        const effectiveConfig = freshConfig
+          ? (replaceEnvVars(freshConfig as any) as typeof freshConfig)
+          : serverInfo.config;
+
+        if (!effectiveConfig) {
+          throw new Error(
+            `Missing server configuration for ${serverInfo.name} after OAuth callback`,
+          );
+        }
+
+        // Keep latest configuration cached on serverInfo
+        serverInfo.config = effectiveConfig;
+
+        // Ensure we have up-to-date request options for the reconnect attempt
+        if (!serverInfo.options) {
+          const requestConfig = effectiveConfig.options || {};
+          serverInfo.options = {
+            timeout: requestConfig.timeout || 60000,
+            resetTimeoutOnProgress: requestConfig.resetTimeoutOnProgress ?? true,
+            maxTotalTimeout: requestConfig.maxTotalTimeout,
+          };
+        }
+
+        // Replace the existing transport instance to avoid reusing a closed/aborted transport
+        try {
+          if (serverInfo.transport && 'close' in serverInfo.transport) {
+            await (serverInfo.transport as any).close();
+          }
+        } catch (closeError) {
+          console.warn('Failed to close existing transport during OAuth reconnect', {
+            serverName: serverInfo.name,
+            error: closeError,
+          });
+        }
+
+        console.log('Rebuilding transport with refreshed credentials', {
+          serverName: serverInfo.name,
+        });
+        const refreshedTransport = await createTransportFromConfig(
+          serverInfo.name,
+          effectiveConfig,
+        );
+        serverInfo.transport = refreshedTransport;
+
+        // Update server status to indicate OAuth is complete
+        serverInfo.status = 'connected';
+        if (serverInfo.oauth) {
+          serverInfo.oauth.authorizationUrl = undefined;
+          serverInfo.oauth.state = undefined;
+          serverInfo.oauth.codeVerifier = undefined;
+        }
+
+        // Check if client needs to be connected
+        const isClientConnected = serverInfo.client && serverInfo.client.getServerCapabilities();
+
+        if (!isClientConnected) {
+          // Client is not connected yet, connect it
+          if (serverInfo.client && serverInfo.transport) {
+            console.log('Connecting client with refreshed transport', {
+              serverName: serverInfo.name,
+            });
+            try {
+              await serverInfo.client.connect(serverInfo.transport, serverInfo.options);
+              console.log('Client connected successfully after OAuth callback', {
+                serverName: serverInfo.name,
+              });
+
+              // List tools after successful connection
+              const capabilities = serverInfo.client.getServerCapabilities();
+              console.log('Server capabilities after OAuth callback', {
+                serverName: serverInfo.name,
+                capabilities,
+              });
+
+              if (capabilities?.tools) {
+                console.log('Listing tools after OAuth callback', {
+                  serverName: serverInfo.name,
+                });
+                const toolsResult = await serverInfo.client.listTools({}, serverInfo.options);
+                updateServerToolsCache(serverInfo, toolsResult.tools);
+                console.log('Listed tools after OAuth callback', {
+                  serverName: serverInfo.name,
+                  toolCount: serverInfo.tools.length,
+                });
+              } else {
+                console.log('Server does not support tools capability after OAuth callback', {
+                  serverName: serverInfo.name,
+                });
+              }
+            } catch (connectError) {
+              console.error('Error connecting client after OAuth callback', {
+                serverName: serverInfo.name,
+                error: connectError,
+              });
+              if (connectError instanceof Error) {
+                console.error('Connect error details after OAuth callback', {
+                  serverName: serverInfo.name,
+                  message: connectError.message,
+                  stack: connectError.stack,
+                });
+              }
+              // Even if connection fails, mark OAuth as complete
+              // The user can try reconnecting from the dashboard
+            }
+          } else {
+            console.log(
+              'Cannot connect client after OAuth callback because client or transport is missing',
+              { serverName: serverInfo.name },
+            );
+          }
+        } else {
+          console.log('Client already connected after OAuth callback', {
+            serverName: serverInfo.name,
+          });
+        }
+
+        console.log('Successfully completed OAuth flow for server', {
+          serverName: serverInfo.name,
+        });
+
+        // Return success page
+        return res.status(200).send(
+          generateHtmlResponse(
+            'success',
+            t('oauthCallback.authorizationSuccessful'),
+            `${t('oauthCallback.successMessage')}\n${t('oauthCallback.autoCloseMessage')}`,
+            [
+              { label: t('oauthCallback.server'), value: serverInfo.name },
+              { label: t('oauthCallback.status'), value: t('oauthCallback.connected') },
+            ],
+            true, // auto-close
+          ),
+        );
+      } catch (error) {
+        console.error('Failed to complete OAuth flow for server', {
+          serverName: serverInfo.name,
+          error,
+        });
+        console.error('OAuth callback error details', {
+          serverName: serverInfo.name,
+          errorType: typeof error,
+          errorName: error?.constructor?.name,
+          errorMessage: error instanceof Error ? error.message : String(error),
+          errorStack: error instanceof Error ? error.stack : 'No stack trace',
+        });
+
+        return res
+          .status(500)
+          .send(
+            generateHtmlResponse(
+              'error',
+              t('oauthCallback.connectionError'),
+              `${t('oauthCallback.connectionErrorMessage')}\n${t('oauthCallback.reconnectMessage')}`,
+              [{ label: '', value: error instanceof Error ? error.message : String(error) }],
+            ),
+          );
+      }
+    } else {
+      // No transport available or transport doesn't support finishAuth
+        console.error('Transport does not support finishAuth', { serverName: serverInfo.name });
+      return res
+        .status(500)
+        .send(
+          generateHtmlResponse(
+            'error',
+            t('oauthCallback.configurationError'),
+            t('oauthCallback.configurationErrorMessage'),
+          ),
+        );
+    }
+  } catch (error) {
+    console.error('Unexpected error handling OAuth callback', { error });
+
+    // Get translation function from request (set by i18n middleware)
+    const t = (req as any).t || ((key: string) => key);
+
+    return res
+      .status(500)
+      .send(
+        generateHtmlResponse(
+          'error',
+          t('oauthCallback.internalError'),
+          t('oauthCallback.internalErrorMessage'),
+        ),
+      );
+  }
+};

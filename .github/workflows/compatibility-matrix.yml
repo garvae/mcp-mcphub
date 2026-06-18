@@ -1,0 +1,96 @@
+name: compatibility-matrix
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/integration/**'
+      - 'tests/helpers/**'
+      - 'config/upstream-compatibility.json'
+      - 'docs/compatibility.md'
+      - 'docs/upstream-mcphub.md'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig*.json'
+      - 'vitest*.ts'
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  matrix-config:
+    runs-on: ubuntu-latest
+    outputs:
+      mcphub_versions: ${{ steps.read-matrix.outputs.mcphub_versions }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Read compatibility matrix versions
+        id: read-matrix
+        shell: bash
+        run: |
+          matrix_json="$(node -e "const config = require('./config/upstream-compatibility.json'); const versions = [...new Set([config.routeSnapshotBaselineVersion, config.pinnedReleaseTargetVersion, 'latest'])]; process.stdout.write(JSON.stringify(versions));")"
+          echo "mcphub_versions=${matrix_json}" >> "$GITHUB_OUTPUT"
+
+  compatibility:
+    needs: matrix-config
+    name: compatibility (${{ matrix.mcphub_version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        mcphub_version: ${{ fromJson(needs.matrix-config.outputs.mcphub_versions) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify generated compatibility documentation
+        run: pnpm docs:compatibility:check
+
+      - name: Run upstream compatibility matrix
+        env:
+          MCPHUB_COMPAT_IMAGE_TAG: ${{ matrix.mcphub_version }}
+          RUN_MCPHUB_COMPAT_TESTS: '1'
+        run: pnpm test:compatibility

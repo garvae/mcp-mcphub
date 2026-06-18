@@ -1,0 +1,109 @@
+name: real-behavior
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 3 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  readonly-live:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run live read-only MCPHub checks
+        env:
+          REAL_TEST_FIXTURE_PREFIX: gha-mcp-mcphub
+          REAL_TEST_HTTP_AUTH_TOKEN: ${{ secrets.REAL_TEST_HTTP_AUTH_TOKEN }}
+          REAL_TEST_MCPHUB_AUTH_HEADER: ${{ secrets.REAL_TEST_MCPHUB_AUTH_HEADER }}
+          REAL_TEST_MCPHUB_PROFILE: ${{ secrets.REAL_TEST_MCPHUB_PROFILE }}
+          REAL_TEST_MCPHUB_TOKEN: ${{ secrets.REAL_TEST_MCPHUB_TOKEN }}
+          REAL_TEST_MCPHUB_TOKEN_KIND: ${{ secrets.REAL_TEST_MCPHUB_TOKEN_KIND }}
+          REAL_TEST_MCPHUB_URL: ${{ secrets.REAL_TEST_MCPHUB_URL }}
+          RUN_REAL_MCPHUB_TESTS: '1'
+        run: pnpm test:real:readonly
+
+  mutation-live:
+    runs-on: ubuntu-latest
+    needs: readonly-live
+    if: ${{ vars.RUN_REAL_MCPHUB_MUTATION_TESTS == '1' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run live mutation MCPHub checks
+        env:
+          REAL_TEST_FIXTURE_PREFIX: gha-mcp-mcphub
+          REAL_TEST_HTTP_AUTH_TOKEN: ${{ secrets.REAL_TEST_HTTP_AUTH_TOKEN }}
+          REAL_TEST_MCPHUB_AUTH_HEADER: ${{ secrets.REAL_TEST_MCPHUB_AUTH_HEADER }}
+          REAL_TEST_MCPHUB_PROFILE: ${{ secrets.REAL_TEST_MCPHUB_PROFILE }}
+          REAL_TEST_MCPHUB_TOKEN: ${{ secrets.REAL_TEST_MCPHUB_TOKEN }}
+          REAL_TEST_MCPHUB_TOKEN_KIND: ${{ secrets.REAL_TEST_MCPHUB_TOKEN_KIND }}
+          REAL_TEST_MCPHUB_URL: ${{ secrets.REAL_TEST_MCPHUB_URL }}
+          RUN_REAL_MCPHUB_MUTATION_TESTS: '1'
+        run: pnpm test:real:mutation
+
+      - name: Cleanup real test fixtures
+        if: always()
+        env:
+          REAL_TEST_FIXTURE_PREFIX: gha-mcp-mcphub
+          REAL_TEST_MCPHUB_AUTH_HEADER: ${{ secrets.REAL_TEST_MCPHUB_AUTH_HEADER }}
+          REAL_TEST_MCPHUB_PROFILE: ${{ secrets.REAL_TEST_MCPHUB_PROFILE }}
+          REAL_TEST_MCPHUB_TOKEN: ${{ secrets.REAL_TEST_MCPHUB_TOKEN }}
+          REAL_TEST_MCPHUB_TOKEN_KIND: ${{ secrets.REAL_TEST_MCPHUB_TOKEN_KIND }}
+          REAL_TEST_MCPHUB_URL: ${{ secrets.REAL_TEST_MCPHUB_URL }}
+        run: pnpm cleanup:real-fixtures

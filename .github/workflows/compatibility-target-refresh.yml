@@ -1,0 +1,63 @@
+name: compatibility-target-refresh
+
+on:
+  schedule:
+    - cron: '23 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh-pinned-target:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22.13.0'
+          package-manager-cache: false
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.7.0
+
+      - name: Resolve pnpm store path
+        shell: bash
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.PNPM_STORE_PATH }}
+          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node22-pnpm11-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Refresh pinned compatibility target
+        run: pnpm exec tsx scripts/refresh-pinned-compatibility.ts
+
+      - name: Sync compatibility sources
+        run: |
+          pnpm exec tsx scripts/sync-compatibility-targets.ts
+          pnpm docs:compatibility
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/weekly-compatibility-target-refresh
+          commit-message: 'chore: refresh pinned compatibility target'
+          title: 'chore: refresh pinned compatibility target'
+          body: |
+            ## Summary
+            - refresh the weekly pinned MCPHub compatibility target from the latest upstream stable release
+            - resync generated compatibility source files
+            - update generated compatibility documentation
+          delete-branch: true

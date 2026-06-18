@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2024"],
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "useUnknownInCatchVariables": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": [
+    "scripts/**/*.ts",
+    "src/**/*.ts",
+    "tests/**/*.test.ts",
+    "vitest.config.ts",
+    "vitest.integration.config.ts",
+    "vitest.package.config.ts",
+    "vitest.real.config.ts"
+  ]
+}

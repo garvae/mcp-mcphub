@@ -1,0 +1,2 @@
+# Package publish contents are controlled by the package.json "files" allowlist.
+# Keep this file so npm/pnpm does not inherit dist/ exclusions from .gitignore.

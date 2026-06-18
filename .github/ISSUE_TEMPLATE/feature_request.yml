@@ -1,0 +1,83 @@
+name: Feature request
+description: Propose a new capability or a change in behavior
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What workflow is currently blocked, unclear, or too awkward?
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed workflow
+      description: Describe the user or agent flow you want to enable.
+    validations:
+      required: true
+  - type: textarea
+    id: upstream_area
+    attributes:
+      label: Upstream MCPHub API area or endpoint
+      description: Mention the management API area or route if known.
+      placeholder: GET /api/servers or OAuth clients
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Lowest exposure profile that should expose the capability
+      options:
+        - safe
+        - ops
+        - admin
+        - all
+        - not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: risk_class
+    attributes:
+      label: Expected risk class
+      options:
+        - read
+        - safe_write
+        - destructive
+        - dangerous_config
+        - secret_sensitive
+        - not sure
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the tool shape, output, or behavior you expect.
+    validations:
+      required: true
+  - type: textarea
+    id: considerations
+    attributes:
+      label: Security or compatibility considerations
+      description: Mention confirmation fields, redaction, feature flags, or version-specific concerns.
+  - type: dropdown
+    id: generated_docs
+    attributes:
+      label: Should generated docs or tool catalogs change?
+      options:
+        - yes
+        - no
+        - not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: willing_to_pr
+    attributes:
+      label: Are you willing to open a pull request?
+      options:
+        - yes
+        - maybe
+        - no
+    validations:
+      required: true

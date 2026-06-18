@@ -1,0 +1,24 @@
+services:
+  mcp-mcphub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - '7345:7345'
+    env_file:
+      - .env
+    environment:
+      MCP_HTTP_HOST: 0.0.0.0
+      MCP_HTTP_PORT: 7345
+      MCP_HTTP_ALLOWED_HOSTS: localhost,127.0.0.1,mcp.example.com
+      MCP_HTTP_ALLOWED_ORIGINS: https://claude.ai,https://chat.openai.com
+      MCP_EXPOSE_ENDPOINTS: safe,ops,admin,all
+      MCP_DEFAULT_EXPOSURE: safe
+      MCPHUB_DEFAULT_PROFILE: primary
+      MCPHUB_PROFILES_JSON: >-
+        {"primary":{"url":"https://mcphub-site.com","tokenEnv":"MCPHUB_TOKEN","tokenKind":"bearer","authHeader":"Authorization"}}
+      MCP_HTTP_AUTH_TOKENS_JSON: >-
+        {"REPLACE_SAFE_TOKEN":"safe","REPLACE_OPS_TOKEN":"ops","REPLACE_ADMIN_TOKEN":"admin","REPLACE_ALL_TOKEN":"all"}
+    command:
+      - http

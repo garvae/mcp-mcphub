@@ -1,0 +1,48 @@
+name: Documentation improvement
+description: Report confusing, missing, or outdated documentation
+title: "[Docs] "
+labels:
+  - documentation
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page or file affected
+      placeholder: README.md or docs/getting-started.md
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is confusing, missing, or outdated?
+    validations:
+      required: true
+  - type: dropdown
+    id: journey
+    attributes:
+      label: User journey affected
+      options:
+        - first install
+        - token setup
+        - Claude or Codex config
+        - HTTP mode
+        - Docker or self-hosted
+        - security
+        - tool catalog
+        - contribution
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording or fix
+  - type: dropdown
+    id: willing_to_pr
+    attributes:
+      label: Are you willing to open a pull request?
+      options:
+        - yes
+        - maybe
+        - no
+    validations:
+      required: true

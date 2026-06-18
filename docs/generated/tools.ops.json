@@ -1,0 +1,1930 @@
+[
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Add a server to a group.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_add_server_to_group",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/groups/:id/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Check whether activity endpoints are available on the connected MCPHub instance.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_check_activities_available",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/activities/available"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Export an MCPHub configuration template.",
+    "inputFields": [],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_export_config_template",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/templates/export"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Export one group as an MCPHub configuration template.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_export_group_template",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/templates/export/groups/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Export MCPHub settings with server-side redaction applied to sensitive fields.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "secret_sensitive",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_export_settings",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/mcp-settings/export"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one activity entry by identifier.",
+    "inputFields": [
+      {
+        "description": "Entity identifier.",
+        "name": "id",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_activity",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/activities/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get available activity filter metadata.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_activity_filters",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/activities/filters"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get aggregate activity statistics.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_activity_stats",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/activities/stats"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the current Better Auth user, when Better Auth is enabled upstream.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_better_auth_user",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/better-auth/user"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one built-in prompt by identifier.",
+    "inputFields": [
+      {
+        "description": "Entity identifier.",
+        "name": "id",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_builtin_prompt",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/prompts/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one built-in resource by identifier.",
+    "inputFields": [
+      {
+        "description": "Entity identifier.",
+        "name": "id",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_builtin_resource",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/resources/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get MCPHub changelog update information.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_changelog_update_info",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/changelog/update-info"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one cloud marketplace server by name.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_cloud_server",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/servers/:name"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List tools exposed by a cloud marketplace server.",
+    "inputFields": [
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_cloud_server_tools",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/servers/:serverName/tools"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get cloud marketplace servers for a category.",
+    "inputFields": [
+      {
+        "description": "Category identifier.",
+        "name": "category",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_cloud_servers_by_category",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/categories/:category"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get cloud marketplace servers for a tag.",
+    "inputFields": [
+      {
+        "description": "Tag identifier.",
+        "name": "tag",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_cloud_servers_by_tag",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/tags/:tag"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the currently authenticated management user.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_current_user",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/auth/user"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one discovery catalog server by name.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_discovery_server",
+    "upstream": {
+      "method": "GET",
+      "path": "/discovery/servers/:name"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get installation instructions for one discovery catalog server.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_discovery_server_install",
+    "upstream": {
+      "method": "GET",
+      "path": "/discovery/servers/:name/install"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the downstream OpenAPI document published by MCPHub.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_downstream_openapi_spec",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/openapi.json"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one MCPHub group by identifier.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_group",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/groups/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get cost aggregates for groups.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_group_costs",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cost/groups"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the downstream OpenAPI document for a named MCPHub group.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_group_downstream_openapi_spec",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/:name/openapi.json"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one group-level server configuration override.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_group_server_config",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/groups/:id/server-configs/:serverName"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the group-level server configuration overrides for a group.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_group_server_configs",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/groups/:id/server-configs"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Get MCPHub log entries.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "secret_sensitive",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_logs",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/logs"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one local marketplace server by name.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_market_server",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/servers/:name"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get local marketplace servers for a category.",
+    "inputFields": [
+      {
+        "description": "Category identifier.",
+        "name": "category",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_market_servers_by_category",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/categories/:category"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get local marketplace servers for a tag.",
+    "inputFields": [
+      {
+        "description": "Tag identifier.",
+        "name": "tag",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_market_servers_by_tag",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/tags/:tag"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the public MCP marketplace manifest exposed by this MCPHub instance.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_marketplace_well_known",
+    "upstream": {
+      "method": "GET",
+      "path": "/.well-known/mcp-marketplace"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get downstream OpenAPI generation statistics.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_openapi_stats",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/openapi/stats"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the public MCPHub configuration snapshot.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_public_config",
+    "upstream": {
+      "method": "GET",
+      "path": "/public-config"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get metadata for one MCP registry server version.",
+    "inputFields": [
+      {
+        "description": "Registry server name.",
+        "name": "name",
+        "optional": false
+      },
+      {
+        "description": "Specific version identifier.",
+        "name": "version",
+        "optional": true
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_registry_server_version",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/registry/servers/version"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the version index for one MCP registry server.",
+    "inputFields": [
+      {
+        "description": "Registry server name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_registry_server_versions",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/registry/servers/versions"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get the runtime config exposed by MCPHub.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_runtime_config",
+    "upstream": {
+      "method": "GET",
+      "path": "/config"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get one MCPHub server by name.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_server",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/servers/:name"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get cost aggregates for servers.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_server_costs",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cost/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Get the live MCPHub settings snapshot with secret redaction.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "secret_sensitive",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_settings_snapshot",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/settings"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Get user statistics from MCPHub.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_get_user_stats",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/users-stats"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Run the MCPHub health check endpoint.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_health_check",
+    "upstream": {
+      "method": "GET",
+      "path": "/health"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List recorded MCPHub activities with optional pagination and filtering.",
+    "inputFields": [
+      {
+        "description": null,
+        "name": "cursor",
+        "optional": true
+      },
+      {
+        "description": null,
+        "name": "limit",
+        "optional": true
+      },
+      {
+        "description": null,
+        "name": "search",
+        "optional": true
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_activities",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/activities"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List built-in prompts stored in MCPHub.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_builtin_prompts",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/prompts"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List built-in MCPHub resources.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_builtin_resources",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/resources"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List available cloud marketplace categories.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_cloud_categories",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/categories"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List cloud marketplace servers.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_cloud_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List available cloud marketplace tags.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_cloud_tags",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/tags"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List discovery catalog categories.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_discovery_categories",
+    "upstream": {
+      "method": "GET",
+      "path": "/discovery/categories"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List discovery catalog servers.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_discovery_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/discovery/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List discovery catalog tags.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_discovery_tags",
+    "upstream": {
+      "method": "GET",
+      "path": "/discovery/tags"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List servers assigned to a group.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_group_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/groups/:id/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List MCPHub groups.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_groups",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/groups"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List local marketplace categories.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_market_categories",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/categories"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List local marketplace servers.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_market_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List local marketplace tags.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_market_tags",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/tags"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List servers included in MCPHub downstream OpenAPI generation.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_openapi_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/openapi/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List official MCP registry servers as proxied by MCPHub.",
+    "inputFields": [
+      {
+        "description": null,
+        "name": "cursor",
+        "optional": true
+      },
+      {
+        "description": null,
+        "name": "limit",
+        "optional": true
+      },
+      {
+        "description": null,
+        "name": "search",
+        "optional": true
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_registry_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/registry/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "List MCPHub servers.",
+    "inputFields": [],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_list_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/servers"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Read a built-in resource payload via MCPHub.",
+    "inputFields": [
+      {
+        "description": "Built-in resource URI to read.",
+        "name": "uri",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_read_builtin_resource",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/resources/read"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Reload one MCPHub server.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_reload_server",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/servers/:name/reload"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Remove a server from a group.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_remove_server_from_group",
+    "upstream": {
+      "method": "DELETE",
+      "path": "/api/groups/:id/servers/:serverName"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Replace the full server membership of a group.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      },
+      {
+        "description": "Replacement server list.",
+        "name": "servers",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_replace_group_servers",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/groups/:id/servers/batch"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Reset a per-server prompt description override.",
+    "inputFields": [
+      {
+        "description": "Prompt name.",
+        "name": "promptName",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_reset_server_prompt_description",
+    "upstream": {
+      "method": "DELETE",
+      "path": "/api/servers/:serverName/prompts/:promptName/description"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Reset a per-server resource description override.",
+    "inputFields": [
+      {
+        "description": "Resource URI.",
+        "name": "resourceUri",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_reset_server_resource_description",
+    "upstream": {
+      "method": "DELETE",
+      "path": "/api/servers/:serverName/resources/:resourceUri/description"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Reset a per-server tool description override.",
+    "inputFields": [
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      },
+      {
+        "description": "Tool name.",
+        "name": "toolName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_reset_server_tool_description",
+    "upstream": {
+      "method": "DELETE",
+      "path": "/api/servers/:serverName/tools/:toolName/description"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Search cloud marketplace servers by query.",
+    "inputFields": [
+      {
+        "description": "Search query string.",
+        "name": "query",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_search_cloud_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/cloud/servers/search"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": true
+    },
+    "confirmationRequired": false,
+    "description": "Search local marketplace servers by query.",
+    "inputFields": [
+      {
+        "description": "Search query string.",
+        "name": "query",
+        "optional": false
+      }
+    ],
+    "profile": "safe",
+    "requiredFeatureFlags": [],
+    "risk": "read",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_search_market_servers",
+    "upstream": {
+      "method": "GET",
+      "path": "/api/market/servers/search"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Toggle one MCPHub server enabled state.",
+    "inputFields": [
+      {
+        "description": "Entity name.",
+        "name": "name",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_toggle_server",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/servers/:name/toggle"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Toggle a prompt exposed by a server.",
+    "inputFields": [
+      {
+        "description": "Prompt name.",
+        "name": "promptName",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_toggle_server_prompt",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/servers/:serverName/prompts/:promptName/toggle"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Toggle a resource exposed by a server.",
+    "inputFields": [
+      {
+        "description": "Resource URI.",
+        "name": "resourceUri",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_toggle_server_resource",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/servers/:serverName/resources/:resourceUri/toggle"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Toggle a tool exposed by a server.",
+    "inputFields": [
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      },
+      {
+        "description": "Tool name.",
+        "name": "toolName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_toggle_server_tool",
+    "upstream": {
+      "method": "POST",
+      "path": "/api/servers/:serverName/tools/:toolName/toggle"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Update a built-in prompt in place.",
+    "inputFields": [
+      {
+        "description": "Prompt content override.",
+        "name": "content",
+        "optional": true
+      },
+      {
+        "description": "Prompt description override.",
+        "name": "description",
+        "optional": true
+      },
+      {
+        "description": "Built-in prompt identifier.",
+        "name": "id",
+        "optional": false
+      },
+      {
+        "description": "Prompt name override.",
+        "name": "name",
+        "optional": true
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_builtin_prompt",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/prompts/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Update a built-in resource in place.",
+    "inputFields": [
+      {
+        "description": "Resource description override.",
+        "name": "description",
+        "optional": true
+      },
+      {
+        "description": "Built-in resource identifier.",
+        "name": "id",
+        "optional": false
+      },
+      {
+        "description": "Resource MIME type override.",
+        "name": "mimeType",
+        "optional": true
+      },
+      {
+        "description": "Resource name override.",
+        "name": "name",
+        "optional": true
+      },
+      {
+        "description": "Resource URI override.",
+        "name": "uri",
+        "optional": true
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_builtin_resource",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/resources/:id"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Replace the enabled tool selection for a server inside a group override.",
+    "inputFields": [
+      {
+        "description": "Group identifier.",
+        "name": "groupId",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      },
+      {
+        "description": "Selected tools for the group-specific override.",
+        "name": "tools",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_group_server_tools",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/groups/:id/server-configs/:serverName/tools"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Update a per-server prompt description override.",
+    "inputFields": [
+      {
+        "description": "New prompt description.",
+        "name": "description",
+        "optional": false
+      },
+      {
+        "description": "Prompt name.",
+        "name": "promptName",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_server_prompt_description",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/servers/:serverName/prompts/:promptName/description"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Update a per-server resource description override.",
+    "inputFields": [
+      {
+        "description": "New resource description.",
+        "name": "description",
+        "optional": false
+      },
+      {
+        "description": "Resource URI.",
+        "name": "resourceUri",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_server_resource_description",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/servers/:serverName/resources/:resourceUri/description"
+    }
+  },
+  {
+    "annotations": {
+      "destructiveHint": false,
+      "idempotentHint": false,
+      "openWorldHint": false,
+      "readOnlyHint": false
+    },
+    "confirmationRequired": false,
+    "description": "Update a per-server tool description override.",
+    "inputFields": [
+      {
+        "description": "New tool description.",
+        "name": "description",
+        "optional": false
+      },
+      {
+        "description": "Server name.",
+        "name": "serverName",
+        "optional": false
+      },
+      {
+        "description": "Tool name.",
+        "name": "toolName",
+        "optional": false
+      }
+    ],
+    "profile": "ops",
+    "requiredFeatureFlags": [],
+    "risk": "safe_write",
+    "sinceMcphubVersion": "1.0.15",
+    "tool": "mcphub_update_server_tool_description",
+    "upstream": {
+      "method": "PUT",
+      "path": "/api/servers/:serverName/tools/:toolName/description"
+    }
+  }
+]

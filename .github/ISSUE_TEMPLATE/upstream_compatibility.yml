@@ -1,0 +1,78 @@
+name: Upstream compatibility drift
+description: Report MCPHub route or behavior drift that affects this package
+title: "[Compatibility] "
+labels:
+  - compatibility
+  - upstream-drift
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when MCPHub changed upstream behavior in a way that affects route coverage, tool behavior, or generated catalogs.
+  - type: input
+    id: mcphub_version
+    attributes:
+      label: MCPHub version or image tag
+      placeholder: 1.0.16 or samanhappy/mcphub:latest
+    validations:
+      required: true
+  - type: input
+    id: package_version
+    attributes:
+      label: Package version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: route_or_area
+    attributes:
+      label: Route or product area
+      placeholder: GET /api/servers or OAuth clients
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed upstream behavior
+      description: Describe the behavior, schema, auth, or route change you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect based on the current package behavior or docs?
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact on this package
+      description: Mention failing tools, docs drift, or broken compatibility assumptions.
+    validations:
+      required: true
+  - type: dropdown
+    id: generated_outputs
+    attributes:
+      label: Are route coverage or generated catalogs affected?
+      options:
+        - yes
+        - no
+        - not sure
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Start MCPHub version ...
+        2. Call route ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: upstream_links
+    attributes:
+      label: Upstream docs, release notes, or references
+      description: Add links if you have them.
