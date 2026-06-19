@@ -134,22 +134,70 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Capture published package version
+      - name: Capture current package version
         id: package-version
-        if: ${{ steps.changesets.outputs.published == 'true' }}
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
-      - name: Create GitHub release for published version
-        if: ${{ steps.changesets.outputs.published == 'true' }}
+      - name: Decide whether GitHub release creation is needed
+        id: release-sync
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
         run: |
           if gh release view "v$PACKAGE_VERSION" >/dev/null 2>&1; then
             echo "GitHub release v$PACKAGE_VERSION already exists."
+            echo "should_create=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
+          node <<'EOF'
+          (async () => {
+            const packageName = require('./package.json').name;
+            const version = process.env.PACKAGE_VERSION;
+            const outputPath = process.env.GITHUB_OUTPUT;
+
+            if (!version || !outputPath) {
+              console.error('PACKAGE_VERSION and GITHUB_OUTPUT are required.');
+              process.exit(1);
+            }
+
+            const encodedName = packageName.replace('/', '%2f');
+            const encodedVersion = encodeURIComponent(version);
+            const registryUrl = `https://registry.npmjs.org/${encodedName}/${encodedVersion}`;
+
+            const response = await fetch(registryUrl, {
+              headers: {
+                Accept: 'application/json',
+              },
+            });
+
+            if (response.status === 404) {
+              console.log(
+                `npm package ${packageName}@${version} is not published yet. Skipping GitHub release creation.`,
+              );
+              require('node:fs').appendFileSync(outputPath, 'should_create=false\n');
+              process.exit(0);
+            }
+
+            if (!response.ok) {
+              console.error(`Failed to verify npm publication: ${response.status} ${response.statusText}`);
+              process.exit(1);
+            }
+
+            console.log(`Confirmed npm publication for ${packageName}@${version}.`);
+            require('node:fs').appendFileSync(outputPath, 'should_create=true\n');
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          EOF
+
+      - name: Create GitHub release for published version
+        if: ${{ steps.release-sync.outputs.should_create == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
+        run: |
           gh release create "v$PACKAGE_VERSION" \
             --target "$GITHUB_SHA" \
             --title "v$PACKAGE_VERSION" \
