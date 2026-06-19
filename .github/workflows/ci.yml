@@ -40,7 +40,7 @@ jobs:
 
       - name: Setup pnpm
         if: ${{ steps.changes.outputs.should_run == 'true' }}
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 11.7.0
 
@@ -114,7 +114,7 @@ jobs:
 
       - name: Setup pnpm
         if: ${{ steps.changes.outputs.should_run == 'true' }}
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 11.7.0
 
