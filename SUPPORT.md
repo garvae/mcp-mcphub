@@ -9,7 +9,9 @@ Use the routing below so questions stay useful and issues stay actionable.
 - usage Q&A
 - workflow ideas that are not yet concrete implementation work
 
-When Discussions are enabled for the public repository, that should be the default home for setup and client help. Until then, use this document as the routing source of truth.
+Use GitHub Discussions as the default home for setup and client help:
+
+- https://github.com/garvae/mcp-mcphub/discussions
 
 ## Use GitHub Issues For
 

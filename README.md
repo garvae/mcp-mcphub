@@ -445,7 +445,7 @@ See [docs/troubleshooting.md][troubleshooting].
 
 ## Support and Contribution
 
-- Questions and setup help: see [SUPPORT.md][support]; use Discussions when they are enabled
+- Questions and setup help: see [SUPPORT.md][support] and use [GitHub Discussions](https://github.com/garvae/mcp-mcphub/discussions)
 - Reproducible bugs: use the bug report issue template
 - Feature proposals: use the feature request template
 - Upstream route or compatibility drift: use the compatibility template

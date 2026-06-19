@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Support and setup routing
-    url: https://github.com/garvae/mcp-mcphub/blob/main/SUPPORT.md
-    about: Read support routing before opening an issue. Use Discussions for setup help when they are enabled.
+    url: https://github.com/garvae/mcp-mcphub/discussions
+    about: Use Discussions for setup help, client configuration, and usage questions before opening an issue.
   - name: Security policy
     url: https://github.com/garvae/mcp-mcphub/blob/main/SECURITY.md
     about: Do not disclose secrets or sensitive exploit details publicly.

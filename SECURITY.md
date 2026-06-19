@@ -19,8 +19,9 @@ Please report issues that could lead to:
 
 Preferred path:
 
-- follow the repository's private vulnerability reporting path if it is available
-- use GitHub Security Advisories / Private Vulnerability Reporting when the repository has that feature enabled
+- use GitHub Private Vulnerability Reporting for this repository:
+  - https://github.com/garvae/mcp-mcphub/security/advisories/new
+- include only the minimum reproduction detail needed for triage and keep real credentials out of the report
 
 Fallback path:
 

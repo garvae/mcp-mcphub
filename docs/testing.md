@@ -8,7 +8,7 @@
 4. ephemeral Docker compatibility tests;
 5. optional live MCPHub tests against a dedicated test instance.
 
-The release workflow is intentionally stricter than the ordinary PR path.
+The release workflow is intentionally stricter than the ordinary PR path because it is the last gate before a publish-capable Changesets run on `main`.
 
 ## Command Matrix
 
@@ -132,17 +132,17 @@ These variables are only for the test harness and release validation. They are n
 
 ## Release Workflow
 
-The manually triggered `release.yml` workflow runs the publish-grade path as explicit GitHub Actions steps:
+`release.yml` runs on pushes to `main` and on manual `workflow_dispatch`.
 
-1. optional Docker compatibility tests;
-2. clean build;
-3. tarball creation and audit;
-4. installed package runtime verification;
-5. optional live read-only checks when configured;
-6. npm publish dry-run;
-7. optional changesets publish when `publish=true` and repository publishing is enabled.
+Its release-grade path performs:
 
-Baseline validation such as Biome, Prettier, deterministic tests, integration tests, and coverage reporting stays in the PR-oriented workflows instead of being duplicated in the release workflow.
+1. generated documentation checks;
+2. typecheck, lint, format check, deterministic tests, integration tests, coverage, and coverage-matrix verification;
+3. optional Docker compatibility and live read-only MCPHub checks when configured;
+4. clean build, tarball audit, installed-package validation, and npm publish dry-run;
+5. `changesets/action`, which creates or updates the Version Packages PR when pending changesets exist and publishes automatically when the Version Packages PR is merged.
+
+Publishing is expected to use npm Trusted Publishing with GitHub Actions OIDC. The workflow keeps `id-token: write` enabled for that path.
 
 ## GitHub Actions
 
@@ -153,4 +153,4 @@ Relevant workflows:
 - `integration.yml`: local transport integration and coverage-matrix verification;
 - `compatibility-matrix.yml`: real Docker-based MCPHub version matrix;
 - `real-behavior.yml`: scheduled or manual live MCPHub checks against dedicated secrets;
-- `release.yml`: manually triggered changesets release flow with publish disabled by default.
+- `release.yml`: release-grade validation plus Changesets PR/publish automation for `main`.
