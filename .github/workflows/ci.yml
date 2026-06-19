@@ -38,6 +38,12 @@ jobs:
             echo "should_run=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Setup pnpm
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+
       - name: Setup Node.js
         if: ${{ steps.changes.outputs.should_run == 'true' }}
         uses: actions/setup-node@v5
@@ -45,10 +51,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install pnpm
-        if: ${{ steps.changes.outputs.should_run == 'true' }}
-        run: npm install --global pnpm@11.7.0
 
       - name: Install dependencies
         if: ${{ steps.changes.outputs.should_run == 'true' }}
@@ -110,6 +112,12 @@ jobs:
             echo "should_run=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Setup pnpm
+        if: ${{ steps.changes.outputs.should_run == 'true' }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+
       - name: Setup Node.js
         if: ${{ steps.changes.outputs.should_run == 'true' }}
         uses: actions/setup-node@v5
@@ -117,10 +125,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install pnpm
-        if: ${{ steps.changes.outputs.should_run == 'true' }}
-        run: npm install --global pnpm@11.7.0
 
       - name: Install dependencies
         if: ${{ steps.changes.outputs.should_run == 'true' }}
