@@ -12,7 +12,7 @@ Normal flow:
 2. the PR merges into `main` after required checks pass
 3. `release.yml` runs on `main`, validates the release path, and asks `changesets/action` to create or update the Version Packages PR when pending changesets exist
 4. the Version Packages PR lands on `main` after review
-5. `release.yml` runs again and publishes the new version to npm through GitHub Actions OIDC
+5. `release.yml` runs again, publishes the new version to npm, and creates the matching Git tag and GitHub Release
 
 Manual `workflow_dispatch` is kept as a maintenance fallback for the same release pipeline.
 
@@ -113,6 +113,7 @@ These checks are partly outside the repository tree and should be reviewed befor
 - `id-token: write`
 - Node `24` for the release job
 - full release-grade validation before `changesets/action`
+- create a GitHub Release for every version that was actually published
 - no long-lived `NPM_TOKEN` dependency for the normal publish path once Trusted Publishing is attached
 
 If npm Trusted Publishing must be repaired, fix the package's trusted publisher entry for:

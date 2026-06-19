@@ -124,6 +124,7 @@ jobs:
         run: pnpm publish:dry-run
 
       - name: Create release PR or publish package
+        id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm version:packages
@@ -132,3 +133,24 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Capture published package version
+        id: package-version
+        if: ${{ steps.changesets.outputs.published == 'true' }}
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release for published version
+        if: ${{ steps.changesets.outputs.published == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
+        run: |
+          if gh release view "v$PACKAGE_VERSION" >/dev/null 2>&1; then
+            echo "GitHub release v$PACKAGE_VERSION already exists."
+            exit 0
+          fi
+
+          gh release create "v$PACKAGE_VERSION" \
+            --target "$GITHUB_SHA" \
+            --title "v$PACKAGE_VERSION" \
+            --generate-notes
