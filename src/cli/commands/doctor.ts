@@ -7,6 +7,7 @@ import { type McpHubProfile, resolveProfileByName } from '../../config/profiles.
 import { createConfiguredMcpHubClient } from '../../core/mcphub-client/factory.js';
 import { createResponseError } from '../../core/mcphub-client/errors.js';
 import { createLogger } from '../../observability/logger.js';
+import { formatDoctorHelpOutput } from './help.js';
 import type { CliContext, CliResult } from '../types.js';
 
 type DoctorCommandOptions = {
@@ -220,6 +221,11 @@ export async function runDoctorCommand(context: CliContext): Promise<CliResult> 
   let selectedProfileTokenKind: string | undefined;
 
   try {
+    if (context.args.includes('--help') || context.args.includes('-h')) {
+      context.io.stdout.write(`${formatDoctorHelpOutput()}\n`);
+      return { exitCode: 0 };
+    }
+
     const options = parseDoctorCommandOptions(context.args);
     const loadedEnv = loadCommandEnvWithMetadata(options.configPath, process.env);
     const config = loadConfig(loadedEnv.env);

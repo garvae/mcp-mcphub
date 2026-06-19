@@ -230,4 +230,22 @@ describe('doctor command', () => {
     ]);
     expect(stderr.toString()).toBe('');
   });
+
+  it('prints doctor help without loading configuration', async () => {
+    const stdout = new MemoryStream();
+    const stderr = new MemoryStream();
+    const result = await runDoctorCommand({
+      args: ['doctor', '--help'],
+      io: {
+        stderr: stderr as unknown as NodeJS.WriteStream,
+        stdout: stdout as unknown as NodeJS.WriteStream,
+      },
+    });
+
+    expect(result.exitCode).toBe(0);
+    expect(stdout.toString()).toContain('Usage:');
+    expect(stdout.toString()).toContain('mcp-mcphub doctor');
+    expect(stdout.toString()).toContain('--json');
+    expect(stderr.toString()).toBe('');
+  });
 });
