@@ -91,7 +91,7 @@
     "format:check": "prettier --check .",
     "pack:validate": "tsx scripts/audit-package.ts --pack",
     "publish:dry-run": "pnpm publish --dry-run --no-git-checks",
-    "release": "pnpm publish --no-git-checks",
+    "release": "tsx scripts/publish-release.ts",
     "test": "vitest run",
     "test:coverage": "vitest run -c vitest.coverage.config.ts",
     "test:compatibility": "vitest run -c vitest.integration.config.ts tests/integration/upstream-compat.test.ts",
