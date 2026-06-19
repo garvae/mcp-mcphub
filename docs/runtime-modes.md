@@ -2,7 +2,7 @@
 
 This project is intentionally local-first.
 
-It should feel lightweight when used as a workstation MCP server, but it also supports heavier self-hosted deployment patterns when needed.
+It should feel lightweight when used as a workstation MCP server, but it also supports heavier shared-service deployment patterns when needed.
 
 ## The Short Version
 
@@ -12,12 +12,12 @@ It should feel lightweight when used as a workstation MCP server, but it also su
 
 ## Mode Summary
 
-| Mode             | Best for                                               | Docker required      | Network listener |
-| ---------------- | ------------------------------------------------------ | -------------------- | ---------------- |
-| `stdio`          | local MCP clients launched as child processes          | no                   | no               |
-| local HTTP       | local testing or local multi-client use                | no                   | yes              |
-| self-hosted HTTP | shared internal service, CI, reverse proxy, automation | no, but often useful | yes              |
-| Dockerized HTTP  | reproducible deployment and ops workflows              | yes, by choice       | yes              |
+| Mode           | Best for                                               | Docker required      | Network listener |
+| -------------- | ------------------------------------------------------ | -------------------- | ---------------- |
+| `stdio`        | local MCP clients launched as child processes          | no                   | no               |
+| local HTTP     | local testing or local multi-client use                | no                   | yes              |
+| shared HTTP    | shared internal service, CI, reverse proxy, automation | no, but often useful | yes              |
+| Dockerized HTTP| reproducible deployment and ops workflows              | yes, by choice       | yes              |
 
 ## `stdio`
 
@@ -61,9 +61,9 @@ Tradeoffs:
 - you now manage a local listening port;
 - you must configure inbound auth tokens or another HTTP auth mode.
 
-## Self-Hosted HTTP
+## Shared HTTP
 
-Use self-hosted HTTP when:
+Use shared HTTP when:
 
 - you want a central MCP service for a team, agent host, or CI environment;
 - you need stable URLs such as `/mcp/safe` or `/mcp/admin`;
@@ -97,7 +97,7 @@ It helps with:
 
 Docker is especially useful for:
 
-- self-hosted users already running reverse proxies and containers;
+- teams already running reverse proxies and containers;
 - CI jobs that must boot the server predictably;
 - compatibility matrix testing with multiple upstream MCPHub versions.
 

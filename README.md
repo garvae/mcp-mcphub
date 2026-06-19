@@ -6,7 +6,7 @@
 <h1 align="center">MCPHub Management MCP</h1>
 
 <p align="center">
-  Typed, profile-gated MCP tools for managing self-hosted MCPHub instances through the REST Management API.
+  Typed, profile-gated MCP tools for managing MCPHub instances through the REST Management API.
 </p>
 
 <p align="center">
@@ -26,10 +26,7 @@
 
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](./LICENSE)
 [![Node.js 22.13%2B](https://img.shields.io/badge/node-22.13%2B-339933.svg)](./package.json)
-[![CI](https://github.com/garvae/mcp-mcphub/actions/workflows/ci.yml/badge.svg)](https://github.com/garvae/mcp-mcphub/actions/workflows/ci.yml)
-[![Test Coverage](https://github.com/garvae/mcp-mcphub/actions/workflows/coverage.yml/badge.svg)](https://github.com/garvae/mcp-mcphub/actions/workflows/coverage.yml)
-[![Compatibility Matrix](https://github.com/garvae/mcp-mcphub/actions/workflows/compatibility-matrix.yml/badge.svg)](https://github.com/garvae/mcp-mcphub/actions/workflows/compatibility-matrix.yml)
-[![Repo Guardrails](https://github.com/garvae/mcp-mcphub/actions/workflows/repo-guardrails.yml/badge.svg)](https://github.com/garvae/mcp-mcphub/actions/workflows/repo-guardrails.yml)
+[![npm version](https://img.shields.io/npm/v/@garvae/mcp-mcphub.svg)](https://www.npmjs.com/package/@garvae/mcp-mcphub)
 
 `@garvae/mcp-mcphub` turns [MCPHub][mcphub]'s REST Management API into typed, profile-gated MCP tools, so agents and operators can inspect, operate, and maintain MCPHub without hand-written REST calls.
 
@@ -277,7 +274,7 @@ See [Streamable HTTP][http-docs] for full HTTP configuration, reverse-proxy guid
 ## Runtime Modes
 
 - `stdio`: best default for local MCP clients
-- Streamable HTTP: for shared internal services, CI, reverse proxies, and self-hosted deployments
+- Streamable HTTP: for shared internal services, CI, reverse proxies, and long-running deployments
 - Docker: optional self-build only
 
 Docker is optional. The official distribution channel is npm; Docker examples are provided for users who want to build and run their own container image.
@@ -364,7 +361,7 @@ Contributions are welcome in areas such as:
 - improving Claude, Codex, and other client setup examples
 - expanding route coverage when upstream MCPHub adds APIs
 - improving generated tool descriptions
-- adding examples for real-world self-hosted deployments
+- adding examples for real-world shared and remote MCPHub deployments
 - improving troubleshooting and diagnostics
 - reporting API drift or compatibility issues
 

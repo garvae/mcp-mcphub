@@ -3,7 +3,7 @@
 This project is designed to be usable in two very different ways:
 
 1. as a lightweight local MCP server launched by a client process over `stdio`;
-2. as a long-running self-hosted HTTP MCP service.
+2. as a long-running shared HTTP MCP service.
 
 The lightweight local path is the default mental model. Docker is optional.
 
