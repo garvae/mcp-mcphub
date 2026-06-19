@@ -1,3 +1,5 @@
+<!-- markdownlint-disable-file MD024 -->
+
 # Changelog
 
 ## 1.0.1
