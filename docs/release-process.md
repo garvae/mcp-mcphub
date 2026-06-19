@@ -113,7 +113,7 @@ These checks are partly outside the repository tree and should be reviewed befor
 - `id-token: write`
 - Node `24` for the release job
 - full release-grade validation before `changesets/action`
-- no long-lived `NPM_TOKEN` dependency for the normal publish path
+- no long-lived `NPM_TOKEN` dependency for the normal publish path once Trusted Publishing is attached
 
 If npm Trusted Publishing must be repaired, fix the package's trusted publisher entry for:
 
@@ -121,6 +121,11 @@ If npm Trusted Publishing must be repaired, fix the package's trusted publisher 
 - repository: `mcp-mcphub`
 - workflow filename: `release.yml`
 - allowed action: `npm publish`
+
+Current temporary fallback:
+
+- the release workflow reads repository secret `NPM_TOKEN` for publish authentication until npm Trusted Publishing can be attached
+- track removal of that fallback in issue `#17`
 
 ## Rollback Expectations
 
