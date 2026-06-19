@@ -113,6 +113,7 @@ These checks are partly outside the repository tree and should be reviewed befor
 - `id-token: write`
 - Node `24` for the release job
 - full release-grade validation before `changesets/action`
+- use an idempotent publish wrapper so ordinary merges to `main` do not fail by attempting to republish the already-released current version
 - create a GitHub Release for every version that was actually published, even when `changesets/action` takes the "publish unpublished packages" path without setting a reliable `published=true` output
 - no long-lived `NPM_TOKEN` dependency for the normal publish path once Trusted Publishing is attached
 
