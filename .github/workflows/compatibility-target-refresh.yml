@@ -50,7 +50,7 @@ jobs:
           pnpm docs:compatibility
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/weekly-compatibility-target-refresh
           commit-message: 'chore: refresh pinned compatibility target'
