@@ -45,7 +45,8 @@ export function loadCommandEnvWithMetadata(
   env: NodeJS.ProcessEnv,
 ): CommandEnvLoadResult {
   const autoEnvPath = path.resolve('.env');
-  const autoEnv = configPath === undefined && existsSync(autoEnvPath) ? readConfigFile(autoEnvPath) : undefined;
+  const autoEnv =
+    configPath === undefined && existsSync(autoEnvPath) ? readConfigFile(autoEnvPath) : undefined;
   const fileEnv = configPath === undefined ? autoEnv : readConfigFile(configPath);
 
   if (fileEnv === undefined) {
@@ -71,6 +72,9 @@ export function loadCommandEnvWithMetadata(
   };
 }
 
-export function loadCommandEnv(configPath: string | undefined, env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
+export function loadCommandEnv(
+  configPath: string | undefined,
+  env: NodeJS.ProcessEnv,
+): NodeJS.ProcessEnv {
   return loadCommandEnvWithMetadata(configPath, env).env;
 }

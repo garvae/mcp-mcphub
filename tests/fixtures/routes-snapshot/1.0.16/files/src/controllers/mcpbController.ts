@@ -145,7 +145,10 @@ export const uploadMcpbFile = async (req: Request, res: Response): Promise<void>
       const safeServerName = validateMcpbServerName(manifest.name);
 
       // Use server name as the final extract directory for automatic version management
-      const finalExtractDir = resolveMcpbServerExtractDir(path.dirname(mcpbFilePath), safeServerName);
+      const finalExtractDir = resolveMcpbServerExtractDir(
+        path.dirname(mcpbFilePath),
+        safeServerName,
+      );
 
       // Clean up any existing version of this server
       cleanupOldMcpbServer(safeServerName);

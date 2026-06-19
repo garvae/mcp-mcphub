@@ -16,13 +16,23 @@ export function createConfiguredMcpHubClient(
   return createMcpHubClient({
     authProvider: createAuthHeadersProvider({
       baseUrl: selectedProfile.url,
-      ...(selectedProfile.betterAuthCookie !== undefined ? { betterAuthCookie: selectedProfile.betterAuthCookie } : {}),
+      ...(selectedProfile.betterAuthCookie !== undefined
+        ? { betterAuthCookie: selectedProfile.betterAuthCookie }
+        : {}),
       headerName: selectedProfile.authHeader,
       logger,
-      ...(selectedProfile.oauthClientId !== undefined ? { oauthClientId: selectedProfile.oauthClientId } : {}),
-      ...(selectedProfile.oauthClientSecret !== undefined ? { oauthClientSecret: selectedProfile.oauthClientSecret } : {}),
-      ...(selectedProfile.oauthScope !== undefined ? { oauthScope: selectedProfile.oauthScope } : {}),
-      ...(selectedProfile.oauthTokenUrl !== undefined ? { oauthTokenUrl: selectedProfile.oauthTokenUrl } : {}),
+      ...(selectedProfile.oauthClientId !== undefined
+        ? { oauthClientId: selectedProfile.oauthClientId }
+        : {}),
+      ...(selectedProfile.oauthClientSecret !== undefined
+        ? { oauthClientSecret: selectedProfile.oauthClientSecret }
+        : {}),
+      ...(selectedProfile.oauthScope !== undefined
+        ? { oauthScope: selectedProfile.oauthScope }
+        : {}),
+      ...(selectedProfile.oauthTokenUrl !== undefined
+        ? { oauthTokenUrl: selectedProfile.oauthTokenUrl }
+        : {}),
       ...(selectedProfile.password !== undefined ? { password: selectedProfile.password } : {}),
       ...(selectedProfile.token !== undefined ? { token: selectedProfile.token } : {}),
       ...(selectedProfile.username !== undefined ? { username: selectedProfile.username } : {}),

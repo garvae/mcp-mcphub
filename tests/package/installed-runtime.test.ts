@@ -6,14 +6,22 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { getFreePort, runProcess, spawnProcess, stopSpawnedProcess, waitForHttpHealth } from '../helpers/cli.js';
+import {
+  getFreePort,
+  runProcess,
+  spawnProcess,
+  stopSpawnedProcess,
+  waitForHttpHealth,
+} from '../helpers/cli.js';
 import { startManagementUpstreamStub } from '../helpers/upstream-stub.js';
 
 function getPackedArtifactPath() {
-  const artifactDirectory = path.resolve('.artifacts');
+  const artifactDirectory = path.resolve(process.env.PACK_ARTIFACTS_DIR ?? '.artifacts');
   const tarballName = readdirSync(artifactDirectory).find((entry) => entry.endsWith('.tgz'));
   if (tarballName === undefined) {
-    throw new Error('No package tarball found under .artifacts. Run pnpm pack:smoke first.');
+    throw new Error(
+      `No package tarball found under ${artifactDirectory}. Run package validation first.`,
+    );
   }
 
   return path.join(artifactDirectory, tarballName);
@@ -32,17 +40,23 @@ async function installTarball(targetDirectory: string, tarballPath: string) {
 
   const install =
     process.platform === 'win32'
-      ? await runProcess('cmd.exe', ['/d', '/s', '/c', 'npm', 'install', '--no-package-lock', tarballPath], {
-          cwd: targetDirectory,
-          env: process.env,
-        })
+      ? await runProcess(
+          'cmd.exe',
+          ['/d', '/s', '/c', 'npm', 'install', '--no-package-lock', tarballPath],
+          {
+            cwd: targetDirectory,
+            env: process.env,
+          },
+        )
       : await runProcess('npm', ['install', '--no-package-lock', tarballPath], {
           cwd: targetDirectory,
           env: process.env,
         });
 
   if (install.exitCode !== 0) {
-    throw new Error(`Failed to install package tarball.\nSTDOUT:\n${install.stdout}\nSTDERR:\n${install.stderr}`);
+    throw new Error(
+      `Failed to install package tarball.\nSTDOUT:\n${install.stdout}\nSTDERR:\n${install.stderr}`,
+    );
   }
 }
 
@@ -67,7 +81,15 @@ describe('installed package runtime', () => {
 
     await installTarball(installDirectory, getPackedArtifactPath());
 
-    const cliPath = path.join(installDirectory, 'node_modules', '@garvae', 'mcp-mcphub', 'dist', 'cli', 'bin.js');
+    const cliPath = path.join(
+      installDirectory,
+      'node_modules',
+      '@garvae',
+      'mcp-mcphub',
+      'dist',
+      'cli',
+      'bin.js',
+    );
     const httpPort = await getFreePort();
     const envFilePath = path.join(installDirectory, '.env');
 
@@ -107,12 +129,22 @@ describe('installed package runtime', () => {
     }
 
     expect('checks' in doctorReport && Array.isArray(doctorReport.checks)).toBe(true);
-    expect('profile' in doctorReport && typeof doctorReport.profile === 'object' && doctorReport.profile !== null).toBe(true);
-    if (!('profile' in doctorReport) || typeof doctorReport.profile !== 'object' || doctorReport.profile === null) {
+    expect(
+      'profile' in doctorReport &&
+        typeof doctorReport.profile === 'object' &&
+        doctorReport.profile !== null,
+    ).toBe(true);
+    if (
+      !('profile' in doctorReport) ||
+      typeof doctorReport.profile !== 'object' ||
+      doctorReport.profile === null
+    ) {
       throw new Error('Expected doctor report to include a profile object.');
     }
 
-    expect('tokenKind' in doctorReport.profile ? doctorReport.profile.tokenKind : undefined).toBe('bearer');
+    expect('tokenKind' in doctorReport.profile ? doctorReport.profile.tokenKind : undefined).toBe(
+      'bearer',
+    );
     expect('url' in doctorReport.profile ? doctorReport.profile.url : undefined).toBe(upstream.url);
 
     const stdioTransport = new StdioClientTransport({

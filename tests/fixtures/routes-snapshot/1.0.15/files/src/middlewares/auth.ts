@@ -24,7 +24,10 @@ const resolveBetterAuthUserSafe = async (req: Request) => {
   return module.resolveBetterAuthUser(req);
 };
 
-const validateBearerAuth = async (req: Request, systemConfig?: SystemConfig | null): Promise<boolean> => {
+const validateBearerAuth = async (
+  req: Request,
+  systemConfig?: SystemConfig | null,
+): Promise<boolean> => {
   const enableBearerAuth = systemConfig?.routing?.enableBearerAuth ?? true;
   if (!enableBearerAuth) {
     return false;
@@ -43,7 +46,9 @@ const validateBearerAuth = async (req: Request, systemConfig?: SystemConfig | nu
     return false;
   }
 
-  const matchingKey: BearerKey | undefined = enabledKeys.find((key) => safeCompare(key.token, token));
+  const matchingKey: BearerKey | undefined = enabledKeys.find((key) =>
+    safeCompare(key.token, token),
+  );
   if (!matchingKey) {
     console.warn('Bearer auth failed: token did not match any configured bearer key');
     return false;

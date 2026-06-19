@@ -28,9 +28,16 @@ function hasRouteSnapshot(version: string): boolean {
 }
 
 function renderTargetsModule(config: CompatibilityConfig): string {
-  const { minimumBestEffortVersion, pinnedReleaseTargetVersion, routeSnapshotBaselineVersion, upstreamRepository } = config;
+  const {
+    minimumBestEffortVersion,
+    pinnedReleaseTargetVersion,
+    routeSnapshotBaselineVersion,
+    upstreamRepository,
+  } = config;
   const pinnedHasRouteSnapshot = hasRouteSnapshot(pinnedReleaseTargetVersion);
-  const automatedImageTags = [...new Set([routeSnapshotBaselineVersion, pinnedReleaseTargetVersion, 'latest'])];
+  const automatedImageTags = [
+    ...new Set([routeSnapshotBaselineVersion, pinnedReleaseTargetVersion, 'latest']),
+  ];
   const pinnedNotes = pinnedHasRouteSnapshot
     ? `Pinned release target with a committed route snapshot for ${pinnedReleaseTargetVersion}.`
     : `Pinned release target refreshed by weekly automation; runtime compatibility is smoke-tested even when no dedicated route snapshot is committed yet.`;
@@ -38,7 +45,9 @@ function renderTargetsModule(config: CompatibilityConfig): string {
     ? `The \`${pinnedReleaseTargetVersion}\` route snapshot is committed alongside the current baseline.`
     : `The weekly pinned release target is \`${pinnedReleaseTargetVersion}\`; if no dedicated route snapshot is committed yet, container smoke tests still cover runtime compatibility.`;
   const escapedPinnedNotes = pinnedNotes.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-  const escapedCompatibilityNotesSummary = compatibilityNotesSummary.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  const escapedCompatibilityNotesSummary = compatibilityNotesSummary
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'");
 
   return `// SPDX-License-Identifier: Apache-2.0
 
@@ -107,7 +116,12 @@ export function getAutomatedCompatibilityTargets(selectedImageTag?: string): Ups
 }
 
 function renderUpstreamDocs(config: CompatibilityConfig): string {
-  const { minimumBestEffortVersion, pinnedReleaseTargetVersion, routeSnapshotBaselineVersion, upstreamRepository } = config;
+  const {
+    minimumBestEffortVersion,
+    pinnedReleaseTargetVersion,
+    routeSnapshotBaselineVersion,
+    upstreamRepository,
+  } = config;
 
   return `# Upstream MCPHub
 

@@ -71,12 +71,12 @@ This package does not require any product-specific manager integration. If your 
 
 ## Local `stdio` Versus Shared HTTP
 
-| Goal | Recommended mode |
-| --- | --- |
-| One local trusted client | `stdio` |
-| Several clients need one managed endpoint | Streamable HTTP |
-| Reverse proxy, shared auth, or CI access | Streamable HTTP |
-| Quick local development | `stdio` first |
+| Goal                                      | Recommended mode |
+| ----------------------------------------- | ---------------- |
+| One local trusted client                  | `stdio`          |
+| Several clients need one managed endpoint | Streamable HTTP  |
+| Reverse proxy, shared auth, or CI access  | Streamable HTTP  |
+| Quick local development                   | `stdio` first    |
 
 ## Inbound HTTP Authentication
 

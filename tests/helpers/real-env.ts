@@ -19,10 +19,7 @@ export type RealTestEnvironment = {
   url: string;
 };
 
-function readString(
-  env: NodeJS.ProcessEnv,
-  ...keys: string[]
-): string | undefined {
+function readString(env: NodeJS.ProcessEnv, ...keys: string[]): string | undefined {
   for (const key of keys) {
     const value = env[key];
     if (typeof value === 'string' && value.length > 0) {
@@ -39,12 +36,13 @@ export function getRealTestEnvironment(): RealTestEnvironment {
   const token = readString(env, 'REAL_TEST_MCPHUB_TOKEN', 'MCPHUB_TOKEN');
 
   return {
-    authHeader: (readString(env, 'REAL_TEST_MCPHUB_AUTH_HEADER', 'MCPHUB_AUTH_HEADER') ?? 'Authorization') as
-      | 'Authorization'
-      | 'x-auth-token',
+    authHeader: (readString(env, 'REAL_TEST_MCPHUB_AUTH_HEADER', 'MCPHUB_AUTH_HEADER') ??
+      'Authorization') as 'Authorization' | 'x-auth-token',
     fixturePrefix: readString(env, 'REAL_TEST_FIXTURE_PREFIX') ?? 'mcp-mcphub-test',
-    httpAuthToken: readString(env, 'REAL_TEST_HTTP_AUTH_TOKEN', 'MCP_HTTP_AUTH_TOKEN') ?? 'real-safe-token',
-    mutationEnabled: env.RUN_REAL_MCPHUB_MUTATION_TESTS === '1' && url !== undefined && token !== undefined,
+    httpAuthToken:
+      readString(env, 'REAL_TEST_HTTP_AUTH_TOKEN', 'MCP_HTTP_AUTH_TOKEN') ?? 'real-safe-token',
+    mutationEnabled:
+      env.RUN_REAL_MCPHUB_MUTATION_TESTS === '1' && url !== undefined && token !== undefined,
     profileName: readString(env, 'REAL_TEST_MCPHUB_PROFILE', 'MCPHUB_DEFAULT_PROFILE'),
     readonlyEnabled: env.RUN_REAL_MCPHUB_TESTS === '1' && url !== undefined && token !== undefined,
     releaseRequired: env.RELEASE_REAL_TESTS_REQUIRED === '1',
@@ -59,16 +57,14 @@ export function getRealTestEnvironment(): RealTestEnvironment {
   };
 }
 
-export function requireRealSuite(
-  env: RealTestEnvironment,
-  scope: 'mutation' | 'readonly',
-): void {
+export function requireRealSuite(env: RealTestEnvironment, scope: 'mutation' | 'readonly'): void {
   const enabled = scope === 'mutation' ? env.mutationEnabled : env.readonlyEnabled;
   if (enabled) {
     return;
   }
 
-  const flag = scope === 'mutation' ? 'RUN_REAL_MCPHUB_MUTATION_TESTS=1' : 'RUN_REAL_MCPHUB_TESTS=1';
+  const flag =
+    scope === 'mutation' ? 'RUN_REAL_MCPHUB_MUTATION_TESTS=1' : 'RUN_REAL_MCPHUB_TESTS=1';
   const message = `Real ${scope} tests are disabled. Set ${flag} and provide REAL_TEST_MCPHUB_URL + REAL_TEST_MCPHUB_TOKEN.`;
 
   if (env.releaseRequired) {

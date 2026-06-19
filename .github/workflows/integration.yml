@@ -1,20 +1,21 @@
-name: coverage
+name: integration
 
 on:
   pull_request:
     paths:
       - 'src/**'
       - 'scripts/**'
-      - 'tests/unit/**'
+      - 'tests/integration/**'
       - 'tests/helpers/**'
+      - 'config/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - 'tsconfig*.json'
-      - 'vitest.config.ts'
-      - 'vitest.coverage.config.ts'
+      - 'vitest.integration.config.ts'
       - 'biome.json'
-      - '.github/workflows/coverage.yml'
+      - '.github/workflows/integration.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,7 +24,7 @@ env:
   NODE_VERSION: '22.13.0'
 
 jobs:
-  coverage:
+  integration:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,12 +46,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run coverage
-        run: pnpm test:coverage
+      - name: Run integration suite
+        run: pnpm test:integration
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v7
-        with:
-          name: coverage-report
-          path: coverage
-          if-no-files-found: error
+      - name: Verify route coverage matrix
+        run: pnpm test:coverage-matrix

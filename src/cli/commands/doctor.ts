@@ -119,16 +119,14 @@ function collectConfigWarnings(config: ReturnType<typeof loadConfig>): string[] 
 function hasSystemAllAccessKey(payload: unknown): boolean {
   return (
     Array.isArray(payload) &&
-    payload.some(
-      (item) => {
-        if (item === null || typeof item !== 'object') {
-          return false;
-        }
+    payload.some((item) => {
+      if (item === null || typeof item !== 'object') {
+        return false;
+      }
 
-        const candidate = item as { accessType?: unknown; kind?: unknown };
-        return candidate.kind === 'system' && candidate.accessType === 'all';
-      },
-    )
+      const candidate = item as { accessType?: unknown; kind?: unknown };
+      return candidate.kind === 'system' && candidate.accessType === 'all';
+    })
   );
 }
 
@@ -171,12 +169,20 @@ async function readPublicRuntimeVersion(baseUrl: string): Promise<string | undef
 async function probeManagementApiAccess(selectedProfile: McpHubProfile): Promise<void> {
   const authProvider = createAuthHeadersProvider({
     baseUrl: selectedProfile.url,
-    ...(selectedProfile.betterAuthCookie !== undefined ? { betterAuthCookie: selectedProfile.betterAuthCookie } : {}),
+    ...(selectedProfile.betterAuthCookie !== undefined
+      ? { betterAuthCookie: selectedProfile.betterAuthCookie }
+      : {}),
     headerName: selectedProfile.authHeader,
-    ...(selectedProfile.oauthClientId !== undefined ? { oauthClientId: selectedProfile.oauthClientId } : {}),
-    ...(selectedProfile.oauthClientSecret !== undefined ? { oauthClientSecret: selectedProfile.oauthClientSecret } : {}),
+    ...(selectedProfile.oauthClientId !== undefined
+      ? { oauthClientId: selectedProfile.oauthClientId }
+      : {}),
+    ...(selectedProfile.oauthClientSecret !== undefined
+      ? { oauthClientSecret: selectedProfile.oauthClientSecret }
+      : {}),
     ...(selectedProfile.oauthScope !== undefined ? { oauthScope: selectedProfile.oauthScope } : {}),
-    ...(selectedProfile.oauthTokenUrl !== undefined ? { oauthTokenUrl: selectedProfile.oauthTokenUrl } : {}),
+    ...(selectedProfile.oauthTokenUrl !== undefined
+      ? { oauthTokenUrl: selectedProfile.oauthTokenUrl }
+      : {}),
     ...(selectedProfile.password !== undefined ? { password: selectedProfile.password } : {}),
     ...(selectedProfile.token !== undefined ? { token: selectedProfile.token } : {}),
     ...(selectedProfile.username !== undefined ? { username: selectedProfile.username } : {}),
@@ -254,7 +260,9 @@ export async function runDoctorCommand(context: CliContext): Promise<CliResult> 
     if (selectedProfile.tokenKind !== 'bearer') {
       const bearerKeys = await client.bearerKeys.list();
       if (!hasSystemAllAccessKey(bearerKeys)) {
-        warnings.push('No system-level all-access bearer key is visible to the configured MCPHub profile.');
+        warnings.push(
+          'No system-level all-access bearer key is visible to the configured MCPHub profile.',
+        );
       }
     }
 

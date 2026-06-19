@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
-import type { CoverageClassification, CoverageEntry, ExposureProfile, RiskClass, SnapshotRoute } from './types.js';
+import type {
+  CoverageClassification,
+  CoverageEntry,
+  ExposureProfile,
+  RiskClass,
+  SnapshotRoute,
+} from './types.js';
 
 function createCoverageEntry(
   route: SnapshotRoute,
@@ -47,7 +53,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'admin',
       mcpName: 'mcphub_create_server',
-      notes: 'Creates a server definition; stdio command-based servers remain gated by policy flags.',
+      notes:
+        'Creates a server definition; stdio command-based servers remain gated by policy flags.',
       profile: 'admin',
       risk: 'destructive',
     });
@@ -57,7 +64,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'admin',
       mcpName: 'mcphub_batch_create_servers',
-      notes: 'Batch server creation remains destructive because it mutates managed infrastructure at scale.',
+      notes:
+        'Batch server creation remains destructive because it mutates managed infrastructure at scale.',
       profile: 'admin',
       risk: 'destructive',
     });
@@ -77,7 +85,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'admin',
       mcpName: 'mcphub_update_server',
-      notes: 'Updates server configuration and requires destructive-style confirmation because a bad update can disable service access.',
+      notes:
+        'Updates server configuration and requires destructive-style confirmation because a bad update can disable service access.',
       profile: 'admin',
       risk: 'destructive',
     });
@@ -97,7 +106,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'ops',
       mcpName: 'mcphub_toggle_server',
-      notes: 'Enable or disable a managed server without deleting it; dry-run support should be preserved in the MCP layer.',
+      notes:
+        'Enable or disable a managed server without deleting it; dry-run support should be preserved in the MCP layer.',
       profile: 'ops',
       risk: 'safe_write',
     });
@@ -128,7 +138,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'ops',
         mcpName: 'mcphub_update_server_tool_description',
-        notes: 'Description overrides affect agent behavior and therefore stay in the ops profile with audit context.',
+        notes:
+          'Description overrides affect agent behavior and therefore stay in the ops profile with audit context.',
         profile: 'ops',
         risk: 'safe_write',
       });
@@ -158,7 +169,8 @@ function classifyServerRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'ops',
         mcpName: 'mcphub_update_server_prompt_description',
-        notes: 'Prompt description overrides influence model-facing guidance and remain operational writes.',
+        notes:
+          'Prompt description overrides influence model-facing guidance and remain operational writes.',
         profile: 'ops',
         risk: 'safe_write',
       });
@@ -301,7 +313,8 @@ function classifyGroupRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'ops',
       mcpName: 'mcphub_replace_group_servers',
-      notes: 'Batch replacement of group membership is operational but broad enough to require careful audit context.',
+      notes:
+        'Batch replacement of group membership is operational but broad enough to require careful audit context.',
       profile: 'ops',
       risk: 'safe_write',
     });
@@ -327,7 +340,10 @@ function classifyGroupRoute(route: SnapshotRoute): CoverageEntry {
     });
   }
 
-  if (route.fullPath === '/api/groups/:id/server-configs/:serverName/tools' && route.method === 'PUT') {
+  if (
+    route.fullPath === '/api/groups/:id/server-configs/:serverName/tools' &&
+    route.method === 'PUT'
+  ) {
     return createCoverageEntry(route, {
       classification: 'ops',
       mcpName: 'mcphub_update_group_server_tools',
@@ -375,7 +391,8 @@ function classifyBuiltinPromptRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'ops',
       mcpName: 'mcphub_update_builtin_prompt',
-      notes: 'Updating a built-in prompt changes model-facing instructions and remains an operational write.',
+      notes:
+        'Updating a built-in prompt changes model-facing instructions and remains an operational write.',
       profile: 'ops',
       risk: 'safe_write',
     });
@@ -435,7 +452,8 @@ function classifyBuiltinResourceRoute(route: SnapshotRoute): CoverageEntry {
     return createCoverageEntry(route, {
       classification: 'ops',
       mcpName: 'mcphub_update_builtin_resource',
-      notes: 'Updating a built-in resource changes model-visible context and remains an operational write.',
+      notes:
+        'Updating a built-in resource changes model-visible context and remains an operational write.',
       profile: 'ops',
       risk: 'safe_write',
     });
@@ -488,7 +506,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_get_public_config',
-        notes: 'Public configuration snapshot; useful for diagnosing skip-auth and similar public flags.',
+        notes:
+          'Public configuration snapshot; useful for diagnosing skip-auth and similar public flags.',
         profile: 'safe',
         risk: 'read',
       });
@@ -566,13 +585,15 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'internal',
         mcpKind: 'none',
-        notes: 'OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.',
+        notes:
+          'OAuth authorization-server and dynamic registration routes are intentionally kept out of the management MCP tool surface.',
       });
     case 'GET /api/openapi.json':
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_get_downstream_openapi_spec',
-        notes: 'This OpenAPI document describes downstream MCP tool execution, not the management API itself.',
+        notes:
+          'This OpenAPI document describes downstream MCP tool execution, not the management API itself.',
         profile: 'safe',
         risk: 'read',
       });
@@ -609,13 +630,15 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'unsupported',
         mcpKind: 'none',
-        notes: 'These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.',
+        notes:
+          'These routes duplicate MCPHub downstream gateway behavior and are intentionally excluded from the management MCP surface.',
       });
     case 'GET /api/settings':
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_get_settings_snapshot',
-        notes: 'Returns a settings snapshot with secrets redacted by default in the MCP output layer.',
+        notes:
+          'Returns a settings snapshot with secrets redacted by default in the MCP output layer.',
         profile: 'safe',
         risk: 'secret_sensitive',
       });
@@ -623,7 +646,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_export_settings',
-        notes: 'Settings export remains secret-sensitive and should only expose redacted content unless explicitly overridden.',
+        notes:
+          'Settings export remains secret-sensitive and should only expose redacted content unless explicitly overridden.',
         profile: 'safe',
         risk: 'secret_sensitive',
       });
@@ -631,7 +655,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'all',
         mcpName: 'mcphub_update_system_config',
-        notes: 'System config writes can lock users out or weaken auth posture and therefore remain all-profile dangerous operations.',
+        notes:
+          'System config writes can lock users out or weaken auth posture and therefore remain all-profile dangerous operations.',
         profile: 'all',
         risk: 'dangerous_config',
       });
@@ -671,7 +696,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_get_user_stats',
-        notes: 'User statistics are read-only and useful for diagnostics, even though upstream still requires authenticated access.',
+        notes:
+          'User statistics are read-only and useful for diagnostics, even though upstream still requires authenticated access.',
         profile: 'safe',
         risk: 'read',
       });
@@ -679,7 +705,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_get_user',
-        notes: 'User record inspection remains administrative because it exposes identity and role data.',
+        notes:
+          'User record inspection remains administrative because it exposes identity and role data.',
         profile: 'admin',
         risk: 'read',
       });
@@ -711,7 +738,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_create_oauth_client',
-        notes: 'Creating an OAuth client introduces new credentials and remains dangerous configuration.',
+        notes:
+          'Creating an OAuth client introduces new credentials and remains dangerous configuration.',
         profile: 'admin',
         risk: 'dangerous_config',
       });
@@ -719,7 +747,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_get_oauth_client',
-        notes: 'OAuth client inspection remains administrative because secrets and redirect URIs require careful redaction.',
+        notes:
+          'OAuth client inspection remains administrative because secrets and redirect URIs require careful redaction.',
         profile: 'admin',
         risk: 'dangerous_config',
       });
@@ -727,7 +756,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_update_oauth_client',
-        notes: 'Updating OAuth client configuration can break auth flows and is classified as dangerous configuration.',
+        notes:
+          'Updating OAuth client configuration can break auth flows and is classified as dangerous configuration.',
         profile: 'admin',
         risk: 'dangerous_config',
       });
@@ -743,7 +773,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'all',
         mcpName: 'mcphub_regenerate_oauth_client_secret',
-        notes: 'Secret regeneration is highly sensitive because it invalidates existing integrations immediately.',
+        notes:
+          'Secret regeneration is highly sensitive because it invalidates existing integrations immediately.',
         profile: 'all',
         risk: 'dangerous_config',
       });
@@ -759,7 +790,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_create_bearer_key',
-        notes: 'Creating a bearer key changes control-plane access and remains dangerous configuration.',
+        notes:
+          'Creating a bearer key changes control-plane access and remains dangerous configuration.',
         profile: 'admin',
         risk: 'dangerous_config',
       });
@@ -775,7 +807,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'admin',
         mcpName: 'mcphub_delete_bearer_key',
-        notes: 'Deleting a bearer key is destructive for existing clients and remains dangerous configuration.',
+        notes:
+          'Deleting a bearer key is destructive for existing clients and remains dangerous configuration.',
         profile: 'admin',
         risk: 'dangerous_config',
       });
@@ -847,7 +880,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'all',
         mcpName: 'mcphub_import_config_template',
-        notes: 'Template import can introduce arbitrary server definitions and remains dangerous configuration.',
+        notes:
+          'Template import can introduce arbitrary server definitions and remains dangerous configuration.',
         profile: 'all',
         risk: 'dangerous_config',
       });
@@ -855,7 +889,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'safe',
         mcpName: 'mcphub_get_better_auth_user',
-        notes: 'Returns the resolved Better Auth user for the current request when Better Auth is enabled.',
+        notes:
+          'Returns the resolved Better Auth user for the current request when Better Auth is enabled.',
         profile: 'safe',
         risk: 'read',
       });
@@ -865,7 +900,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'internal',
         mcpKind: 'none',
-        notes: 'Authentication mutation routes are used by the REST client in JWT mode but are not exposed as management tools.',
+        notes:
+          'Authentication mutation routes are used by the REST client in JWT mode but are not exposed as management tools.',
       });
     case 'GET /api/auth/user':
       return createCoverageEntry(route, {
@@ -999,7 +1035,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'all',
         mcpName: 'mcphub_call_cloud_tool',
-        notes: 'Calling a cloud market tool is intentionally reserved for the all profile because it crosses into downstream execution.',
+        notes:
+          'Calling a cloud market tool is intentionally reserved for the all profile because it crosses into downstream execution.',
         profile: 'all',
         risk: 'dangerous_config',
       });
@@ -1055,7 +1092,8 @@ export function classifyRoute(route: SnapshotRoute): CoverageEntry {
       return createCoverageEntry(route, {
         classification: 'streaming-only',
         mcpKind: 'none',
-        notes: 'Log streaming should be modeled as a future MCP resource subscription, not a request/response tool.',
+        notes:
+          'Log streaming should be modeled as a future MCP resource subscription, not a request/response tool.',
       });
     case 'POST /api/mcpb/upload':
       return createCoverageEntry(route, {

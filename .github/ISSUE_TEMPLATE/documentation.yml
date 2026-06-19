@@ -1,6 +1,6 @@
 name: Documentation improvement
 description: Report confusing, missing, or outdated documentation
-title: "[Docs] "
+title: '[Docs] '
 labels:
   - documentation
 body:

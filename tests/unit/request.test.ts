@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { McpHubApiError } from '../../src/core/mcphub-client/errors.js';
+import type { McpHubApiError } from '../../src/core/mcphub-client/errors.js';
 import { createRequestClient } from '../../src/core/mcphub-client/request.js';
 
 describe('createRequestClient', () => {
@@ -33,7 +33,9 @@ describe('createRequestClient', () => {
       timeoutMs: 1000,
     });
 
-    await expect(client.json({ method: 'GET', path: '/api/settings' })).resolves.toEqual({ ok: true });
+    await expect(client.json({ method: 'GET', path: '/api/settings' })).resolves.toEqual({
+      ok: true,
+    });
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
@@ -67,7 +69,9 @@ describe('createRequestClient', () => {
       timeoutMs: 1000,
     });
 
-    await expect(client.json({ method: 'GET', path: '/api/settings' })).resolves.toEqual({ ok: true });
+    await expect(client.json({ method: 'GET', path: '/api/settings' })).resolves.toEqual({
+      ok: true,
+    });
     expect(invalidate).toHaveBeenCalledTimes(1);
   });
 

@@ -9,10 +9,18 @@ type FixtureGroup = {
   groupId: string;
 };
 
-async function findGroupByName(client: ReturnType<typeof createRealClient>, name: string): Promise<FixtureGroup | undefined> {
+async function findGroupByName(
+  client: ReturnType<typeof createRealClient>,
+  name: string,
+): Promise<FixtureGroup | undefined> {
   const groups = await client.groups.list();
   const group = groups.find((candidate) => {
-    return 'name' in candidate && candidate.name === name && 'id' in candidate && typeof candidate.id === 'string';
+    return (
+      'name' in candidate &&
+      candidate.name === name &&
+      'id' in candidate &&
+      typeof candidate.id === 'string'
+    );
   });
 
   if (group === undefined || !('id' in group) || typeof group.id !== 'string') {

@@ -69,7 +69,9 @@ function parseCommaList(value: string): string[] {
 }
 
 function parseExposureProfiles(value: string): ExposureProfile[] {
-  const profiles = parseCommaList(value).map((item) => envSchema.shape.MCP_DEFAULT_EXPOSURE.parse(item));
+  const profiles = parseCommaList(value).map((item) =>
+    envSchema.shape.MCP_DEFAULT_EXPOSURE.parse(item),
+  );
 
   if (profiles.length === 0) {
     throw new Error('MCP_EXPOSE_ENDPOINTS must contain at least one exposure profile.');

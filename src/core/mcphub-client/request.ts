@@ -9,7 +9,14 @@ import {
 } from './errors.js';
 import type { RequestBody, RequestClientOptions, RequestOptions } from './types.js';
 
-type SerializedRequestBody = ArrayBuffer | Blob | FormData | URLSearchParams | Uint8Array | string | undefined;
+type SerializedRequestBody =
+  | ArrayBuffer
+  | Blob
+  | FormData
+  | URLSearchParams
+  | Uint8Array
+  | string
+  | undefined;
 
 function normalizeBaseUrl(url: string): string {
   return url.endsWith('/') ? url.slice(0, -1) : url;
@@ -90,7 +97,11 @@ export function createRequestClient(options: RequestClientOptions) {
      * Recursive retries keep the control flow explicit for auth refresh and transport backoff
      * without relying on an unbounded loop that static analysis treats as unconditional.
      */
-    async function run(attempt: number, remainingRetries: number, authRetryAvailable: boolean): Promise<T> {
+    async function run(
+      attempt: number,
+      remainingRetries: number,
+      authRetryAvailable: boolean,
+    ): Promise<T> {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), options.timeoutMs);
 
@@ -106,12 +117,15 @@ export function createRequestClient(options: RequestClientOptions) {
           headers['content-type'] = serializedBody.contentType;
         }
 
-        const response = await fetchImpl(buildUrl(options.baseUrl, requestOptions.path, requestOptions.query), {
-          ...(serializedBody.body !== undefined ? { body: serializedBody.body } : {}),
-          headers,
-          method: requestOptions.method,
-          signal: controller.signal,
-        });
+        const response = await fetchImpl(
+          buildUrl(options.baseUrl, requestOptions.path, requestOptions.query),
+          {
+            ...(serializedBody.body !== undefined ? { body: serializedBody.body } : {}),
+            headers,
+            method: requestOptions.method,
+            signal: controller.signal,
+          },
+        );
 
         const requestId = response.headers.get('x-request-id') ?? undefined;
         if (response.ok) {

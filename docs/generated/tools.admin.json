@@ -163,9 +163,7 @@
     "description": "Create a new MCPHub bearer key.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_create_bearer_key",
@@ -245,9 +243,7 @@
     "description": "Create an OAuth client.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_create_oauth_client",
@@ -287,9 +283,7 @@
     "description": "Create a user.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "destructive",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_create_user",
@@ -330,9 +324,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_delete_bearer_key",
@@ -496,9 +488,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_delete_oauth_client",
@@ -580,9 +570,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "destructive",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_delete_user",
@@ -1275,9 +1263,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_get_oauth_client",
@@ -1486,9 +1472,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "read",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_get_user",
@@ -1584,9 +1568,7 @@
     "description": "List MCPHub bearer keys.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_list_bearer_keys",
@@ -1872,9 +1854,7 @@
     "description": "List OAuth clients.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_list_oauth_clients",
@@ -1970,9 +1950,7 @@
     "description": "List MCPHub users.",
     "inputFields": [],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "read",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_list_users",
@@ -2381,9 +2359,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_update_bearer_key",
@@ -2568,9 +2544,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "dangerous_config",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_update_oauth_client",
@@ -2740,9 +2714,7 @@
       }
     ],
     "profile": "admin",
-    "requiredFeatureFlags": [
-      "allowAuthAdminTools"
-    ],
+    "requiredFeatureFlags": ["allowAuthAdminTools"],
     "risk": "destructive",
     "sinceMcphubVersion": "1.0.15",
     "tool": "mcphub_update_user",

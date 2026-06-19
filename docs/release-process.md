@@ -20,13 +20,16 @@ Run:
 pnpm docs:compatibility
 pnpm docs:coverage
 pnpm docs:tools
-pnpm ci:validate
+pnpm typecheck
+pnpm lint
+pnpm format:check
+pnpm test
+pnpm test:integration
+pnpm test:coverage
+pnpm test:coverage-matrix
 pnpm test:package:installed
-pnpm test:release-gate
 pnpm publish:dry-run
 ```
-
-If the environment has no working container runtime, `pnpm test:release-gate` skips the Docker compatibility suite locally. Set `RELEASE_COMPAT_TESTS_REQUIRED=1` in CI or release automation when that suite must be mandatory.
 
 ## Release-facing Generated Artifacts
 
@@ -60,8 +63,7 @@ The tarball must not contain:
 Use:
 
 ```bash
-pnpm pack:smoke
-pnpm pack:audit
+pnpm pack:validate
 ```
 
 ## GitHub and npm Settings to Review
@@ -116,7 +118,7 @@ For `@garvae/mcp-mcphub`, the practical sequence is:
 
 The repository release workflow is intentionally dry-run-first.
 
-- `push` to `main` validates release readiness and npm dry-run only
+- release automation runs only through `workflow_dispatch`
 - real npm publish is disabled unless both conditions are true:
   - the workflow is started with `workflow_dispatch`
   - `publish=true`

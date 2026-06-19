@@ -4,12 +4,12 @@ This directory is generated from the tool registry and coverage matrix.
 
 ## Tool Catalogs
 
-| Profile | Tools | Markdown | JSON |
-| --- | --- | --- | --- |
-| `safe` | 57 | [tools.safe.md](./tools.safe.md) | [tools.safe.json](./tools.safe.json) |
-| `ops` | 76 | [tools.ops.md](./tools.ops.md) | [tools.ops.json](./tools.ops.json) |
-| `admin` | 104 | [tools.admin.md](./tools.admin.md) | [tools.admin.json](./tools.admin.json) |
-| `all` | 109 | [tools.all.md](./tools.all.md) | [tools.all.json](./tools.all.json) |
+| Profile | Tools | Markdown                           | JSON                                   |
+| ------- | ----- | ---------------------------------- | -------------------------------------- |
+| `safe`  | 57    | [tools.safe.md](./tools.safe.md)   | [tools.safe.json](./tools.safe.json)   |
+| `ops`   | 76    | [tools.ops.md](./tools.ops.md)     | [tools.ops.json](./tools.ops.json)     |
+| `admin` | 104   | [tools.admin.md](./tools.admin.md) | [tools.admin.json](./tools.admin.json) |
+| `all`   | 109   | [tools.all.md](./tools.all.md)     | [tools.all.json](./tools.all.json)     |
 
 ## Coverage
 

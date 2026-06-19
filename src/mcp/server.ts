@@ -22,13 +22,22 @@ const SETTINGS_RESOURCE_URI = 'mcphub://settings/snapshot';
 export function createManagedMcpServer(options: CreateManagedMcpServerOptions): McpServer {
   const registry = createToolRegistry(options);
   const resourceCapabilities =
-    options.enableResources === false ? undefined : options.enableResourceSubscriptions === false ? {} : { subscribe: true };
-  const server = new McpServer({
-    name: `mcp-mcphub-${options.exposureProfile}`,
-    version: PACKAGE_VERSION,
-  }, {
-    ...(resourceCapabilities === undefined ? {} : { capabilities: { resources: resourceCapabilities } }),
-  });
+    options.enableResources === false
+      ? undefined
+      : options.enableResourceSubscriptions === false
+        ? {}
+        : { subscribe: true };
+  const server = new McpServer(
+    {
+      name: `mcp-mcphub-${options.exposureProfile}`,
+      version: PACKAGE_VERSION,
+    },
+    {
+      ...(resourceCapabilities === undefined
+        ? {}
+        : { capabilities: { resources: resourceCapabilities } }),
+    },
+  );
 
   for (const tool of registry.list(options.exposureProfile)) {
     server.registerTool(
@@ -52,7 +61,9 @@ export function createManagedMcpServer(options: CreateManagedMcpServerOptions): 
         mimeType: 'application/json',
       },
       async () => {
-        const data = options.redactor?.redactValue(await options.client.settings.getSnapshot()) ?? await options.client.settings.getSnapshot();
+        const data =
+          options.redactor?.redactValue(await options.client.settings.getSnapshot()) ??
+          (await options.client.settings.getSnapshot());
         return {
           contents: [
             {
@@ -69,11 +80,14 @@ export function createManagedMcpServer(options: CreateManagedMcpServerOptions): 
       'mcphub-logs-stream',
       LOGS_RESOURCE_URI,
       {
-        description: 'Latest redacted MCPHub log snapshot. Clients may subscribe and reread on updates.',
+        description:
+          'Latest redacted MCPHub log snapshot. Clients may subscribe and reread on updates.',
         mimeType: 'application/json',
       },
       async () => {
-        const data = options.redactor?.redactValue(await options.client.logs.list()) ?? await options.client.logs.list();
+        const data =
+          options.redactor?.redactValue(await options.client.logs.list()) ??
+          (await options.client.logs.list());
         return {
           contents: [
             {
@@ -113,14 +127,17 @@ export function createManagedMcpServer(options: CreateManagedMcpServerOptions): 
 
     if (options.enableResourceSubscriptions !== false) {
       let lastLogsPayload = '';
-      const resourcePollIntervalMs = options.resourcePollIntervalMs ?? DEFAULT_RESOURCE_POLL_INTERVAL_MS;
+      const resourcePollIntervalMs =
+        options.resourcePollIntervalMs ?? DEFAULT_RESOURCE_POLL_INTERVAL_MS;
       const interval = setInterval(() => {
         void (async () => {
           if (!server.isConnected()) {
             return;
           }
 
-          const logs = options.redactor?.redactValue(await options.client.logs.list()) ?? await options.client.logs.list();
+          const logs =
+            options.redactor?.redactValue(await options.client.logs.list()) ??
+            (await options.client.logs.list());
           const nextPayload = JSON.stringify(logs);
           if (nextPayload === lastLogsPayload) {
             return;

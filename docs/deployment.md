@@ -81,11 +81,12 @@ Recommended usage:
 
 ## CI and Release Workflows
 
-- `ci.yml`: typecheck, lint, tests, build, package smoke, tarball audit, installed-runtime package tests, publish dry-run
-- `compatibility-matrix.yml`: real upstream MCPHub version matrix via `testcontainers`
+- `ci.yml`: fast PR checks split into baseline validation and package validation, with explicit Biome, Prettier, unit, build, pack, and dry-run publish steps
+- `integration.yml`: local transport integration and coverage-matrix checks without Docker
+- `compatibility-matrix.yml`: selective real-upstream MCPHub version matrix via `testcontainers`
 - `real-behavior.yml`: scheduled/manual live checks against a dedicated MCPHub test instance
 - `docker.yml`: validate that the Docker build still works for container users
-- `release.yml`: changesets-based release PR or publish flow on `main`, guarded by `pnpm test:release-gate`
+- `release.yml`: manually triggered changesets release workflow with explicit validation steps and publish disabled unless requested
 - `upstream-routes-watch.yml`: nightly upstream route drift detection
 
 ## Rollback

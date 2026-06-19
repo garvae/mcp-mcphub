@@ -4,7 +4,11 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { createRealRuntimeEnv, getRealTestEnvironment, requireRealSuite } from '../helpers/real-env.js';
+import {
+  createRealRuntimeEnv,
+  getRealTestEnvironment,
+  requireRealSuite,
+} from '../helpers/real-env.js';
 
 const realEnv = getRealTestEnvironment();
 const describeReal = realEnv.readonlyEnabled || realEnv.releaseRequired ? describe : describe.skip;

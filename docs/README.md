@@ -19,7 +19,7 @@ This directory stores durable product documentation for `@garvae/mcp-mcphub`.
 ## Security and Operations
 
 - [security.md](./security.md): threat model, feature flags, redaction, audit logging, and current limitations.
-- [testing.md](./testing.md): local, compatibility, live, package, and release-gate test guidance.
+- [testing.md](./testing.md): local, compatibility, live, package, coverage, and release-workflow test guidance.
 - [deployment.md](./deployment.md): npm, Docker, Compose, CI, and rollback guidance.
 - [streamable-http.md](./streamable-http.md): HTTP transport endpoints, auth, CORS, and reverse-proxy guidance.
 - [stdio.md](./stdio.md): stdio usage patterns and local client examples.

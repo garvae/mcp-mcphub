@@ -5,7 +5,9 @@ import { getRealTestEnvironment, createRealClient } from '../tests/helpers/real-
 async function main(): Promise<void> {
   const realEnv = getRealTestEnvironment();
   if (realEnv.url.length === 0 || realEnv.token.length === 0) {
-    process.stdout.write('Skipping cleanup: REAL_TEST_MCPHUB_URL/REAL_TEST_MCPHUB_TOKEN are not configured.\n');
+    process.stdout.write(
+      'Skipping cleanup: REAL_TEST_MCPHUB_URL/REAL_TEST_MCPHUB_TOKEN are not configured.\n',
+    );
     return;
   }
 
@@ -15,9 +17,14 @@ async function main(): Promise<void> {
   let deleted = 0;
 
   for (const group of groups) {
-    const candidateName = 'name' in group && typeof group.name === 'string' ? group.name : undefined;
+    const candidateName =
+      'name' in group && typeof group.name === 'string' ? group.name : undefined;
     const candidateId = 'id' in group && typeof group.id === 'string' ? group.id : undefined;
-    if (candidateName === undefined || candidateId === undefined || !candidateName.startsWith(prefix)) {
+    if (
+      candidateName === undefined ||
+      candidateId === undefined ||
+      !candidateName.startsWith(prefix)
+    ) {
       continue;
     }
 
@@ -29,6 +36,8 @@ async function main(): Promise<void> {
 }
 
 void main().catch((error: unknown) => {
-  process.stderr.write(`${error instanceof Error ? error.stack ?? error.message : String(error)}\n`);
+  process.stderr.write(
+    `${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+  );
   process.exitCode = 1;
 });

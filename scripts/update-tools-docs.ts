@@ -4,6 +4,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { format } from 'prettier';
 import { z } from 'zod';
 
 import type { ExposureProfile } from '../src/core/coverage/types.js';
@@ -65,7 +66,8 @@ function getInputFields(schema: z.ZodType | undefined): GeneratedToolEntry['inpu
   const shape = schema.shape as Record<string, z.ZodType>;
 
   return Object.entries(shape).map(([name, fieldSchema]) => {
-    const description = typeof fieldSchema.description === 'string' ? fieldSchema.description : null;
+    const description =
+      typeof fieldSchema.description === 'string' ? fieldSchema.description : null;
     const optional = fieldSchema.safeParse(undefined).success;
 
     return {
@@ -106,7 +108,10 @@ function buildGeneratedEntry(tool: ManagedToolDefinition): GeneratedToolEntry {
 function renderProfileMarkdown(profile: ExposureProfile, entries: GeneratedToolEntry[]): string {
   const rows = entries
     .map((entry) => {
-      const flags = entry.requiredFeatureFlags.length === 0 ? '-' : entry.requiredFeatureFlags.map((flag) => `\`${flag}\``).join(', ');
+      const flags =
+        entry.requiredFeatureFlags.length === 0
+          ? '-'
+          : entry.requiredFeatureFlags.map((flag) => `\`${flag}\``).join(', ');
       const confirmation = entry.confirmationRequired ? 'yes' : 'no';
 
       return `| \`${entry.tool}\` | \`${entry.profile}\` | \`${entry.risk}\` | \`${entry.upstream.method}\` | \`${entry.upstream.path}\` | ${flags} | ${confirmation} | ${entry.description} |`;
@@ -155,27 +160,36 @@ ${rows}
 `;
 }
 
-function writeFileIfChanged(filePath: string, contents: string, checkMode: boolean): void {
+async function writeFileIfChanged(
+  filePath: string,
+  contents: string,
+  checkMode: boolean,
+): Promise<void> {
+  const formattedContents = await format(contents, { filepath: filePath });
   const current = readFileSync(filePath, 'utf8');
-  if (current !== contents) {
+  if (current !== formattedContents) {
     if (checkMode) {
-      throw new Error(`${path.relative(repositoryRoot, filePath)} is out of date. Run the matching docs command.`);
+      throw new Error(
+        `${path.relative(repositoryRoot, filePath)} is out of date. Run the matching docs command.`,
+      );
     }
 
-    writeFileSync(filePath, contents, 'utf8');
+    writeFileSync(filePath, formattedContents, 'utf8');
   }
 }
 
-function ensureFile(filePath: string, contents: string, checkMode: boolean): void {
+async function ensureFile(filePath: string, contents: string, checkMode: boolean): Promise<void> {
   try {
-    writeFileIfChanged(filePath, contents, checkMode);
+    await writeFileIfChanged(filePath, contents, checkMode);
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
       if (checkMode) {
-        throw new Error(`${path.relative(repositoryRoot, filePath)} is missing. Run "pnpm docs:tools".`);
+        throw new Error(
+          `${path.relative(repositoryRoot, filePath)} is missing. Run "pnpm docs:tools".`,
+        );
       }
 
-      writeFileSync(filePath, contents, 'utf8');
+      writeFileSync(filePath, await format(contents, { filepath: filePath }), 'utf8');
       return;
     }
 
@@ -183,7 +197,7 @@ function ensureFile(filePath: string, contents: string, checkMode: boolean): voi
   }
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const checkMode = process.argv.includes('--check');
   mkdirSync(generatedDirectory, { recursive: true });
 
@@ -199,12 +213,12 @@ function main(): void {
     const markdownPath = path.join(generatedDirectory, `tools.${profile}.md`);
     const jsonPath = path.join(generatedDirectory, `tools.${profile}.json`);
 
-    ensureFile(markdownPath, renderProfileMarkdown(profile, entries), checkMode);
-    ensureFile(jsonPath, `${JSON.stringify(entries, null, 2)}\n`, checkMode);
+    await ensureFile(markdownPath, renderProfileMarkdown(profile, entries), checkMode);
+    await ensureFile(jsonPath, `${JSON.stringify(entries, null, 2)}\n`, checkMode);
   }
 
   const indexPath = path.join(generatedDirectory, 'README.md');
-  ensureFile(indexPath, renderGeneratedIndex(counts), checkMode);
+  await ensureFile(indexPath, renderGeneratedIndex(counts), checkMode);
 }
 
-main();
+await main();

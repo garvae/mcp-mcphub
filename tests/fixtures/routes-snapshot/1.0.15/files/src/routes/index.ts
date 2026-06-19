@@ -22,7 +22,10 @@ import {
   resetResourceDescription,
   updateSystemConfig,
 } from '../controllers/serverController.js';
-import { getServerCostsHandler, getGroupCostsHandler } from '../controllers/contextCostController.js';
+import {
+  getServerCostsHandler,
+  getGroupCostsHandler,
+} from '../controllers/contextCostController.js';
 import {
   getGroups,
   getGroup,
@@ -206,11 +209,25 @@ export const initRoutes = async (app: express.Application): Promise<void> => {
 
   // OAuth Authorization Server endpoints (no auth required for OAuth flow)
   app.get('/oauth/authorize', mcpConnectionRateLimiter, getAuthorize);
-  app.post('/oauth/authorize', express.urlencoded({ extended: true }), mcpConnectionRateLimiter, postAuthorize);
-  app.post('/oauth/token', express.urlencoded({ extended: true }), mcpConnectionRateLimiter, postToken); // Public endpoint for token exchange
+  app.post(
+    '/oauth/authorize',
+    express.urlencoded({ extended: true }),
+    mcpConnectionRateLimiter,
+    postAuthorize,
+  );
+  app.post(
+    '/oauth/token',
+    express.urlencoded({ extended: true }),
+    mcpConnectionRateLimiter,
+    postToken,
+  ); // Public endpoint for token exchange
   app.get('/oauth/userinfo', mcpConnectionRateLimiter, getUserInfo); // Validates OAuth token
   app.get('/.well-known/oauth-authorization-server', mcpConnectionRateLimiter, getMetadata); // Public metadata endpoint
-  app.get('/.well-known/oauth-protected-resource', mcpConnectionRateLimiter, getProtectedResourceMetadata); // Public protected resource metadata
+  app.get(
+    '/.well-known/oauth-protected-resource',
+    mcpConnectionRateLimiter,
+    getProtectedResourceMetadata,
+  ); // Public protected resource metadata
 
   // RFC 7591 Dynamic Client Registration endpoints (public for registration)
   app.post('/oauth/register', registerClient); // Register new OAuth client

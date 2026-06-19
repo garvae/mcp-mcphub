@@ -10,7 +10,14 @@ export const identifierSchema = nonEmptyStringSchema;
 export const urlStringSchema = z.url();
 
 export const unknownJsonSchema: z.ZodType<JsonValue> = z.lazy(() =>
-  z.union([z.string(), z.number(), z.boolean(), z.null(), z.array(unknownJsonSchema), z.record(z.string(), unknownJsonSchema)]),
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.null(),
+    z.array(unknownJsonSchema),
+    z.record(z.string(), unknownJsonSchema),
+  ]),
 );
 
 export const passthroughObjectSchema = z.looseObject({});

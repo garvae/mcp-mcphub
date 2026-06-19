@@ -72,7 +72,9 @@ function decodeJwtExpiration(token: string): number | undefined {
   }
 
   try {
-    const decoded = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as { exp?: number };
+    const decoded = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as {
+      exp?: number;
+    };
     return decoded.exp;
   } catch {
     return undefined;
@@ -92,14 +94,17 @@ function extractToken(payload: LoginResponseShape): string | undefined {
   return payload.token ?? payload.jwt ?? payload.accessToken ?? payload.data?.token;
 }
 
-export function createAuthHeadersProvider(options: AuthHeadersProviderOptions): AuthHeadersProvider {
+export function createAuthHeadersProvider(
+  options: AuthHeadersProviderOptions,
+): AuthHeadersProvider {
   const fetchImpl = options.fetchImpl ?? fetch;
   const logger = options.logger;
   const baseUrl = normalizeBaseUrl(options.baseUrl);
   let currentToken = options.token;
   let refreshPromise: Promise<string> | undefined;
 
-  const canLogin = options.tokenKind === 'jwt' && options.username !== undefined && options.password !== undefined;
+  const canLogin =
+    options.tokenKind === 'jwt' && options.username !== undefined && options.password !== undefined;
   const canExchangeOAuthToken =
     options.tokenKind === 'oauth' &&
     options.oauthClientId !== undefined &&
@@ -169,7 +174,9 @@ export function createAuthHeadersProvider(options: AuthHeadersProviderOptions): 
   const ensureJwtToken = async (): Promise<string> => {
     if (currentToken === undefined) {
       if (!canLogin) {
-        throw createAuthRefreshError('JWT token is missing and login credentials were not provided.');
+        throw createAuthRefreshError(
+          'JWT token is missing and login credentials were not provided.',
+        );
       }
     } else if (!isJwtExpiringSoon(currentToken)) {
       return currentToken;
@@ -190,7 +197,9 @@ export function createAuthHeadersProvider(options: AuthHeadersProviderOptions): 
     }
 
     if (!canExchangeOAuthToken) {
-      throw createAuthRefreshError('OAuth token is missing and client credentials were not provided.');
+      throw createAuthRefreshError(
+        'OAuth token is missing and client credentials were not provided.',
+      );
     }
 
     if (refreshPromise === undefined) {

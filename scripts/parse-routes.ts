@@ -81,11 +81,13 @@ function evaluateExpression(
   }
 
   if (ts.isIdentifier(expression)) {
-    return variables.get(expression.text) ?? {
-      containsPlaceholder: true,
-      raw: expression.getText(sourceFile),
-      resolved: `<${expression.text}>`,
-    };
+    return (
+      variables.get(expression.text) ?? {
+        containsPlaceholder: true,
+        raw: expression.getText(sourceFile),
+        resolved: `<${expression.text}>`,
+      }
+    );
   }
 
   if (ts.isPropertyAccessExpression(expression)) {
@@ -148,7 +150,10 @@ function collectArgumentNames(expression: ts.Expression, sourceFile: ts.SourceFi
   return [];
 }
 
-function getHandlerName(argumentsList: readonly ts.Expression[], sourceFile: ts.SourceFile): string {
+function getHandlerName(
+  argumentsList: readonly ts.Expression[],
+  sourceFile: ts.SourceFile,
+): string {
   const lastArgument = argumentsList.at(-1);
   if (lastArgument === undefined) {
     return 'unknown';
@@ -210,7 +215,11 @@ export function parseRoutesFromSource(sourceText: string, sourceFilePath: string
   const routeDefinitions: RouteDefinition[] = [];
 
   const visit = (node: ts.Node): void => {
-    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.initializer !== undefined) {
+    if (
+      ts.isVariableDeclaration(node) &&
+      ts.isIdentifier(node.name) &&
+      node.initializer !== undefined
+    ) {
       variables.set(node.name.text, evaluateExpression(node.initializer, sourceFile, variables));
     }
 
@@ -233,7 +242,11 @@ export function parseRoutesFromSource(sourceText: string, sourceFilePath: string
                 prefix: prefix.resolved,
               });
             }
-          } else if (firstArg !== undefined && ts.isIdentifier(firstArg) && ROUTER_NAMES.has(firstArg.text as RouterName)) {
+          } else if (
+            firstArg !== undefined &&
+            ts.isIdentifier(firstArg) &&
+            ROUTER_NAMES.has(firstArg.text as RouterName)
+          ) {
             mounts.push({
               child: firstArg.text as RouterName,
               parent: routerName,

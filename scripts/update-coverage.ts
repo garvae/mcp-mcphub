@@ -4,8 +4,14 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { format } from 'prettier';
+
 import { COVERAGE } from '../src/core/coverage/matrix.js';
-import { DYNAMIC_ROUTES, SNAPSHOT_REPOSITORY, SNAPSHOT_VERSION } from '../src/core/coverage/routes-snapshot.js';
+import {
+  DYNAMIC_ROUTES,
+  SNAPSHOT_REPOSITORY,
+  SNAPSHOT_VERSION,
+} from '../src/core/coverage/routes-snapshot.js';
 import { routeKey } from '../src/core/coverage/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,7 +43,10 @@ function renderMarkdown(): string {
   ];
 
   const rows = COVERAGE.map((entry) => {
-    const surface = entry.mcp.kind === 'none' || entry.mcp.name === null ? entry.mcp.kind : `${entry.mcp.kind}: \`${entry.mcp.name}\``;
+    const surface =
+      entry.mcp.kind === 'none' || entry.mcp.name === null
+        ? entry.mcp.kind
+        : `${entry.mcp.kind}: \`${entry.mcp.name}\``;
 
     return `| \`${routeKey(entry)}\` | ${entry.authenticated ? 'yes' : 'no'} | \`${entry.classification}\` | ${entry.profile === null ? '-' : `\`${entry.profile}\``} | ${entry.risk === null ? '-' : `\`${entry.risk}\``} | ${surface} | ${entry.notes} |`;
   });
@@ -73,10 +82,12 @@ function renderJson(): string {
   )}\n`;
 }
 
-function writeOrCheck(filePath: string, contents: string, checkMode: boolean): void {
+async function writeOrCheck(filePath: string, contents: string, checkMode: boolean): Promise<void> {
+  const formattedContents = await format(contents, { filepath: filePath });
+
   try {
     const current = readFileSync(filePath, 'utf8');
-    if (current !== contents) {
+    if (current !== formattedContents) {
       throw new Error(`${path.relative(repositoryRoot, filePath)} is out of date.`);
     }
   } catch (error) {
@@ -90,17 +101,17 @@ function writeOrCheck(filePath: string, contents: string, checkMode: boolean): v
   }
 
   if (!checkMode) {
-    writeFileSync(filePath, contents, 'utf8');
+    writeFileSync(filePath, formattedContents, 'utf8');
   }
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const checkMode = process.argv.includes('--check');
   mkdirSync(docsDirectory, { recursive: true });
   mkdirSync(generatedDirectory, { recursive: true });
 
-  writeOrCheck(markdownOutputPath, renderMarkdown(), checkMode);
-  writeOrCheck(jsonOutputPath, renderJson(), checkMode);
+  await writeOrCheck(markdownOutputPath, renderMarkdown(), checkMode);
+  await writeOrCheck(jsonOutputPath, renderJson(), checkMode);
 }
 
-main();
+await main();

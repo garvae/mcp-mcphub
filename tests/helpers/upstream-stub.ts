@@ -21,13 +21,20 @@ export async function startManagementUpstreamStub(status = 'ok'): Promise<Starte
 
     if (request.method === 'GET' && request.url === '/public-config') {
       response.writeHead(200, { 'content-type': 'application/json' });
-      response.end(JSON.stringify({ success: true, data: { betterAuth: false, permissions: [], skipAuth: false } }));
+      response.end(
+        JSON.stringify({
+          success: true,
+          data: { betterAuth: false, permissions: [], skipAuth: false },
+        }),
+      );
       return;
     }
 
     if (request.method === 'GET' && request.url === '/api/auth/user') {
       response.writeHead(200, { 'content-type': 'application/json' });
-      response.end(JSON.stringify({ success: true, user: { isAdmin: true, username: 'stub-admin' } }));
+      response.end(
+        JSON.stringify({ success: true, user: { isAdmin: true, username: 'stub-admin' } }),
+      );
       return;
     }
 

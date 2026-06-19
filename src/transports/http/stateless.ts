@@ -297,7 +297,9 @@ class DirectResponseTransport {
   }
 }
 
-export async function handleStatelessHttpRequest(options: HandleStatelessRequestOptions): Promise<void> {
+export async function handleStatelessHttpRequest(
+  options: HandleStatelessRequestOptions,
+): Promise<void> {
   if (options.request.method !== 'POST') {
     options.response.setHeader('allow', 'POST');
     writeJson(options.response, 405, { error: 'Method not allowed.' });
@@ -306,7 +308,11 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
 
   const parsedRequest = extractModernRequest(options.parsedBody);
   if (parsedRequest === undefined) {
-    writeJson(options.response, 400, createErrorBody(undefined, -32600, 'Invalid JSON-RPC request.'));
+    writeJson(
+      options.response,
+      400,
+      createErrorBody(undefined, -32600, 'Invalid JSON-RPC request.'),
+    );
     return;
   }
 
@@ -320,7 +326,11 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
     writeJson(
       options.response,
       400,
-      createErrorBody(parsedRequest.id, HEADER_MISMATCH_CODE, 'Header mismatch: request metadata is missing or malformed.'),
+      createErrorBody(
+        parsedRequest.id,
+        HEADER_MISMATCH_CODE,
+        'Header mismatch: request metadata is missing or malformed.',
+      ),
     );
     return;
   }
@@ -342,10 +352,15 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
     writeJson(
       options.response,
       400,
-      createErrorBody(parsedRequest.id, UNSUPPORTED_PROTOCOL_VERSION_CODE, 'Unsupported protocol version', {
-        requested: modernMeta.protocolVersion,
-        supported: [MODERN_PROTOCOL_VERSION],
-      }),
+      createErrorBody(
+        parsedRequest.id,
+        UNSUPPORTED_PROTOCOL_VERSION_CODE,
+        'Unsupported protocol version',
+        {
+          requested: modernMeta.protocolVersion,
+          supported: [MODERN_PROTOCOL_VERSION],
+        },
+      ),
     );
     return;
   }
@@ -382,7 +397,9 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
       actor: options.actor,
       profile: options.requestedProfile,
       target: `${options.request.method} ${options.request.url ?? '/mcp'}`,
-      ...(options.upstreamProfileName !== undefined ? { upstreamProfile: options.upstreamProfileName } : {}),
+      ...(options.upstreamProfileName !== undefined
+        ? { upstreamProfile: options.upstreamProfileName }
+        : {}),
     });
     writeJson(options.response, 200, {
       id: parsedRequest.id,
@@ -392,7 +409,11 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
     return;
   }
 
-  const client = createConfiguredMcpHubClient(options.config, options.logger, options.upstreamProfileName);
+  const client = createConfiguredMcpHubClient(
+    options.config,
+    options.logger,
+    options.upstreamProfileName,
+  );
   const mcpServer = createManagedMcpServer({
     client,
     enableResourceSubscriptions: false,
@@ -415,7 +436,9 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
     actor: options.actor,
     profile: options.requestedProfile,
     target: `${options.request.method} ${options.request.url ?? '/mcp'}`,
-    ...(options.upstreamProfileName !== undefined ? { upstreamProfile: options.upstreamProfileName } : {}),
+    ...(options.upstreamProfileName !== undefined
+      ? { upstreamProfile: options.upstreamProfileName }
+      : {}),
   });
 
   try {
@@ -433,7 +456,11 @@ export async function handleStatelessHttpRequest(options: HandleStatelessRequest
     const messages = await transport.dispatchRequest(parsedMessage);
     const finalMessage = messages[messages.length - 1];
     if (finalMessage === undefined) {
-      writeJson(options.response, 500, createErrorBody(parsedRequest.id, -32603, 'No response message was emitted.'));
+      writeJson(
+        options.response,
+        500,
+        createErrorBody(parsedRequest.id, -32603, 'No response message was emitted.'),
+      );
       return;
     }
 

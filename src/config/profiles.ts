@@ -38,9 +38,17 @@ function resolveSecretValue(
 }
 
 function resolveProfile(input: McpHubProfileInput, env: NodeJS.ProcessEnv): McpHubProfile {
-  const betterAuthCookie = resolveSecretValue(input.betterAuthCookie, input.betterAuthCookieEnv, env);
+  const betterAuthCookie = resolveSecretValue(
+    input.betterAuthCookie,
+    input.betterAuthCookieEnv,
+    env,
+  );
   const oauthClientId = resolveSecretValue(input.oauthClientId, input.oauthClientIdEnv, env);
-  const oauthClientSecret = resolveSecretValue(input.oauthClientSecret, input.oauthClientSecretEnv, env);
+  const oauthClientSecret = resolveSecretValue(
+    input.oauthClientSecret,
+    input.oauthClientSecretEnv,
+    env,
+  );
   const oauthTokenUrl = resolveSecretValue(input.oauthTokenUrl, input.oauthTokenUrlEnv, env);
   const password = resolveSecretValue(input.password, input.passwordEnv, env);
   const token = resolveSecretValue(input.token, input.tokenEnv, env);

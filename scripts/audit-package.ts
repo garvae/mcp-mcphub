@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { execFileSync } from 'node:child_process';
-import { readdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
 type PackageMetadata = {
@@ -28,8 +28,27 @@ const REQUIRED_ARCHIVE_ENTRIES = [
   'package/docs/generated/tools.safe.json',
 ] as const;
 
-const FORBIDDEN_ARCHIVE_PREFIXES = ['package/src/', 'package/tests/', 'package/.github/', 'package/coverage/'] as const;
+const FORBIDDEN_ARCHIVE_PREFIXES = [
+  'package/src/',
+  'package/tests/',
+  'package/.github/',
+  'package/coverage/',
+] as const;
 const FORBIDDEN_ARCHIVE_SUFFIXES = ['.env', '.pem', '.key'] as const;
+
+function getArtifactsDirectory(): string {
+  const artifactsDirectoryFlagIndex = process.argv.indexOf('--artifacts-dir');
+  if (artifactsDirectoryFlagIndex !== -1) {
+    const artifactsDirectory = process.argv.at(artifactsDirectoryFlagIndex + 1);
+    if (artifactsDirectory === undefined) {
+      throw new Error('--artifacts-dir requires a directory path.');
+    }
+
+    return path.resolve(artifactsDirectory);
+  }
+
+  return path.resolve(process.env.PACK_ARTIFACTS_DIR ?? '.artifacts');
+}
 
 function getExpectedTarballPrefix(packageName: string): string {
   return packageName.replace(/^@/u, '').replace(/\//gu, '-');
@@ -42,7 +61,9 @@ function getLatestPackageArchive(artifactsDirectory: string, expectedPrefix: str
 
   const archiveName = archives.at(-1);
   if (archiveName === undefined) {
-    throw new Error(`No package archive matching "${expectedPrefix}*.tgz" was found in ${artifactsDirectory}.`);
+    throw new Error(
+      `No package archive matching "${expectedPrefix}*.tgz" was found in ${artifactsDirectory}.`,
+    );
   }
 
   return path.join(artifactsDirectory, archiveName);
@@ -80,17 +101,53 @@ function assertForbiddenEntries(entries: readonly string[]): void {
   }
 }
 
+function runPackCommand(artifactsDirectory: string): void {
+  const npmExecPath = process.env.npm_execpath;
+
+  if (npmExecPath !== undefined) {
+    execFileSync(
+      process.execPath,
+      [npmExecPath, 'pack', '--pack-destination', artifactsDirectory],
+      {
+        stdio: 'inherit',
+      },
+    );
+    return;
+  }
+
+  const fallbackCommand = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
+  execFileSync(fallbackCommand, ['pack', '--pack-destination', artifactsDirectory], {
+    stdio: 'inherit',
+  });
+}
+
+function createPackageArchive(artifactsDirectory: string): void {
+  rmSync(artifactsDirectory, { force: true, recursive: true });
+  mkdirSync(artifactsDirectory, { recursive: true });
+  runPackCommand(artifactsDirectory);
+}
+
 function main(): void {
   const packageJsonPath = path.resolve('package.json');
   const packageMetadata = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PackageMetadata;
-  const artifactsDirectory = path.resolve('.artifacts');
-  const archivePath = getLatestPackageArchive(artifactsDirectory, getExpectedTarballPrefix(packageMetadata.name));
+  const artifactsDirectory = getArtifactsDirectory();
+
+  if (process.argv.includes('--pack')) {
+    createPackageArchive(artifactsDirectory);
+  }
+
+  const archivePath = getLatestPackageArchive(
+    artifactsDirectory,
+    getExpectedTarballPrefix(packageMetadata.name),
+  );
   const entries = readArchiveEntries(archivePath);
 
   assertRequiredEntries(entries);
   assertForbiddenEntries(entries);
 
-  process.stdout.write(`Package audit passed for ${path.basename(archivePath)} with ${String(entries.length)} entries.\n`);
+  process.stdout.write(
+    `Package audit passed for ${path.basename(archivePath)} with ${String(entries.length)} entries.\n`,
+  );
 }
 
 main();

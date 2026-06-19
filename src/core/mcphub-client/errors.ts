@@ -54,7 +54,11 @@ function statusToCode(status: number): McpHubApiErrorCode {
   }
 }
 
-export function createResponseError(status: number, payload: unknown, requestId?: string): McpHubApiError {
+export function createResponseError(
+  status: number,
+  payload: unknown,
+  requestId?: string,
+): McpHubApiError {
   const message =
     typeof payload === 'object' &&
     payload !== null &&

@@ -1,6 +1,6 @@
 name: Upstream compatibility drift
 description: Report MCPHub route or behavior drift that affects this package
-title: "[Compatibility] "
+title: '[Compatibility] '
 labels:
   - compatibility
   - upstream-drift

@@ -3,7 +3,13 @@
 import type { Logger } from '../../observability/logger.js';
 
 export type FetchLike = typeof fetch;
-export type SerializableBody = ArrayBuffer | Blob | FormData | URLSearchParams | Uint8Array | string;
+export type SerializableBody =
+  | ArrayBuffer
+  | Blob
+  | FormData
+  | URLSearchParams
+  | Uint8Array
+  | string;
 
 export type McpHubRequestMethod = 'DELETE' | 'GET' | 'POST' | 'PUT';
 
@@ -15,12 +21,7 @@ export type RequestBody =
   | Record<string, unknown>
   | undefined;
 
-export type RequestQueryValue =
-  | boolean
-  | null
-  | number
-  | string
-  | undefined;
+export type RequestQueryValue = boolean | null | number | string | undefined;
 
 export type RequestQuery = Record<string, RequestQueryValue>;
 

@@ -35,7 +35,9 @@ describe('observability', () => {
 
   it('inherits child logger context', () => {
     const stream = new MemoryStream();
-    const logger = createLogger('debug', stream as unknown as NodeJS.WriteStream).child({ component: 'client' });
+    const logger = createLogger('debug', stream as unknown as NodeJS.WriteStream).child({
+      component: 'client',
+    });
 
     logger.error('failed', { requestId: 'req-1' });
 
@@ -66,11 +68,14 @@ describe('observability', () => {
   it('writes audit events to a rotating file sink', async () => {
     const directory = mkdtempSync(path.join(tmpdir(), 'mcphub-audit-'));
     const filePath = path.join(directory, 'audit.ndjson');
-    const audit = createAuditLogger(createLogger('error', new MemoryStream() as unknown as NodeJS.WriteStream), {
-      filePath,
-      maxBytes: 120,
-      maxFiles: 2,
-    });
+    const audit = createAuditLogger(
+      createLogger('error', new MemoryStream() as unknown as NodeJS.WriteStream),
+      {
+        filePath,
+        maxBytes: 120,
+        maxFiles: 2,
+      },
+    );
 
     audit.record({ action: 'event-1', actor: 'tester' });
     audit.record({ action: 'event-2', actor: 'tester' });

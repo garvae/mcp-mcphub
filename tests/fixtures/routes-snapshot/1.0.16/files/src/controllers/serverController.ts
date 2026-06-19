@@ -67,9 +67,9 @@ const canAccessServer = (user: RequestUser | null, server: ServerRecord): boolea
 const isPrivilegedServerConfig = (config: ServerConfig): boolean => {
   return Boolean(
     config.type === 'stdio' ||
-      config.command ||
-      (Array.isArray(config.args) && config.args.length > 0) ||
-      (!config.url && !config.openapi?.url && !config.openapi?.schema),
+    config.command ||
+    (Array.isArray(config.args) && config.args.length > 0) ||
+    (!config.url && !config.openapi?.url && !config.openapi?.schema),
   );
 };
 
@@ -121,11 +121,7 @@ const ensureNonAdminCanManageConfig = (
   return true;
 };
 
-const assignServerOwner = (
-  req: Request,
-  config: ServerConfig,
-  existingOwner?: string,
-): void => {
+const assignServerOwner = (req: Request, config: ServerConfig, existingOwner?: string): void => {
   const currentUser = getRequestUser(req);
   if (!currentUser) {
     return;
@@ -345,7 +341,8 @@ export const getAllSettings = async (req: Request, res: Response): Promise<void>
       bearerKeys: bearerKeys.map((key) => ({
         ...key,
         kind: key.kind ?? 'system',
-        token: key.token.length > 12 ? `${key.token.slice(0, 8)}...${key.token.slice(-4)}` : '********',
+        token:
+          key.token.length > 12 ? `${key.token.slice(0, 8)}...${key.token.slice(-4)}` : '********',
       })),
     };
 
@@ -473,8 +470,7 @@ export const createServer = async (req: Request, res: Response): Promise<void> =
 
     // Set default keep-alive interval for SSE servers if not specified
     if (
-      (normalizedConfig.type === 'sse' ||
-        (!normalizedConfig.type && normalizedConfig.url)) &&
+      (normalizedConfig.type === 'sse' || (!normalizedConfig.type && normalizedConfig.url)) &&
       !normalizedConfig.keepAliveInterval
     ) {
       normalizedConfig.keepAliveInterval = 60000; // Default 60 seconds for SSE servers
@@ -631,8 +627,7 @@ export const batchCreateServers = async (req: Request, res: Response): Promise<v
         const normalizedConfig = normalizeServerConfigForPersistence(config);
 
         if (
-          (normalizedConfig.type === 'sse' ||
-            (!normalizedConfig.type && normalizedConfig.url)) &&
+          (normalizedConfig.type === 'sse' || (!normalizedConfig.type && normalizedConfig.url)) &&
           !normalizedConfig.keepAliveInterval
         ) {
           normalizedConfig.keepAliveInterval = 60000; // Default 60 seconds for SSE servers
@@ -649,7 +644,9 @@ export const batchCreateServers = async (req: Request, res: Response): Promise<v
         }
 
         // Set owner property if not provided
-        normalizedConfig.owner = currentUser?.isAdmin ? normalizedConfig.owner || defaultOwner : defaultOwner;
+        normalizedConfig.owner = currentUser?.isAdmin
+          ? normalizedConfig.owner || defaultOwner
+          : defaultOwner;
 
         // Attempt to add server
         const result = await addServer(name, normalizedConfig);
@@ -694,7 +691,9 @@ export const batchCreateServers = async (req: Request, res: Response): Promise<v
 
     if (successCount > 0) {
       const successfulServerNames = results
-        .filter((result): result is BatchServerResult & { name: string; success: true } => result.success)
+        .filter(
+          (result): result is BatchServerResult & { name: string; success: true } => result.success,
+        )
         .map((result) => result.name);
 
       Promise.all(
@@ -853,8 +852,7 @@ export const updateServer = async (req: Request, res: Response): Promise<void> =
 
     // Set default keep-alive interval for SSE servers if not specified
     if (
-      (normalizedConfig.type === 'sse' ||
-        (!normalizedConfig.type && normalizedConfig.url)) &&
+      (normalizedConfig.type === 'sse' || (!normalizedConfig.type && normalizedConfig.url)) &&
       !normalizedConfig.keepAliveInterval
     ) {
       normalizedConfig.keepAliveInterval = 60000; // Default 60 seconds for SSE servers
@@ -1600,15 +1598,18 @@ export const updateSystemConfig = async (req: Request, res: Response): Promise<v
             }
           } else {
             // Get current OpenAI config values, preferring new values from request
-            const currentOpenAiKey = typeof smartRouting.openaiApiKey === 'string'
-              ? smartRouting.openaiApiKey.trim()
-              : (systemConfig.smartRouting.openaiApiKey || '').trim();
-            const currentOpenaiApiBaseUrl = typeof smartRouting.openaiApiBaseUrl === 'string'
-              ? smartRouting.openaiApiBaseUrl.trim()
-              : (systemConfig.smartRouting.openaiApiBaseUrl || '').trim();
-            const currentOpenaiApiEmbeddingModel = typeof smartRouting.openaiApiEmbeddingModel === 'string'
-              ? smartRouting.openaiApiEmbeddingModel.trim()
-              : (systemConfig.smartRouting.openaiApiEmbeddingModel || '').trim();
+            const currentOpenAiKey =
+              typeof smartRouting.openaiApiKey === 'string'
+                ? smartRouting.openaiApiKey.trim()
+                : (systemConfig.smartRouting.openaiApiKey || '').trim();
+            const currentOpenaiApiBaseUrl =
+              typeof smartRouting.openaiApiBaseUrl === 'string'
+                ? smartRouting.openaiApiBaseUrl.trim()
+                : (systemConfig.smartRouting.openaiApiBaseUrl || '').trim();
+            const currentOpenaiApiEmbeddingModel =
+              typeof smartRouting.openaiApiEmbeddingModel === 'string'
+                ? smartRouting.openaiApiEmbeddingModel.trim()
+                : (systemConfig.smartRouting.openaiApiEmbeddingModel || '').trim();
 
             if (!currentOpenAiKey || !currentOpenaiApiBaseUrl || !currentOpenaiApiEmbeddingModel) {
               res.status(400).json({
@@ -1651,7 +1652,8 @@ export const updateSystemConfig = async (req: Request, res: Response): Promise<v
         systemConfig.smartRouting.azureOpenaiApiKey = smartRouting.azureOpenaiApiKey?.trim();
       }
       if (typeof smartRouting.azureOpenaiApiVersion === 'string') {
-        systemConfig.smartRouting.azureOpenaiApiVersion = smartRouting.azureOpenaiApiVersion?.trim();
+        systemConfig.smartRouting.azureOpenaiApiVersion =
+          smartRouting.azureOpenaiApiVersion?.trim();
       }
       if (typeof smartRouting.azureOpenaiEmbeddingDeployment === 'string') {
         systemConfig.smartRouting.azureOpenaiEmbeddingDeployment =

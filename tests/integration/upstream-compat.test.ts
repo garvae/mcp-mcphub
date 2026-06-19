@@ -5,7 +5,10 @@ import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/
 import { GenericContainer, Wait, type StartedTestContainer } from 'testcontainers';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { getAutomatedCompatibilityTargets, type UpstreamCompatibilityTarget } from '../../src/core/compatibility/targets.js';
+import {
+  getAutomatedCompatibilityTargets,
+  type UpstreamCompatibilityTarget,
+} from '../../src/core/compatibility/targets.js';
 import { loadConfig } from '../../src/config/env.js';
 import { createLogger } from '../../src/observability/logger.js';
 import { startHttpServer } from '../../src/transports/http/server.js';
@@ -18,7 +21,8 @@ const COMPATIBILITY_USERNAME = 'admin';
 const COMPATIBILITY_TEST_TIMEOUT_MS = 180_000;
 const DOCKER_HTTP_PORT = 3000;
 
-const compatibilityDescribe = process.env.RUN_MCPHUB_COMPAT_TESTS === '1' ? describe : describe.skip;
+const compatibilityDescribe =
+  process.env.RUN_MCPHUB_COMPAT_TESTS === '1' ? describe : describe.skip;
 
 type StartedCompatContainer = {
   container: StartedTestContainer;
@@ -90,7 +94,9 @@ async function waitForAdminLogin(upstreamUrl: string): Promise<void> {
   throw new Error(`Timed out waiting for upstream admin login readiness: ${lastError}`);
 }
 
-async function startUpstreamContainer(target: UpstreamCompatibilityTarget): Promise<StartedCompatContainer> {
+async function startUpstreamContainer(
+  target: UpstreamCompatibilityTarget,
+): Promise<StartedCompatContainer> {
   const image = `samanhappy/mcphub:${target.imageTag}`;
   const container = await new GenericContainer(image)
     .withEnvironment({
@@ -100,7 +106,9 @@ async function startUpstreamContainer(target: UpstreamCompatibilityTarget): Prom
     })
     .withExposedPorts(DOCKER_HTTP_PORT)
     .withStartupTimeout(120_000)
-    .withWaitStrategy(Wait.forHttp('/health', DOCKER_HTTP_PORT).forStatusCode(200).withReadTimeout(120_000))
+    .withWaitStrategy(
+      Wait.forHttp('/health', DOCKER_HTTP_PORT).forStatusCode(200).withReadTimeout(120_000),
+    )
     .start();
 
   const url = `http://${container.getHost()}:${String(container.getMappedPort(DOCKER_HTTP_PORT))}`;
@@ -163,7 +171,9 @@ compatibilityDescribe('upstream MCPHub compatibility', () => {
 
         const listedTools = await client.listTools();
         expect(listedTools.tools.find((tool) => tool.name === 'mcphub_health_check')).toBeDefined();
-        expect(listedTools.tools.find((tool) => tool.name === 'mcphub_get_current_user')).toBeDefined();
+        expect(
+          listedTools.tools.find((tool) => tool.name === 'mcphub_get_current_user'),
+        ).toBeDefined();
 
         const healthResult = await client.callTool({ name: 'mcphub_health_check' });
         expect(healthResult.structuredContent).toMatchObject({
@@ -204,7 +214,11 @@ compatibilityDescribe('upstream MCPHub compatibility', () => {
         expect(structuredContent).toBeTypeOf('object');
         expect(structuredContent).not.toBeNull();
 
-        if (structuredContent === null || typeof structuredContent !== 'object' || !('data' in structuredContent)) {
+        if (
+          structuredContent === null ||
+          typeof structuredContent !== 'object' ||
+          !('data' in structuredContent)
+        ) {
           throw new Error('Expected public config tool to return structured content.');
         }
 
@@ -212,7 +226,11 @@ compatibilityDescribe('upstream MCPHub compatibility', () => {
         expect(publicConfigData).toBeTypeOf('object');
         expect(publicConfigData).not.toBeNull();
 
-        if (publicConfigData === null || typeof publicConfigData !== 'object' || !('data' in publicConfigData)) {
+        if (
+          publicConfigData === null ||
+          typeof publicConfigData !== 'object' ||
+          !('data' in publicConfigData)
+        ) {
           throw new Error('Expected public config tool to return a nested data payload.');
         }
 
