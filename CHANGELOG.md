@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- c1d6593: Remove self-hosted-only positioning and clean npm-facing README badges.
+- 2071b09: Document the public support and security routing updates and switch release automation to the current npm bootstrap publish fallback.
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
