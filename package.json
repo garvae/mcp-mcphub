@@ -1,7 +1,7 @@
 {
   "name": "@garvae/mcp-mcphub",
   "description": "Typed, profile-gated MCP server for managing MCPHub instances through the MCPHub REST Management API",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "Apache-2.0",
   "type": "module",
   "packageManager": "pnpm@11.7.0",

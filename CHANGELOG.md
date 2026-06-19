@@ -1,5 +1,11 @@
 <!-- markdownlint-disable-file MD024 -->
 
+## 1.0.2
+
+### Patch Changes
+
+- a662284: Automate GitHub release creation after successful npm publication and make `doctor --help` return command help instead of trying to validate runtime configuration.
+
 # Changelog
 
 ## 1.0.1
