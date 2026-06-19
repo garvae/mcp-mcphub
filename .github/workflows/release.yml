@@ -1,13 +1,11 @@
 name: release
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
-      publish:
-        description: Publish the package to npm after release validation
-        required: true
-        default: false
-        type: boolean
       run_compatibility:
         description: Run the Docker compatibility suite before publish validation
         required: true
@@ -26,7 +24,7 @@ permissions:
   pull-requests: write
 
 env:
-  NODE_VERSION: '22.13.0'
+  NODE_VERSION: '24'
   PACK_ARTIFACTS_DIR: .artifacts/release
 
 jobs:
@@ -48,12 +46,41 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          package-manager-cache: false
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Verify compatibility documentation
+        run: pnpm docs:compatibility:check
+
+      - name: Verify coverage documentation
+        run: pnpm docs:coverage:check
+
+      - name: Verify generated tool catalogs
+        run: pnpm docs:tools:check
+
+      - name: Run TypeScript typecheck
+        run: pnpm typecheck
+
+      - name: Run Biome lint
+        run: pnpm lint
+
+      - name: Run Prettier check
+        run: pnpm format:check
+
+      - name: Run deterministic test suite
+        run: pnpm test
+
+      - name: Run integration suite
+        run: pnpm test:integration
+
+      - name: Run coverage suite
+        run: pnpm test:coverage
+
+      - name: Verify route coverage matrix
+        run: pnpm test:coverage-matrix
 
       - name: Run Docker compatibility suite
         if: ${{ inputs.run_compatibility || vars.RELEASE_COMPAT_TESTS_REQUIRED == '1' }}
@@ -97,16 +124,9 @@ jobs:
         run: pnpm publish:dry-run
 
       - name: Create release PR or publish package
-        if: ${{ inputs.publish && vars.ENABLE_NPM_PUBLISH == '1' }}
         uses: changesets/action@v1
         with:
           version: pnpm version:packages
-          publish: pnpm release
+          publish: pnpm release --access public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish skipped
-        if: ${{ !(inputs.publish && vars.ENABLE_NPM_PUBLISH == '1') }}
-        run: |
-          echo "Release validation completed."
-          echo "Real npm publish is disabled unless workflow_dispatch publish=true and ENABLE_NPM_PUBLISH=1."

@@ -86,7 +86,7 @@ Recommended usage:
 - `compatibility-matrix.yml`: selective real-upstream MCPHub version matrix via `testcontainers`
 - `real-behavior.yml`: scheduled/manual live checks against a dedicated MCPHub test instance
 - `docker.yml`: validate that the Docker build still works for container users
-- `release.yml`: manually triggered changesets release workflow with explicit validation steps and publish disabled unless requested
+- `release.yml`: push-to-`main` and manual Changesets workflow that validates release artifacts, creates or updates the Version Packages PR, and publishes through npm Trusted Publishing when the version PR lands
 - `upstream-routes-watch.yml`: nightly upstream route drift detection
 
 ## Rollback

@@ -2,6 +2,20 @@
 
 This document covers the public package release path for `@garvae/mcp-mcphub`.
 
+## Release Model
+
+This repository uses Changesets for versioning and GitHub Actions for release orchestration.
+
+Normal flow:
+
+1. feature or fix PRs that change published behavior include a changeset
+2. the PR merges into `main` after required checks pass
+3. `release.yml` runs on `main`, validates the release path, and asks `changesets/action` to create or update the Version Packages PR when pending changesets exist
+4. the Version Packages PR lands on `main` after review
+5. `release.yml` runs again and publishes the new version to npm through GitHub Actions OIDC
+
+Manual `workflow_dispatch` is kept as a maintenance fallback for the same release pipeline.
+
 ## Pre-release Checklist
 
 Before publishing, verify:
@@ -17,6 +31,7 @@ Before publishing, verify:
 Run:
 
 ```bash
+pnpm install --frozen-lockfile
 pnpm docs:compatibility
 pnpm docs:coverage
 pnpm docs:tools
@@ -48,6 +63,7 @@ The tarball should contain:
 - `dist/`
 - `docs/`
 - `.env.example`
+- `AGENTS.md`
 - `docker-compose.example.yml`
 - `README.md`
 - `LICENSE`
@@ -64,7 +80,10 @@ Use:
 
 ```bash
 pnpm pack:validate
+npm pack --dry-run
 ```
+
+`AGENTS.md` stays in the tarball intentionally as public AI-agent guidance for package users and maintainers working from the installed artifact.
 
 ## GitHub and npm Settings to Review
 
@@ -75,62 +94,37 @@ These checks are partly outside the repository tree and should be reviewed befor
 - `.github/FUNDING.yml` matches active funding handles only
 - Ko-fi profile is `https://ko-fi.com/garvae`; verify it stays active before changing funding links
 - README support section links only to active funding profiles
-- Discussions enabled or intentionally deferred
+- Discussions enabled and linked from `README.md`, `SUPPORT.md`, and issue contact routing
 - issue labels and templates
 - recommended labels created or planned: `good first issue`, `help wanted`, `documentation`, `compatibility`, `upstream-drift`, `client-config`, `security`, `tool-catalog`, `testing`, `transport`, `stdio`, `streamable-http`, `release`, `question`, `needs-repro`
 - branch protection and required checks
-- secret scanning and dependency alerts
+- secret scanning, push protection, and dependency alerts
 - npm package ownership under `@garvae`
-- publish credentials or trusted-publishing configuration
-- after the repository becomes public, upload `assets/social-preview.png` in GitHub repository Settings -> Social preview
-- after the repository becomes public, enable GitHub Security Advisories / Private Vulnerability Reporting
-- after the repository becomes public, revisit `SECURITY.md` wording if the private reporting path changed
-- after the repository becomes public, consider Discussions categories such as Announcements, Q&A, Ideas, Client setup, Show and tell, and Compatibility reports
+- trusted-publishing configuration for `release.yml`
+- repository social preview uses `assets/social-preview.png`
+- Private Vulnerability Reporting is enabled and `SECURITY.md` points to the active path
+- Discussions categories still match current support routing
 
-## Publishing Model
+## Release Workflow Expectations
 
-Current workflow support in-repo is compatible with provenance-enabled npm publishing.
+`release.yml` should remain aligned with npm Trusted Publishing requirements:
 
-Preferred long-term model:
+- GitHub-hosted runners
+- `id-token: write`
+- Node `24` for the release job
+- full release-grade validation before `changesets/action`
+- no long-lived `NPM_TOKEN` dependency for the normal publish path
 
-- GitHub Actions with OIDC trusted publishing
+If npm Trusted Publishing must be repaired, fix the package's trusted publisher entry for:
 
-Fallback model:
-
-- `NPM_TOKEN` stored only as a GitHub Actions secret
-
-If trusted publishing is not configured yet, document that gap in the release notes instead of pretending it is already active.
-
-## Trusted Publishing Constraint
-
-npm trusted publishing is configured from the package settings page on npmjs.com.
-
-That means the package must already exist in the npm registry before the trust relationship can be attached.
-
-For `@garvae/mcp-mcphub`, the practical sequence is:
-
-1. complete first package publication intentionally
-2. open npm package settings
-3. attach the GitHub Actions workflow as the trusted publisher
-4. switch package publishing access to disallow traditional tokens if desired
-
-## Current Safe Default
-
-The repository release workflow is intentionally dry-run-first.
-
-- release automation runs only through `workflow_dispatch`
-- real npm publish is disabled unless both conditions are true:
-  - the workflow is started with `workflow_dispatch`
-  - `publish=true`
-  - repository variable `ENABLE_NPM_PUBLISH=1` is set
-
-This prevents accidental first publication before npm ownership and trusted-publishing setup are complete.
-
-The workflow no longer requires `NPM_TOKEN` for the preferred release path. Real publishing is expected to use npm trusted publishing via OIDC once the package exists and the trust relationship has been added on npmjs.com.
+- owner or user: `garvae`
+- repository: `mcp-mcphub`
+- workflow filename: `release.yml`
+- allowed action: `npm publish`
 
 ## Rollback Expectations
 
-Before any first public release or breaking release:
+Before any release:
 
 - verify the previous published version can still be installed
 - keep the previous tag and tarball available
@@ -141,8 +135,8 @@ Before any first public release or breaking release:
 Before final release approval, inspect:
 
 - rendered GitHub README
-- rendered npm README during dry-run review
-- GitHub Sponsors link resolves and the Sponsor button appears once the repository is public
-- GitHub Social Preview configuration after the repository becomes public
+- rendered npm README during dry-run review and after publish
+- GitHub Sponsors link resolves and the Sponsor button appears
+- GitHub Social Preview configuration
 - generated tool catalogs
-- release workflow inputs and secrets usage
+- release workflow behavior on `main`
