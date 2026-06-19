@@ -30,9 +30,7 @@ type AuthenticatedUser = {
  * On success the resolved user is attached to req.user so the caller does not have to
  * repeat that assignment at every call site.
  */
-async function resolveBetterAuthUserForAuthorize(
-  req: Request,
-): Promise<AuthenticatedUser | null> {
+async function resolveBetterAuthUserForAuthorize(req: Request): Promise<AuthenticatedUser | null> {
   try {
     const user = await resolveBetterAuthUser(req);
     if (user) {

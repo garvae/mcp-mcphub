@@ -78,15 +78,19 @@ describe('stdio transport', () => {
     const emptyConfigPath = path.join(tempDir, 'empty.env');
     writeFileSync(emptyConfigPath, '', 'utf8');
 
-    const result = spawnSync(process.execPath, [tsxCliPath, cliEntryPath, 'stdio', '--config', emptyConfigPath], {
-      cwd: process.cwd(),
-      encoding: 'utf8',
-      env: {
-        PATH: process.env.PATH ?? '',
-        SystemRoot: process.env.SystemRoot ?? '',
+    const result = spawnSync(
+      process.execPath,
+      [tsxCliPath, cliEntryPath, 'stdio', '--config', emptyConfigPath],
+      {
+        cwd: process.cwd(),
+        encoding: 'utf8',
+        env: {
+          PATH: process.env.PATH ?? '',
+          SystemRoot: process.env.SystemRoot ?? '',
+        },
+        timeout: 5_000,
       },
-      timeout: 5_000,
-    });
+    );
     rmSync(tempDir, { force: true, recursive: true });
 
     expect(result.status).toBe(1);
@@ -130,9 +134,11 @@ describe('stdio transport', () => {
     );
 
     const logsResource = await client.readResource({ uri: 'mcphub://logs/stream' });
-    expect(logsResource.contents[0] && 'text' in logsResource.contents[0] ? logsResource.contents[0].text : '').toContain(
-      'upstream log line',
-    );
+    expect(
+      logsResource.contents[0] && 'text' in logsResource.contents[0]
+        ? logsResource.contents[0].text
+        : '',
+    ).toContain('upstream log line');
 
     const result = await client.callTool({ name: 'mcphub_health_check' });
 

@@ -36,10 +36,18 @@ function rotateAuditFile(filePath: string, maxFiles: number): void {
   }
 }
 
-function writeAuditLine(filePath: string, payload: string, maxBytes: number, maxFiles: number): void {
+function writeAuditLine(
+  filePath: string,
+  payload: string,
+  maxBytes: number,
+  maxFiles: number,
+): void {
   mkdirSync(path.dirname(filePath), { recursive: true });
 
-  if (existsSync(filePath) && statSync(filePath).size + Buffer.byteLength(payload, 'utf8') > maxBytes) {
+  if (
+    existsSync(filePath) &&
+    statSync(filePath).size + Buffer.byteLength(payload, 'utf8') > maxBytes
+  ) {
     rotateAuditFile(filePath, maxFiles);
   }
 

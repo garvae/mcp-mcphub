@@ -4,6 +4,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { format } from 'prettier';
+
 import {
   AUTOMATED_COMPATIBILITY_IMAGE_TAGS,
   COMPATIBILITY_NOTES_SUMMARY,
@@ -31,7 +33,9 @@ function buildCompatibilityDocument(): string {
   const compatibilityRows = UPSTREAM_COMPATIBILITY_TARGETS.map(
     (target) => `| \`${target.label}\` | ${target.status} | ${target.notes} |`,
   ).join('\n');
-  const automatedMatrixDescription = AUTOMATED_COMPATIBILITY_IMAGE_TAGS.map((tag) => `\`${tag}\``).join(', ');
+  const automatedMatrixDescription = AUTOMATED_COMPATIBILITY_IMAGE_TAGS.map(
+    (tag) => `\`${tag}\``,
+  ).join(', ');
 
   return `# Compatibility
 
@@ -75,8 +79,8 @@ ${compatibilityRows}
 `;
 }
 
-function main(): void {
-  const expected = buildCompatibilityDocument();
+async function main(): Promise<void> {
+  const expected = await format(buildCompatibilityDocument(), { filepath: outputPath });
   const checkMode = process.argv.includes('--check');
 
   if (checkMode) {
@@ -91,4 +95,4 @@ function main(): void {
   writeFileSync(outputPath, expected, 'utf8');
 }
 
-main();
+await main();

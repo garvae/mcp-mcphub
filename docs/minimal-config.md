@@ -65,24 +65,24 @@ The CLI loads `.env` automatically when:
 
 ### Required almost always
 
-| Variable | Why |
-| --- | --- |
-| `MCPHUB_URL` | tells the server which MCPHub instance to manage |
+| Variable       | Why                                               |
+| -------------- | ------------------------------------------------- |
+| `MCPHUB_URL`   | tells the server which MCPHub instance to manage  |
 | `MCPHUB_TOKEN` | authenticates this server to that MCPHub instance |
 
 ### Required only for HTTP mode
 
-| Variable | Why |
-| --- | --- |
+| Variable                                             | Why                                                     |
+| ---------------------------------------------------- | ------------------------------------------------------- |
 | `MCP_HTTP_AUTH_TOKEN` or `MCP_HTTP_AUTH_TOKENS_JSON` | authenticates clients calling this MCP server over HTTP |
 
 ### Optional defaults most users can ignore
 
-| Variable | Default | Why it exists |
-| --- | --- | --- |
-| `MCPHUB_TOKEN_KIND` | `bearer` | switch only for alternate upstream auth modes |
-| `MCPHUB_AUTH_HEADER` | `Authorization` | switch only for MCPHub deployments that expect `x-auth-token` |
-| `MCP_HTTP_AUTH_EXPOSURE` | `safe` | changes the profile granted by `MCP_HTTP_AUTH_TOKEN` |
+| Variable                 | Default         | Why it exists                                                 |
+| ------------------------ | --------------- | ------------------------------------------------------------- |
+| `MCPHUB_TOKEN_KIND`      | `bearer`        | switch only for alternate upstream auth modes                 |
+| `MCPHUB_AUTH_HEADER`     | `Authorization` | switch only for MCPHub deployments that expect `x-auth-token` |
+| `MCP_HTTP_AUTH_EXPOSURE` | `safe`          | changes the profile granted by `MCP_HTTP_AUTH_TOKEN`          |
 
 ## Quick Verification
 

@@ -12,23 +12,23 @@ Each transport chooses one profile per MCP endpoint or stdio process.
 
 ## Profile Table
 
-| Profile | Typical audience | Allowed change level | Examples |
-| --- | --- | --- | --- |
-| `safe` | read-only agents, observability, diagnostics | none | health, servers, groups, costs, logs, marketplace, registry |
-| `ops` | SRE and automation workflows | reversible | reload server, toggle server/tool/prompt/resource, group membership, template export |
-| `admin` | trusted operators | destructive admin | create/update/delete servers, groups, users, bearer keys, OAuth clients |
-| `all` | owner-controlled maintenance | maximum | cloud tool call, MCPB upload, template import, system config writes |
+| Profile | Typical audience                             | Allowed change level | Examples                                                                             |
+| ------- | -------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------ |
+| `safe`  | read-only agents, observability, diagnostics | none                 | health, servers, groups, costs, logs, marketplace, registry                          |
+| `ops`   | SRE and automation workflows                 | reversible           | reload server, toggle server/tool/prompt/resource, group membership, template export |
+| `admin` | trusted operators                            | destructive admin    | create/update/delete servers, groups, users, bearer keys, OAuth clients              |
+| `all`   | owner-controlled maintenance                 | maximum              | cloud tool call, MCPB upload, template import, system config writes                  |
 
 ## Additional Gates
 
 Some tools require both the right profile and an enabled feature flag:
 
-| Flag | Affected tools |
-| --- | --- |
-| `ALLOW_AUTH_ADMIN_TOOLS` | bearer key and OAuth client management, user CRUD |
+| Flag                        | Affected tools                                             |
+| --------------------------- | ---------------------------------------------------------- |
+| `ALLOW_AUTH_ADMIN_TOOLS`    | bearer key and OAuth client management, user CRUD          |
 | `ALLOW_STDIO_SERVER_CREATE` | creation or update of stdio-backed upstream MCPHub servers |
-| `ALLOW_MCPB_UPLOAD` | `mcphub_upload_mcpb_bundle` |
-| `ALLOW_SYSTEM_CONFIG_WRITE` | `mcphub_update_system_config` |
+| `ALLOW_MCPB_UPLOAD`         | `mcphub_upload_mcpb_bundle`                                |
+| `ALLOW_SYSTEM_CONFIG_WRITE` | `mcphub_update_system_config`                              |
 
 ## Safe Profile
 

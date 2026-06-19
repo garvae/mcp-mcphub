@@ -68,7 +68,9 @@ function parseStdioCommandOptions(args: readonly string[]): StdioCommandOptions 
 
 function installConsoleToStderrShim(stderr: NodeJS.WriteStream) {
   const write = (...values: unknown[]) => {
-    stderr.write(`${values.map((value) => (typeof value === 'string' ? value : JSON.stringify(value))).join(' ')}\n`);
+    stderr.write(
+      `${values.map((value) => (typeof value === 'string' ? value : JSON.stringify(value))).join(' ')}\n`,
+    );
   };
 
   console.log = write;

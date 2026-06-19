@@ -21,6 +21,6 @@ export const REDACTED_KEYS = [
 
 export const REDACTION_PATTERNS = [
   /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/giu,
-  /\beyJ[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+/gu,
+  /\beyJ[A-Za-z0-9_-]+?\.[A-Za-z0-9_-]+?\.[A-Za-z0-9_-]+/gu,
   /\bsk-[A-Za-z0-9]{20,}\b/gu,
 ];

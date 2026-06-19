@@ -68,10 +68,7 @@ export async function runProcess(
   return spawnProcess(command, args, options).wait();
 }
 
-export async function waitForHttpHealth(
-  url: string,
-  timeoutMs = 15_000,
-): Promise<void> {
+export async function waitForHttpHealth(url: string, timeoutMs = 15_000): Promise<void> {
   const deadline = Date.now() + timeoutMs;
   let lastError = 'health endpoint did not answer';
 

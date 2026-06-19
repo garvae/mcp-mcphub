@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { COVERAGE } from '../core/coverage/matrix.js';
 import type { CoverageEntry, ExposureProfile, RiskClass } from '../core/coverage/types.js';
-import { createMcpHubClient } from '../core/mcphub-client/client.js';
+import type { createMcpHubClient } from '../core/mcphub-client/client.js';
 import { createRedactor } from '../core/redaction/redactor.js';
 import {
   assertAllowedCommand,

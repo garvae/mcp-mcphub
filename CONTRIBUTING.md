@@ -74,14 +74,16 @@ When docs or generated outputs change:
 pnpm docs:compatibility
 pnpm docs:coverage
 pnpm docs:tools
-pnpm ci:validate
+pnpm typecheck
+pnpm lint
+pnpm format:check
 ```
 
 When npm-facing packaging changes:
 
 ```bash
 pnpm test:package:installed
-pnpm pack:audit
+pnpm pack:validate
 ```
 
 See [docs/testing.md](./docs/testing.md) for the full matrix.

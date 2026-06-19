@@ -5,7 +5,11 @@ import { tmpdir } from 'node:os';
 import { describe, expect, it } from 'vitest';
 
 import { runProcess } from '../helpers/cli.js';
-import { createRealRuntimeEnv, getRealTestEnvironment, requireRealSuite } from '../helpers/real-env.js';
+import {
+  createRealRuntimeEnv,
+  getRealTestEnvironment,
+  requireRealSuite,
+} from '../helpers/real-env.js';
 
 const realEnv = getRealTestEnvironment();
 const describeReal = realEnv.readonlyEnabled || realEnv.releaseRequired ? describe : describe.skip;
@@ -16,13 +20,17 @@ describeReal('real doctor suite', () => {
   it('passes doctor --json against the live MCPHub instance', async () => {
     requireRealSuite(realEnv, 'readonly');
 
-    const result = await runProcess(process.execPath, [tsxCliPath, cliEntryPath, 'doctor', '--json'], {
-      cwd: process.cwd(),
-      env: {
-        ...process.env,
-        ...createRealRuntimeEnv(realEnv),
+    const result = await runProcess(
+      process.execPath,
+      [tsxCliPath, cliEntryPath, 'doctor', '--json'],
+      {
+        cwd: process.cwd(),
+        env: {
+          ...process.env,
+          ...createRealRuntimeEnv(realEnv),
+        },
       },
-    });
+    );
 
     expect(result.exitCode).toBe(0);
     const doctorReport = JSON.parse(result.stdout) as unknown;
@@ -33,12 +41,22 @@ describeReal('real doctor suite', () => {
     }
 
     expect('checks' in doctorReport && Array.isArray(doctorReport.checks)).toBe(true);
-    expect('profile' in doctorReport && typeof doctorReport.profile === 'object' && doctorReport.profile !== null).toBe(true);
-    if (!('profile' in doctorReport) || typeof doctorReport.profile !== 'object' || doctorReport.profile === null) {
+    expect(
+      'profile' in doctorReport &&
+        typeof doctorReport.profile === 'object' &&
+        doctorReport.profile !== null,
+    ).toBe(true);
+    if (
+      !('profile' in doctorReport) ||
+      typeof doctorReport.profile !== 'object' ||
+      doctorReport.profile === null
+    ) {
       throw new Error('Expected doctor report to include a profile object.');
     }
 
-    expect('tokenKind' in doctorReport.profile ? doctorReport.profile.tokenKind : undefined).toBe(realEnv.tokenKind);
+    expect('tokenKind' in doctorReport.profile ? doctorReport.profile.tokenKind : undefined).toBe(
+      realEnv.tokenKind,
+    );
     expect('url' in doctorReport.profile ? doctorReport.profile.url : undefined).toBe(realEnv.url);
   });
 
@@ -77,13 +95,17 @@ describeReal('real doctor suite', () => {
     );
 
     try {
-      const result = await runProcess(process.execPath, [tsxCliPath, cliEntryPath, 'doctor', '--json', '--config', configPath], {
-        cwd: process.cwd(),
-        env: {
-          PATH: process.env.PATH ?? '',
-          SystemRoot: process.env.SystemRoot ?? '',
+      const result = await runProcess(
+        process.execPath,
+        [tsxCliPath, cliEntryPath, 'doctor', '--json', '--config', configPath],
+        {
+          cwd: process.cwd(),
+          env: {
+            PATH: process.env.PATH ?? '',
+            SystemRoot: process.env.SystemRoot ?? '',
+          },
         },
-      });
+      );
 
       expect(result.exitCode).toBe(0);
       const doctorReport = JSON.parse(result.stdout) as unknown;

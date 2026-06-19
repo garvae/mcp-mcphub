@@ -24,9 +24,12 @@ Run the smallest relevant set first, then the release-facing checks before final
 pnpm test
 pnpm test:integration
 pnpm test:coverage-matrix
+pnpm typecheck
+pnpm lint
+pnpm format:check
 pnpm docs:coverage
 pnpm docs:tools
-pnpm ci:validate
+pnpm test:package:installed
 ```
 
 ## Security Rules
@@ -59,5 +62,5 @@ pnpm ci:validate
 - `src/transports/http/*`
 - `src/transports/stdio/*`
 - `src/security/*`
-- `scripts/run-release-gate.ts`
+- `.github/workflows/*`
 - `package.json`

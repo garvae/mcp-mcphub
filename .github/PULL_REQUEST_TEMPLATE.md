@@ -43,9 +43,11 @@
 - [ ] `pnpm docs:coverage`
 - [ ] `pnpm docs:tools`
 - [ ] `pnpm build`
-- [ ] `pnpm ci:validate`
+- [ ] `pnpm typecheck`
+- [ ] `pnpm lint`
+- [ ] `pnpm format:check`
 - [ ] `pnpm test:package:installed`
-- [ ] `pnpm pack:audit`
+- [ ] `pnpm pack:validate`
 
 List anything skipped and why:
 

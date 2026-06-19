@@ -2,7 +2,7 @@
 
 const suspiciousDescriptionPatterns = [
   /\bBearer\s+[A-Za-z0-9\-._~+/]+=*/iu,
-  /\beyJ[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+/u,
+  /\beyJ[A-Za-z0-9_-]+?\.[A-Za-z0-9_-]+?\.[A-Za-z0-9_-]+/u,
   /\bsk-[A-Za-z0-9]{20,}\b/u,
 ] as const;
 

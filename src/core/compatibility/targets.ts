@@ -15,9 +15,11 @@ export const ROUTE_SNAPSHOT_BASELINE_VERSION = '1.0.15';
 export const PINNED_RELEASE_TARGET_VERSION = '1.0.16';
 export const MINIMUM_BEST_EFFORT_VERSION = '1.0.15';
 export const PINNED_RELEASE_TARGET_HAS_ROUTE_SNAPSHOT = true;
-export const AUTOMATED_COMPATIBILITY_IMAGE_TAGS = ["1.0.15","1.0.16","latest"] as const;
-export const PINNED_RELEASE_TARGET_NOTE = 'Pinned release target with a committed route snapshot for 1.0.16.';
-export const COMPATIBILITY_NOTES_SUMMARY = 'The `1.0.16` route snapshot is committed alongside the current baseline.';
+export const AUTOMATED_COMPATIBILITY_IMAGE_TAGS = ['1.0.15', '1.0.16', 'latest'] as const;
+export const PINNED_RELEASE_TARGET_NOTE =
+  'Pinned release target with a committed route snapshot for 1.0.16.';
+export const COMPATIBILITY_NOTES_SUMMARY =
+  'The `1.0.16` route snapshot is committed alongside the current baseline.';
 
 export const UPSTREAM_COMPATIBILITY_TARGETS: readonly UpstreamCompatibilityTarget[] = [
   {
@@ -48,8 +50,14 @@ export const UPSTREAM_COMPATIBILITY_TARGETS: readonly UpstreamCompatibilityTarge
   },
 ] as const;
 
-export function getAutomatedCompatibilityTargets(selectedImageTag?: string): UpstreamCompatibilityTarget[] {
-  const automatedTargets = UPSTREAM_COMPATIBILITY_TARGETS.filter((target) => AUTOMATED_COMPATIBILITY_IMAGE_TAGS.includes(target.imageTag as (typeof AUTOMATED_COMPATIBILITY_IMAGE_TAGS)[number]));
+export function getAutomatedCompatibilityTargets(
+  selectedImageTag?: string,
+): UpstreamCompatibilityTarget[] {
+  const automatedTargets = UPSTREAM_COMPATIBILITY_TARGETS.filter((target) =>
+    AUTOMATED_COMPATIBILITY_IMAGE_TAGS.includes(
+      target.imageTag as (typeof AUTOMATED_COMPATIBILITY_IMAGE_TAGS)[number],
+    ),
+  );
 
   if (selectedImageTag === undefined || selectedImageTag.length === 0) {
     return [...automatedTargets];

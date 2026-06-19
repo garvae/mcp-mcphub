@@ -5,9 +5,7 @@
     "includeInCoverage": true,
     "line": 437,
     "method": "GET",
-    "middlewareNames": [
-      "getMarketplaceWellKnown"
-    ],
+    "middlewareNames": ["getMarketplaceWellKnown"],
     "path": "/.well-known/mcp-marketplace",
     "rawPath": "'/.well-known/mcp-marketplace'",
     "routerName": "app",
@@ -20,10 +18,7 @@
     "includeInCoverage": true,
     "line": 212,
     "method": "GET",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "getMetadata"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "getMetadata"],
     "path": "/.well-known/oauth-authorization-server",
     "rawPath": "'/.well-known/oauth-authorization-server'",
     "routerName": "app",
@@ -36,10 +31,7 @@
     "includeInCoverage": true,
     "line": 213,
     "method": "GET",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "getProtectedResourceMetadata"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "getProtectedResourceMetadata"],
     "path": "/.well-known/oauth-protected-resource",
     "rawPath": "'/.well-known/oauth-protected-resource'",
     "routerName": "app",
@@ -78,9 +70,7 @@
     "includeInCoverage": true,
     "line": 446,
     "method": "GET",
-    "middlewareNames": [
-      "getGroupOpenAPISpec"
-    ],
+    "middlewareNames": ["getGroupOpenAPISpec"],
     "path": "/api/:name/openapi.json",
     "rawPath": "`${config.basePath}/api/:name/openapi.json`",
     "routerName": "app",
@@ -93,9 +83,7 @@
     "includeInCoverage": true,
     "line": 453,
     "method": "GET",
-    "middlewareNames": [
-      "executeToolViaOpenAPI"
-    ],
+    "middlewareNames": ["executeToolViaOpenAPI"],
     "path": "/api/:name/tools/:serverName/:toolName",
     "rawPath": "`${config.basePath}/api/:name/tools/:serverName/:toolName`",
     "routerName": "app",
@@ -108,9 +96,7 @@
     "includeInCoverage": true,
     "line": 454,
     "method": "POST",
-    "middlewareNames": [
-      "executeToolViaOpenAPI"
-    ],
+    "middlewareNames": ["executeToolViaOpenAPI"],
     "path": "/api/:name/tools/:serverName/:toolName",
     "rawPath": "`${config.basePath}/api/:name/tools/:serverName/:toolName`",
     "routerName": "app",
@@ -123,9 +109,7 @@
     "includeInCoverage": true,
     "line": 315,
     "method": "GET",
-    "middlewareNames": [
-      "getActivities"
-    ],
+    "middlewareNames": ["getActivities"],
     "path": "/activities",
     "rawPath": "'/activities'",
     "routerName": "authenticatedRouter",
@@ -138,9 +122,7 @@
     "includeInCoverage": true,
     "line": 318,
     "method": "GET",
-    "middlewareNames": [
-      "getActivityById"
-    ],
+    "middlewareNames": ["getActivityById"],
     "path": "/activities/:id",
     "rawPath": "'/activities/:id'",
     "routerName": "authenticatedRouter",
@@ -153,9 +135,7 @@
     "includeInCoverage": true,
     "line": 314,
     "method": "GET",
-    "middlewareNames": [
-      "checkActivityAvailable"
-    ],
+    "middlewareNames": ["checkActivityAvailable"],
     "path": "/activities/available",
     "rawPath": "'/activities/available'",
     "routerName": "authenticatedRouter",
@@ -168,9 +148,7 @@
     "includeInCoverage": true,
     "line": 319,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteOldActivities"
-    ],
+    "middlewareNames": ["deleteOldActivities"],
     "path": "/activities/cleanup",
     "rawPath": "'/activities/cleanup'",
     "routerName": "authenticatedRouter",
@@ -183,9 +161,7 @@
     "includeInCoverage": true,
     "line": 317,
     "method": "GET",
-    "middlewareNames": [
-      "getActivityFilterOptions"
-    ],
+    "middlewareNames": ["getActivityFilterOptions"],
     "path": "/activities/filters",
     "rawPath": "'/activities/filters'",
     "routerName": "authenticatedRouter",
@@ -198,9 +174,7 @@
     "includeInCoverage": true,
     "line": 316,
     "method": "GET",
-    "middlewareNames": [
-      "getActivityStats"
-    ],
+    "middlewareNames": ["getActivityStats"],
     "path": "/activities/stats",
     "rawPath": "'/activities/stats'",
     "routerName": "authenticatedRouter",
@@ -213,11 +187,7 @@
     "includeInCoverage": true,
     "line": 415,
     "method": "POST",
-    "middlewareNames": [
-      "authenticatedRouteRateLimiter",
-      "auth",
-      "changePassword"
-    ],
+    "middlewareNames": ["authenticatedRouteRateLimiter", "auth", "changePassword"],
     "path": "/auth/change-password",
     "rawPath": "'/auth/change-password'",
     "routerName": "router",
@@ -230,9 +200,7 @@
     "includeInCoverage": true,
     "line": 308,
     "method": "GET",
-    "middlewareNames": [
-      "getBearerKeys"
-    ],
+    "middlewareNames": ["getBearerKeys"],
     "path": "/auth/keys",
     "rawPath": "'/auth/keys'",
     "routerName": "authenticatedRouter",
@@ -245,9 +213,7 @@
     "includeInCoverage": true,
     "line": 309,
     "method": "POST",
-    "middlewareNames": [
-      "createBearerKey"
-    ],
+    "middlewareNames": ["createBearerKey"],
     "path": "/auth/keys",
     "rawPath": "'/auth/keys'",
     "routerName": "authenticatedRouter",
@@ -260,9 +226,7 @@
     "includeInCoverage": true,
     "line": 311,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteBearerKey"
-    ],
+    "middlewareNames": ["deleteBearerKey"],
     "path": "/auth/keys/:id",
     "rawPath": "'/auth/keys/:id'",
     "routerName": "authenticatedRouter",
@@ -275,9 +239,7 @@
     "includeInCoverage": true,
     "line": 310,
     "method": "PUT",
-    "middlewareNames": [
-      "updateBearerKey"
-    ],
+    "middlewareNames": ["updateBearerKey"],
     "path": "/auth/keys/:id",
     "rawPath": "'/auth/keys/:id'",
     "routerName": "authenticatedRouter",
@@ -290,9 +252,7 @@
     "includeInCoverage": true,
     "line": 394,
     "method": "POST",
-    "middlewareNames": [
-      "login"
-    ],
+    "middlewareNames": ["login"],
     "path": "/auth/login",
     "rawPath": "'/auth/login'",
     "routerName": "router",
@@ -305,9 +265,7 @@
     "includeInCoverage": true,
     "line": 403,
     "method": "POST",
-    "middlewareNames": [
-      "register"
-    ],
+    "middlewareNames": ["register"],
     "path": "/auth/register",
     "rawPath": "'/auth/register'",
     "routerName": "router",
@@ -320,11 +278,7 @@
     "includeInCoverage": true,
     "line": 412,
     "method": "GET",
-    "middlewareNames": [
-      "authenticatedRouteRateLimiter",
-      "auth",
-      "getCurrentUser"
-    ],
+    "middlewareNames": ["authenticatedRouteRateLimiter", "auth", "getCurrentUser"],
     "path": "/auth/user",
     "rawPath": "'/auth/user'",
     "routerName": "router",
@@ -337,9 +291,7 @@
     "includeInCoverage": true,
     "line": 392,
     "method": "GET",
-    "middlewareNames": [
-      "getBetterAuthUser"
-    ],
+    "middlewareNames": ["getBetterAuthUser"],
     "path": "/better-auth/user",
     "rawPath": "'/better-auth/user'",
     "routerName": "authenticatedRouter",
@@ -352,9 +304,7 @@
     "includeInCoverage": true,
     "line": 381,
     "method": "GET",
-    "middlewareNames": [
-      "getChangelogUpdateInfoHandler"
-    ],
+    "middlewareNames": ["getChangelogUpdateInfoHandler"],
     "path": "/changelog/update-info",
     "rawPath": "'/changelog/update-info'",
     "routerName": "authenticatedRouter",
@@ -367,9 +317,7 @@
     "includeInCoverage": true,
     "line": 368,
     "method": "GET",
-    "middlewareNames": [
-      "getAllCloudCategories"
-    ],
+    "middlewareNames": ["getAllCloudCategories"],
     "path": "/cloud/categories",
     "rawPath": "'/cloud/categories'",
     "routerName": "authenticatedRouter",
@@ -382,9 +330,7 @@
     "includeInCoverage": true,
     "line": 369,
     "method": "GET",
-    "middlewareNames": [
-      "getCloudServersByCategory"
-    ],
+    "middlewareNames": ["getCloudServersByCategory"],
     "path": "/cloud/categories/:category",
     "rawPath": "'/cloud/categories/:category'",
     "routerName": "authenticatedRouter",
@@ -397,9 +343,7 @@
     "includeInCoverage": true,
     "line": 365,
     "method": "GET",
-    "middlewareNames": [
-      "getAllCloudServers"
-    ],
+    "middlewareNames": ["getAllCloudServers"],
     "path": "/cloud/servers",
     "rawPath": "'/cloud/servers'",
     "routerName": "authenticatedRouter",
@@ -412,9 +356,7 @@
     "includeInCoverage": true,
     "line": 367,
     "method": "GET",
-    "middlewareNames": [
-      "getCloudServer"
-    ],
+    "middlewareNames": ["getCloudServer"],
     "path": "/cloud/servers/:name",
     "rawPath": "'/cloud/servers/:name'",
     "routerName": "authenticatedRouter",
@@ -427,9 +369,7 @@
     "includeInCoverage": true,
     "line": 372,
     "method": "GET",
-    "middlewareNames": [
-      "getCloudServerToolsList"
-    ],
+    "middlewareNames": ["getCloudServerToolsList"],
     "path": "/cloud/servers/:serverName/tools",
     "rawPath": "'/cloud/servers/:serverName/tools'",
     "routerName": "authenticatedRouter",
@@ -442,9 +382,7 @@
     "includeInCoverage": true,
     "line": 373,
     "method": "POST",
-    "middlewareNames": [
-      "callCloudTool"
-    ],
+    "middlewareNames": ["callCloudTool"],
     "path": "/cloud/servers/:serverName/tools/:toolName/call",
     "rawPath": "'/cloud/servers/:serverName/tools/:toolName/call'",
     "routerName": "authenticatedRouter",
@@ -457,9 +395,7 @@
     "includeInCoverage": true,
     "line": 366,
     "method": "GET",
-    "middlewareNames": [
-      "searchCloudServersByQuery"
-    ],
+    "middlewareNames": ["searchCloudServersByQuery"],
     "path": "/cloud/servers/search",
     "rawPath": "'/cloud/servers/search'",
     "routerName": "authenticatedRouter",
@@ -472,9 +408,7 @@
     "includeInCoverage": true,
     "line": 370,
     "method": "GET",
-    "middlewareNames": [
-      "getAllCloudTags"
-    ],
+    "middlewareNames": ["getAllCloudTags"],
     "path": "/cloud/tags",
     "rawPath": "'/cloud/tags'",
     "routerName": "authenticatedRouter",
@@ -487,9 +421,7 @@
     "includeInCoverage": true,
     "line": 371,
     "method": "GET",
-    "middlewareNames": [
-      "getCloudServersByTag"
-    ],
+    "middlewareNames": ["getCloudServersByTag"],
     "path": "/cloud/tags/:tag",
     "rawPath": "'/cloud/tags/:tag'",
     "routerName": "authenticatedRouter",
@@ -502,9 +434,7 @@
     "includeInCoverage": true,
     "line": 265,
     "method": "GET",
-    "middlewareNames": [
-      "getGroupCostsHandler"
-    ],
+    "middlewareNames": ["getGroupCostsHandler"],
     "path": "/cost/groups",
     "rawPath": "'/cost/groups'",
     "routerName": "authenticatedRouter",
@@ -517,9 +447,7 @@
     "includeInCoverage": true,
     "line": 264,
     "method": "GET",
-    "middlewareNames": [
-      "getServerCostsHandler"
-    ],
+    "middlewareNames": ["getServerCostsHandler"],
     "path": "/cost/servers",
     "rawPath": "'/cost/servers'",
     "routerName": "authenticatedRouter",
@@ -532,9 +460,7 @@
     "includeInCoverage": true,
     "line": 268,
     "method": "GET",
-    "middlewareNames": [
-      "getGroups"
-    ],
+    "middlewareNames": ["getGroups"],
     "path": "/groups",
     "rawPath": "'/groups'",
     "routerName": "authenticatedRouter",
@@ -547,9 +473,7 @@
     "includeInCoverage": true,
     "line": 270,
     "method": "POST",
-    "middlewareNames": [
-      "createNewGroup"
-    ],
+    "middlewareNames": ["createNewGroup"],
     "path": "/groups",
     "rawPath": "'/groups'",
     "routerName": "authenticatedRouter",
@@ -562,9 +486,7 @@
     "includeInCoverage": true,
     "line": 273,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteExistingGroup"
-    ],
+    "middlewareNames": ["deleteExistingGroup"],
     "path": "/groups/:id",
     "rawPath": "'/groups/:id'",
     "routerName": "authenticatedRouter",
@@ -577,9 +499,7 @@
     "includeInCoverage": true,
     "line": 269,
     "method": "GET",
-    "middlewareNames": [
-      "getGroup"
-    ],
+    "middlewareNames": ["getGroup"],
     "path": "/groups/:id",
     "rawPath": "'/groups/:id'",
     "routerName": "authenticatedRouter",
@@ -592,9 +512,7 @@
     "includeInCoverage": true,
     "line": 272,
     "method": "PUT",
-    "middlewareNames": [
-      "updateExistingGroup"
-    ],
+    "middlewareNames": ["updateExistingGroup"],
     "path": "/groups/:id",
     "rawPath": "'/groups/:id'",
     "routerName": "authenticatedRouter",
@@ -607,9 +525,7 @@
     "includeInCoverage": true,
     "line": 280,
     "method": "GET",
-    "middlewareNames": [
-      "getGroupServerConfigs"
-    ],
+    "middlewareNames": ["getGroupServerConfigs"],
     "path": "/groups/:id/server-configs",
     "rawPath": "'/groups/:id/server-configs'",
     "routerName": "authenticatedRouter",
@@ -622,9 +538,7 @@
     "includeInCoverage": true,
     "line": 281,
     "method": "GET",
-    "middlewareNames": [
-      "getGroupServerConfig"
-    ],
+    "middlewareNames": ["getGroupServerConfig"],
     "path": "/groups/:id/server-configs/:serverName",
     "rawPath": "'/groups/:id/server-configs/:serverName'",
     "routerName": "authenticatedRouter",
@@ -637,9 +551,7 @@
     "includeInCoverage": true,
     "line": 282,
     "method": "PUT",
-    "middlewareNames": [
-      "updateGroupServerTools"
-    ],
+    "middlewareNames": ["updateGroupServerTools"],
     "path": "/groups/:id/server-configs/:serverName/tools",
     "rawPath": "'/groups/:id/server-configs/:serverName/tools'",
     "routerName": "authenticatedRouter",
@@ -652,9 +564,7 @@
     "includeInCoverage": true,
     "line": 276,
     "method": "GET",
-    "middlewareNames": [
-      "getGroupServers"
-    ],
+    "middlewareNames": ["getGroupServers"],
     "path": "/groups/:id/servers",
     "rawPath": "'/groups/:id/servers'",
     "routerName": "authenticatedRouter",
@@ -667,9 +577,7 @@
     "includeInCoverage": true,
     "line": 274,
     "method": "POST",
-    "middlewareNames": [
-      "addServerToExistingGroup"
-    ],
+    "middlewareNames": ["addServerToExistingGroup"],
     "path": "/groups/:id/servers",
     "rawPath": "'/groups/:id/servers'",
     "routerName": "authenticatedRouter",
@@ -682,9 +590,7 @@
     "includeInCoverage": true,
     "line": 275,
     "method": "DELETE",
-    "middlewareNames": [
-      "removeServerFromExistingGroup"
-    ],
+    "middlewareNames": ["removeServerFromExistingGroup"],
     "path": "/groups/:id/servers/:serverName",
     "rawPath": "'/groups/:id/servers/:serverName'",
     "routerName": "authenticatedRouter",
@@ -697,9 +603,7 @@
     "includeInCoverage": true,
     "line": 278,
     "method": "PUT",
-    "middlewareNames": [
-      "updateGroupServersBatch"
-    ],
+    "middlewareNames": ["updateGroupServersBatch"],
     "path": "/groups/:id/servers/batch",
     "rawPath": "'/groups/:id/servers/batch'",
     "routerName": "authenticatedRouter",
@@ -712,9 +616,7 @@
     "includeInCoverage": true,
     "line": 271,
     "method": "POST",
-    "middlewareNames": [
-      "batchCreateGroups"
-    ],
+    "middlewareNames": ["batchCreateGroups"],
     "path": "/groups/batch",
     "rawPath": "'/groups/batch'",
     "routerName": "authenticatedRouter",
@@ -727,9 +629,7 @@
     "includeInCoverage": true,
     "line": 385,
     "method": "DELETE",
-    "middlewareNames": [
-      "clearLogs"
-    ],
+    "middlewareNames": ["clearLogs"],
     "path": "/logs",
     "rawPath": "'/logs'",
     "routerName": "authenticatedRouter",
@@ -742,9 +642,7 @@
     "includeInCoverage": true,
     "line": 384,
     "method": "GET",
-    "middlewareNames": [
-      "getAllLogs"
-    ],
+    "middlewareNames": ["getAllLogs"],
     "path": "/logs",
     "rawPath": "'/logs'",
     "routerName": "authenticatedRouter",
@@ -757,9 +655,7 @@
     "includeInCoverage": true,
     "line": 386,
     "method": "GET",
-    "middlewareNames": [
-      "streamLogs"
-    ],
+    "middlewareNames": ["streamLogs"],
     "path": "/logs/stream",
     "rawPath": "'/logs/stream'",
     "routerName": "authenticatedRouter",
@@ -772,9 +668,7 @@
     "includeInCoverage": true,
     "line": 359,
     "method": "GET",
-    "middlewareNames": [
-      "getAllMarketCategories"
-    ],
+    "middlewareNames": ["getAllMarketCategories"],
     "path": "/market/categories",
     "rawPath": "'/market/categories'",
     "routerName": "authenticatedRouter",
@@ -787,9 +681,7 @@
     "includeInCoverage": true,
     "line": 360,
     "method": "GET",
-    "middlewareNames": [
-      "getMarketServersByCategory"
-    ],
+    "middlewareNames": ["getMarketServersByCategory"],
     "path": "/market/categories/:category",
     "rawPath": "'/market/categories/:category'",
     "routerName": "authenticatedRouter",
@@ -802,9 +694,7 @@
     "includeInCoverage": true,
     "line": 356,
     "method": "GET",
-    "middlewareNames": [
-      "getAllMarketServers"
-    ],
+    "middlewareNames": ["getAllMarketServers"],
     "path": "/market/servers",
     "rawPath": "'/market/servers'",
     "routerName": "authenticatedRouter",
@@ -817,9 +707,7 @@
     "includeInCoverage": true,
     "line": 358,
     "method": "GET",
-    "middlewareNames": [
-      "getMarketServer"
-    ],
+    "middlewareNames": ["getMarketServer"],
     "path": "/market/servers/:name",
     "rawPath": "'/market/servers/:name'",
     "routerName": "authenticatedRouter",
@@ -832,9 +720,7 @@
     "includeInCoverage": true,
     "line": 357,
     "method": "GET",
-    "middlewareNames": [
-      "searchMarketServersByQuery"
-    ],
+    "middlewareNames": ["searchMarketServersByQuery"],
     "path": "/market/servers/search",
     "rawPath": "'/market/servers/search'",
     "routerName": "authenticatedRouter",
@@ -847,9 +733,7 @@
     "includeInCoverage": true,
     "line": 361,
     "method": "GET",
-    "middlewareNames": [
-      "getAllMarketTags"
-    ],
+    "middlewareNames": ["getAllMarketTags"],
     "path": "/market/tags",
     "rawPath": "'/market/tags'",
     "routerName": "authenticatedRouter",
@@ -862,9 +746,7 @@
     "includeInCoverage": true,
     "line": 362,
     "method": "GET",
-    "middlewareNames": [
-      "getMarketServersByTag"
-    ],
+    "middlewareNames": ["getMarketServersByTag"],
     "path": "/market/tags/:tag",
     "rawPath": "'/market/tags/:tag'",
     "routerName": "authenticatedRouter",
@@ -877,9 +759,7 @@
     "includeInCoverage": true,
     "line": 389,
     "method": "GET",
-    "middlewareNames": [
-      "getMcpSettingsJson"
-    ],
+    "middlewareNames": ["getMcpSettingsJson"],
     "path": "/mcp-settings/export",
     "rawPath": "'/mcp-settings/export'",
     "routerName": "authenticatedRouter",
@@ -892,9 +772,7 @@
     "includeInCoverage": true,
     "line": 335,
     "method": "POST",
-    "middlewareNames": [
-      "getPrompt"
-    ],
+    "middlewareNames": ["getPrompt"],
     "path": "/mcp/:serverName/prompts/:promptName",
     "rawPath": "'/mcp/:serverName/prompts/:promptName'",
     "routerName": "authenticatedRouter",
@@ -907,10 +785,7 @@
     "includeInCoverage": true,
     "line": 353,
     "method": "POST",
-    "middlewareNames": [
-      "uploadMiddleware",
-      "uploadMcpbFile"
-    ],
+    "middlewareNames": ["uploadMiddleware", "uploadMcpbFile"],
     "path": "/mcpb/upload",
     "rawPath": "'/mcpb/upload'",
     "routerName": "authenticatedRouter",
@@ -923,9 +798,7 @@
     "includeInCoverage": true,
     "line": 293,
     "method": "GET",
-    "middlewareNames": [
-      "getAllClients"
-    ],
+    "middlewareNames": ["getAllClients"],
     "path": "/oauth/clients",
     "rawPath": "'/oauth/clients'",
     "routerName": "authenticatedRouter",
@@ -938,9 +811,7 @@
     "includeInCoverage": true,
     "line": 295,
     "method": "POST",
-    "middlewareNames": [
-      "createClient"
-    ],
+    "middlewareNames": ["createClient"],
     "path": "/oauth/clients",
     "rawPath": "'/oauth/clients'",
     "routerName": "authenticatedRouter",
@@ -953,9 +824,7 @@
     "includeInCoverage": true,
     "line": 304,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteClient"
-    ],
+    "middlewareNames": ["deleteClient"],
     "path": "/oauth/clients/:clientId",
     "rawPath": "'/oauth/clients/:clientId'",
     "routerName": "authenticatedRouter",
@@ -968,9 +837,7 @@
     "includeInCoverage": true,
     "line": 294,
     "method": "GET",
-    "middlewareNames": [
-      "getClient"
-    ],
+    "middlewareNames": ["getClient"],
     "path": "/oauth/clients/:clientId",
     "rawPath": "'/oauth/clients/:clientId'",
     "routerName": "authenticatedRouter",
@@ -983,9 +850,7 @@
     "includeInCoverage": true,
     "line": 303,
     "method": "PUT",
-    "middlewareNames": [
-      "updateClient"
-    ],
+    "middlewareNames": ["updateClient"],
     "path": "/oauth/clients/:clientId",
     "rawPath": "'/oauth/clients/:clientId'",
     "routerName": "authenticatedRouter",
@@ -998,9 +863,7 @@
     "includeInCoverage": true,
     "line": 305,
     "method": "POST",
-    "middlewareNames": [
-      "regenerateSecret"
-    ],
+    "middlewareNames": ["regenerateSecret"],
     "path": "/oauth/clients/:clientId/regenerate-secret",
     "rawPath": "'/oauth/clients/:clientId/regenerate-secret'",
     "routerName": "authenticatedRouter",
@@ -1013,9 +876,7 @@
     "includeInCoverage": true,
     "line": 445,
     "method": "GET",
-    "middlewareNames": [
-      "getOpenAPISpec"
-    ],
+    "middlewareNames": ["getOpenAPISpec"],
     "path": "/api/openapi.json",
     "rawPath": "`${config.basePath}/api/openapi.json`",
     "routerName": "app",
@@ -1028,9 +889,7 @@
     "includeInCoverage": true,
     "line": 447,
     "method": "GET",
-    "middlewareNames": [
-      "getOpenAPIServers"
-    ],
+    "middlewareNames": ["getOpenAPIServers"],
     "path": "/api/openapi/servers",
     "rawPath": "`${config.basePath}/api/openapi/servers`",
     "routerName": "app",
@@ -1043,9 +902,7 @@
     "includeInCoverage": true,
     "line": 448,
     "method": "GET",
-    "middlewareNames": [
-      "getOpenAPIStats"
-    ],
+    "middlewareNames": ["getOpenAPIStats"],
     "path": "/api/openapi/stats",
     "rawPath": "`${config.basePath}/api/openapi/stats`",
     "routerName": "app",
@@ -1058,9 +915,7 @@
     "includeInCoverage": true,
     "line": 338,
     "method": "GET",
-    "middlewareNames": [
-      "listBuiltinPrompts"
-    ],
+    "middlewareNames": ["listBuiltinPrompts"],
     "path": "/prompts",
     "rawPath": "'/prompts'",
     "routerName": "authenticatedRouter",
@@ -1073,9 +928,7 @@
     "includeInCoverage": true,
     "line": 340,
     "method": "POST",
-    "middlewareNames": [
-      "createBuiltinPrompt"
-    ],
+    "middlewareNames": ["createBuiltinPrompt"],
     "path": "/prompts",
     "rawPath": "'/prompts'",
     "routerName": "authenticatedRouter",
@@ -1088,9 +941,7 @@
     "includeInCoverage": true,
     "line": 342,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteBuiltinPrompt"
-    ],
+    "middlewareNames": ["deleteBuiltinPrompt"],
     "path": "/prompts/:id",
     "rawPath": "'/prompts/:id'",
     "routerName": "authenticatedRouter",
@@ -1103,9 +954,7 @@
     "includeInCoverage": true,
     "line": 339,
     "method": "GET",
-    "middlewareNames": [
-      "getBuiltinPrompt"
-    ],
+    "middlewareNames": ["getBuiltinPrompt"],
     "path": "/prompts/:id",
     "rawPath": "'/prompts/:id'",
     "routerName": "authenticatedRouter",
@@ -1118,9 +967,7 @@
     "includeInCoverage": true,
     "line": 341,
     "method": "PUT",
-    "middlewareNames": [
-      "updateBuiltinPrompt"
-    ],
+    "middlewareNames": ["updateBuiltinPrompt"],
     "path": "/prompts/:id",
     "rawPath": "'/prompts/:id'",
     "routerName": "authenticatedRouter",
@@ -1133,9 +980,7 @@
     "includeInCoverage": true,
     "line": 376,
     "method": "GET",
-    "middlewareNames": [
-      "getAllRegistryServers"
-    ],
+    "middlewareNames": ["getAllRegistryServers"],
     "path": "/registry/servers",
     "rawPath": "'/registry/servers'",
     "routerName": "authenticatedRouter",
@@ -1148,9 +993,7 @@
     "includeInCoverage": true,
     "line": 378,
     "method": "GET",
-    "middlewareNames": [
-      "getRegistryServerVersion"
-    ],
+    "middlewareNames": ["getRegistryServerVersion"],
     "path": "/registry/servers/version",
     "rawPath": "'/registry/servers/version'",
     "routerName": "authenticatedRouter",
@@ -1163,9 +1006,7 @@
     "includeInCoverage": true,
     "line": 377,
     "method": "GET",
-    "middlewareNames": [
-      "getRegistryServerVersions"
-    ],
+    "middlewareNames": ["getRegistryServerVersions"],
     "path": "/registry/servers/versions",
     "rawPath": "'/registry/servers/versions'",
     "routerName": "authenticatedRouter",
@@ -1178,9 +1019,7 @@
     "includeInCoverage": true,
     "line": 345,
     "method": "GET",
-    "middlewareNames": [
-      "listBuiltinResources"
-    ],
+    "middlewareNames": ["listBuiltinResources"],
     "path": "/resources",
     "rawPath": "'/resources'",
     "routerName": "authenticatedRouter",
@@ -1193,9 +1032,7 @@
     "includeInCoverage": true,
     "line": 347,
     "method": "POST",
-    "middlewareNames": [
-      "createBuiltinResource"
-    ],
+    "middlewareNames": ["createBuiltinResource"],
     "path": "/resources",
     "rawPath": "'/resources'",
     "routerName": "authenticatedRouter",
@@ -1208,9 +1045,7 @@
     "includeInCoverage": true,
     "line": 349,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteBuiltinResource"
-    ],
+    "middlewareNames": ["deleteBuiltinResource"],
     "path": "/resources/:id",
     "rawPath": "'/resources/:id'",
     "routerName": "authenticatedRouter",
@@ -1223,9 +1058,7 @@
     "includeInCoverage": true,
     "line": 346,
     "method": "GET",
-    "middlewareNames": [
-      "getBuiltinResource"
-    ],
+    "middlewareNames": ["getBuiltinResource"],
     "path": "/resources/:id",
     "rawPath": "'/resources/:id'",
     "routerName": "authenticatedRouter",
@@ -1238,9 +1071,7 @@
     "includeInCoverage": true,
     "line": 348,
     "method": "PUT",
-    "middlewareNames": [
-      "updateBuiltinResource"
-    ],
+    "middlewareNames": ["updateBuiltinResource"],
     "path": "/resources/:id",
     "rawPath": "'/resources/:id'",
     "routerName": "authenticatedRouter",
@@ -1253,9 +1084,7 @@
     "includeInCoverage": true,
     "line": 350,
     "method": "POST",
-    "middlewareNames": [
-      "readResource"
-    ],
+    "middlewareNames": ["readResource"],
     "path": "/resources/read",
     "rawPath": "'/resources/read'",
     "routerName": "authenticatedRouter",
@@ -1268,9 +1097,7 @@
     "includeInCoverage": true,
     "line": 225,
     "method": "GET",
-    "middlewareNames": [
-      "getAllServers"
-    ],
+    "middlewareNames": ["getAllServers"],
     "path": "/servers",
     "rawPath": "'/servers'",
     "routerName": "authenticatedRouter",
@@ -1283,9 +1110,7 @@
     "includeInCoverage": true,
     "line": 228,
     "method": "POST",
-    "middlewareNames": [
-      "createServer"
-    ],
+    "middlewareNames": ["createServer"],
     "path": "/servers",
     "rawPath": "'/servers'",
     "routerName": "authenticatedRouter",
@@ -1298,9 +1123,7 @@
     "includeInCoverage": true,
     "line": 231,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteServer"
-    ],
+    "middlewareNames": ["deleteServer"],
     "path": "/servers/:name",
     "rawPath": "'/servers/:name'",
     "routerName": "authenticatedRouter",
@@ -1313,9 +1136,7 @@
     "includeInCoverage": true,
     "line": 226,
     "method": "GET",
-    "middlewareNames": [
-      "getServerConfig"
-    ],
+    "middlewareNames": ["getServerConfig"],
     "path": "/servers/:name",
     "rawPath": "'/servers/:name'",
     "routerName": "authenticatedRouter",
@@ -1328,9 +1149,7 @@
     "includeInCoverage": true,
     "line": 230,
     "method": "PUT",
-    "middlewareNames": [
-      "updateServer"
-    ],
+    "middlewareNames": ["updateServer"],
     "path": "/servers/:name",
     "rawPath": "'/servers/:name'",
     "routerName": "authenticatedRouter",
@@ -1343,9 +1162,7 @@
     "includeInCoverage": true,
     "line": 233,
     "method": "POST",
-    "middlewareNames": [
-      "reloadServer"
-    ],
+    "middlewareNames": ["reloadServer"],
     "path": "/servers/:name/reload",
     "rawPath": "'/servers/:name/reload'",
     "routerName": "authenticatedRouter",
@@ -1358,9 +1175,7 @@
     "includeInCoverage": true,
     "line": 232,
     "method": "POST",
-    "middlewareNames": [
-      "toggleServer"
-    ],
+    "middlewareNames": ["toggleServer"],
     "path": "/servers/:name/toggle",
     "rawPath": "'/servers/:name/toggle'",
     "routerName": "authenticatedRouter",
@@ -1373,9 +1188,7 @@
     "includeInCoverage": true,
     "line": 248,
     "method": "DELETE",
-    "middlewareNames": [
-      "resetPromptDescription"
-    ],
+    "middlewareNames": ["resetPromptDescription"],
     "path": "/servers/:serverName/prompts/:promptName/description",
     "rawPath": "'/servers/:serverName/prompts/:promptName/description'",
     "routerName": "authenticatedRouter",
@@ -1388,9 +1201,7 @@
     "includeInCoverage": true,
     "line": 244,
     "method": "PUT",
-    "middlewareNames": [
-      "updatePromptDescription"
-    ],
+    "middlewareNames": ["updatePromptDescription"],
     "path": "/servers/:serverName/prompts/:promptName/description",
     "rawPath": "'/servers/:serverName/prompts/:promptName/description'",
     "routerName": "authenticatedRouter",
@@ -1403,9 +1214,7 @@
     "includeInCoverage": true,
     "line": 243,
     "method": "POST",
-    "middlewareNames": [
-      "togglePrompt"
-    ],
+    "middlewareNames": ["togglePrompt"],
     "path": "/servers/:serverName/prompts/:promptName/toggle",
     "rawPath": "'/servers/:serverName/prompts/:promptName/toggle'",
     "routerName": "authenticatedRouter",
@@ -1418,9 +1227,7 @@
     "includeInCoverage": true,
     "line": 257,
     "method": "DELETE",
-    "middlewareNames": [
-      "resetResourceDescription"
-    ],
+    "middlewareNames": ["resetResourceDescription"],
     "path": "/servers/:serverName/resources/:resourceUri/description",
     "rawPath": "'/servers/:serverName/resources/:resourceUri/description'",
     "routerName": "authenticatedRouter",
@@ -1433,9 +1240,7 @@
     "includeInCoverage": true,
     "line": 253,
     "method": "PUT",
-    "middlewareNames": [
-      "updateResourceDescription"
-    ],
+    "middlewareNames": ["updateResourceDescription"],
     "path": "/servers/:serverName/resources/:resourceUri/description",
     "rawPath": "'/servers/:serverName/resources/:resourceUri/description'",
     "routerName": "authenticatedRouter",
@@ -1448,9 +1253,7 @@
     "includeInCoverage": true,
     "line": 252,
     "method": "POST",
-    "middlewareNames": [
-      "toggleResource"
-    ],
+    "middlewareNames": ["toggleResource"],
     "path": "/servers/:serverName/resources/:resourceUri/toggle",
     "rawPath": "'/servers/:serverName/resources/:resourceUri/toggle'",
     "routerName": "authenticatedRouter",
@@ -1463,9 +1266,7 @@
     "includeInCoverage": true,
     "line": 239,
     "method": "DELETE",
-    "middlewareNames": [
-      "resetToolDescription"
-    ],
+    "middlewareNames": ["resetToolDescription"],
     "path": "/servers/:serverName/tools/:toolName/description",
     "rawPath": "'/servers/:serverName/tools/:toolName/description'",
     "routerName": "authenticatedRouter",
@@ -1478,9 +1279,7 @@
     "includeInCoverage": true,
     "line": 235,
     "method": "PUT",
-    "middlewareNames": [
-      "updateToolDescription"
-    ],
+    "middlewareNames": ["updateToolDescription"],
     "path": "/servers/:serverName/tools/:toolName/description",
     "rawPath": "'/servers/:serverName/tools/:toolName/description'",
     "routerName": "authenticatedRouter",
@@ -1493,9 +1292,7 @@
     "includeInCoverage": true,
     "line": 234,
     "method": "POST",
-    "middlewareNames": [
-      "toggleTool"
-    ],
+    "middlewareNames": ["toggleTool"],
     "path": "/servers/:serverName/tools/:toolName/toggle",
     "rawPath": "'/servers/:serverName/tools/:toolName/toggle'",
     "routerName": "authenticatedRouter",
@@ -1508,9 +1305,7 @@
     "includeInCoverage": true,
     "line": 229,
     "method": "POST",
-    "middlewareNames": [
-      "batchCreateServers"
-    ],
+    "middlewareNames": ["batchCreateServers"],
     "path": "/servers/batch",
     "rawPath": "'/servers/batch'",
     "routerName": "authenticatedRouter",
@@ -1523,9 +1318,7 @@
     "includeInCoverage": true,
     "line": 227,
     "method": "GET",
-    "middlewareNames": [
-      "getAllSettings"
-    ],
+    "middlewareNames": ["getAllSettings"],
     "path": "/settings",
     "rawPath": "'/settings'",
     "routerName": "authenticatedRouter",
@@ -1538,9 +1331,7 @@
     "includeInCoverage": true,
     "line": 261,
     "method": "PUT",
-    "middlewareNames": [
-      "updateSystemConfig"
-    ],
+    "middlewareNames": ["updateSystemConfig"],
     "path": "/system-config",
     "rawPath": "'/system-config'",
     "routerName": "authenticatedRouter",
@@ -1553,11 +1344,7 @@
     "includeInCoverage": true,
     "line": 322,
     "method": "POST",
-    "middlewareNames": [
-      "templateRateLimiter",
-      "auth",
-      "exportConfigTemplate"
-    ],
+    "middlewareNames": ["templateRateLimiter", "auth", "exportConfigTemplate"],
     "path": "/templates/export",
     "rawPath": "'/templates/export'",
     "routerName": "authenticatedRouter",
@@ -1570,11 +1357,7 @@
     "includeInCoverage": true,
     "line": 323,
     "method": "GET",
-    "middlewareNames": [
-      "templateRateLimiter",
-      "auth",
-      "exportGroupAsTemplate"
-    ],
+    "middlewareNames": ["templateRateLimiter", "auth", "exportGroupAsTemplate"],
     "path": "/templates/export/groups/:id",
     "rawPath": "'/templates/export/groups/:id'",
     "routerName": "authenticatedRouter",
@@ -1587,11 +1370,7 @@
     "includeInCoverage": true,
     "line": 329,
     "method": "POST",
-    "middlewareNames": [
-      "templateRateLimiter",
-      "auth",
-      "importConfigTemplate"
-    ],
+    "middlewareNames": ["templateRateLimiter", "auth", "importConfigTemplate"],
     "path": "/templates/import",
     "rawPath": "'/templates/import'",
     "routerName": "authenticatedRouter",
@@ -1604,9 +1383,7 @@
     "includeInCoverage": true,
     "line": 451,
     "method": "GET",
-    "middlewareNames": [
-      "executeToolViaOpenAPI"
-    ],
+    "middlewareNames": ["executeToolViaOpenAPI"],
     "path": "/api/tools/:serverName/:toolName",
     "rawPath": "`${config.basePath}/api/tools/:serverName/:toolName`",
     "routerName": "app",
@@ -1619,9 +1396,7 @@
     "includeInCoverage": true,
     "line": 452,
     "method": "POST",
-    "middlewareNames": [
-      "executeToolViaOpenAPI"
-    ],
+    "middlewareNames": ["executeToolViaOpenAPI"],
     "path": "/api/tools/:serverName/:toolName",
     "rawPath": "`${config.basePath}/api/tools/:serverName/:toolName`",
     "routerName": "app",
@@ -1634,9 +1409,7 @@
     "includeInCoverage": true,
     "line": 332,
     "method": "POST",
-    "middlewareNames": [
-      "callTool"
-    ],
+    "middlewareNames": ["callTool"],
     "path": "/tools/call/:server",
     "rawPath": "'/tools/call/:server'",
     "routerName": "authenticatedRouter",
@@ -1649,9 +1422,7 @@
     "includeInCoverage": true,
     "line": 285,
     "method": "GET",
-    "middlewareNames": [
-      "getUsers"
-    ],
+    "middlewareNames": ["getUsers"],
     "path": "/users",
     "rawPath": "'/users'",
     "routerName": "authenticatedRouter",
@@ -1664,9 +1435,7 @@
     "includeInCoverage": true,
     "line": 287,
     "method": "POST",
-    "middlewareNames": [
-      "createUser"
-    ],
+    "middlewareNames": ["createUser"],
     "path": "/users",
     "rawPath": "'/users'",
     "routerName": "authenticatedRouter",
@@ -1679,9 +1448,7 @@
     "includeInCoverage": true,
     "line": 290,
     "method": "GET",
-    "middlewareNames": [
-      "getUserStats"
-    ],
+    "middlewareNames": ["getUserStats"],
     "path": "/users-stats",
     "rawPath": "'/users-stats'",
     "routerName": "authenticatedRouter",
@@ -1694,9 +1461,7 @@
     "includeInCoverage": true,
     "line": 289,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteExistingUser"
-    ],
+    "middlewareNames": ["deleteExistingUser"],
     "path": "/users/:username",
     "rawPath": "'/users/:username'",
     "routerName": "authenticatedRouter",
@@ -1709,9 +1474,7 @@
     "includeInCoverage": true,
     "line": 286,
     "method": "GET",
-    "middlewareNames": [
-      "getUser"
-    ],
+    "middlewareNames": ["getUser"],
     "path": "/users/:username",
     "rawPath": "'/users/:username'",
     "routerName": "authenticatedRouter",
@@ -1724,9 +1487,7 @@
     "includeInCoverage": true,
     "line": 288,
     "method": "PUT",
-    "middlewareNames": [
-      "updateExistingUser"
-    ],
+    "middlewareNames": ["updateExistingUser"],
     "path": "/users/:username",
     "rawPath": "'/users/:username'",
     "routerName": "authenticatedRouter",
@@ -1739,9 +1500,7 @@
     "includeInCoverage": true,
     "line": 427,
     "method": "GET",
-    "middlewareNames": [
-      "getRuntimeConfig"
-    ],
+    "middlewareNames": ["getRuntimeConfig"],
     "path": "/config",
     "rawPath": "`${config.basePath}/config`",
     "routerName": "app",
@@ -1754,9 +1513,7 @@
     "includeInCoverage": true,
     "line": 441,
     "method": "GET",
-    "middlewareNames": [
-      "listDiscoveryCategories"
-    ],
+    "middlewareNames": ["listDiscoveryCategories"],
     "path": "/discovery/categories",
     "rawPath": "`${config.basePath}/discovery/categories`",
     "routerName": "app",
@@ -1769,9 +1526,7 @@
     "includeInCoverage": true,
     "line": 438,
     "method": "GET",
-    "middlewareNames": [
-      "listDiscoveryServers"
-    ],
+    "middlewareNames": ["listDiscoveryServers"],
     "path": "/discovery/servers",
     "rawPath": "`${config.basePath}/discovery/servers`",
     "routerName": "app",
@@ -1784,9 +1539,7 @@
     "includeInCoverage": true,
     "line": 439,
     "method": "GET",
-    "middlewareNames": [
-      "getDiscoveryServer"
-    ],
+    "middlewareNames": ["getDiscoveryServer"],
     "path": "/discovery/servers/:name",
     "rawPath": "`${config.basePath}/discovery/servers/:name`",
     "routerName": "app",
@@ -1799,9 +1552,7 @@
     "includeInCoverage": true,
     "line": 440,
     "method": "GET",
-    "middlewareNames": [
-      "getDiscoveryServerInstall"
-    ],
+    "middlewareNames": ["getDiscoveryServerInstall"],
     "path": "/discovery/servers/:name/install",
     "rawPath": "`${config.basePath}/discovery/servers/:name/install`",
     "routerName": "app",
@@ -1814,9 +1565,7 @@
     "includeInCoverage": true,
     "line": 442,
     "method": "GET",
-    "middlewareNames": [
-      "listDiscoveryTags"
-    ],
+    "middlewareNames": ["listDiscoveryTags"],
     "path": "/discovery/tags",
     "rawPath": "`${config.basePath}/discovery/tags`",
     "routerName": "app",
@@ -1829,9 +1578,7 @@
     "includeInCoverage": true,
     "line": 194,
     "method": "GET",
-    "middlewareNames": [
-      "healthCheck"
-    ],
+    "middlewareNames": ["healthCheck"],
     "path": "/health",
     "rawPath": "'/health'",
     "routerName": "app",
@@ -1844,10 +1591,7 @@
     "includeInCoverage": true,
     "line": 197,
     "method": "POST",
-    "middlewareNames": [
-      "hostedInternalEventRateLimiter",
-      "receiveHostedInternalEvent"
-    ],
+    "middlewareNames": ["hostedInternalEventRateLimiter", "receiveHostedInternalEvent"],
     "path": "/internal/v1/events",
     "rawPath": "'/internal/v1/events'",
     "routerName": "app",
@@ -1860,10 +1604,7 @@
     "includeInCoverage": true,
     "line": 198,
     "method": "GET",
-    "middlewareNames": [
-      "hostedInternalEventRateLimiter",
-      "getHostedInternalRuntimeCatalog"
-    ],
+    "middlewareNames": ["hostedInternalEventRateLimiter", "getHostedInternalRuntimeCatalog"],
     "path": "/internal/v1/hosted/runtime-catalog",
     "rawPath": "'/internal/v1/hosted/runtime-catalog'",
     "routerName": "app",
@@ -1876,10 +1617,7 @@
     "includeInCoverage": true,
     "line": 208,
     "method": "GET",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "getAuthorize"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "getAuthorize"],
     "path": "/oauth/authorize",
     "rawPath": "'/oauth/authorize'",
     "routerName": "app",
@@ -1892,10 +1630,7 @@
     "includeInCoverage": true,
     "line": 209,
     "method": "POST",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "postAuthorize"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "postAuthorize"],
     "path": "/oauth/authorize",
     "rawPath": "'/oauth/authorize'",
     "routerName": "app",
@@ -1908,9 +1643,7 @@
     "includeInCoverage": true,
     "line": 205,
     "method": "GET",
-    "middlewareNames": [
-      "handleOAuthCallback"
-    ],
+    "middlewareNames": ["handleOAuthCallback"],
     "path": "/oauth/callback",
     "rawPath": "'/oauth/callback'",
     "routerName": "app",
@@ -1923,9 +1656,7 @@
     "includeInCoverage": true,
     "line": 216,
     "method": "POST",
-    "middlewareNames": [
-      "registerClient"
-    ],
+    "middlewareNames": ["registerClient"],
     "path": "/oauth/register",
     "rawPath": "'/oauth/register'",
     "routerName": "app",
@@ -1938,9 +1669,7 @@
     "includeInCoverage": true,
     "line": 219,
     "method": "DELETE",
-    "middlewareNames": [
-      "deleteClientRegistration"
-    ],
+    "middlewareNames": ["deleteClientRegistration"],
     "path": "/oauth/register/:clientId",
     "rawPath": "'/oauth/register/:clientId'",
     "routerName": "app",
@@ -1953,9 +1682,7 @@
     "includeInCoverage": true,
     "line": 217,
     "method": "GET",
-    "middlewareNames": [
-      "getClientConfiguration"
-    ],
+    "middlewareNames": ["getClientConfiguration"],
     "path": "/oauth/register/:clientId",
     "rawPath": "'/oauth/register/:clientId'",
     "routerName": "app",
@@ -1968,9 +1695,7 @@
     "includeInCoverage": true,
     "line": 218,
     "method": "PUT",
-    "middlewareNames": [
-      "updateClientConfiguration"
-    ],
+    "middlewareNames": ["updateClientConfiguration"],
     "path": "/oauth/register/:clientId",
     "rawPath": "'/oauth/register/:clientId'",
     "routerName": "app",
@@ -1983,10 +1708,7 @@
     "includeInCoverage": true,
     "line": 210,
     "method": "POST",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "postToken"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "postToken"],
     "path": "/oauth/token",
     "rawPath": "'/oauth/token'",
     "routerName": "app",
@@ -1999,10 +1721,7 @@
     "includeInCoverage": true,
     "line": 211,
     "method": "GET",
-    "middlewareNames": [
-      "mcpConnectionRateLimiter",
-      "getUserInfo"
-    ],
+    "middlewareNames": ["mcpConnectionRateLimiter", "getUserInfo"],
     "path": "/oauth/userinfo",
     "rawPath": "'/oauth/userinfo'",
     "routerName": "app",
@@ -2015,9 +1734,7 @@
     "includeInCoverage": true,
     "line": 430,
     "method": "GET",
-    "middlewareNames": [
-      "getPublicConfig"
-    ],
+    "middlewareNames": ["getPublicConfig"],
     "path": "/public-config",
     "rawPath": "`${config.basePath}/public-config`",
     "routerName": "app",

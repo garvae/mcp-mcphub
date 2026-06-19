@@ -419,7 +419,7 @@ export const handleOAuthCallback = async (req: Request, res: Response) => {
       }
     } else {
       // No transport available or transport doesn't support finishAuth
-        console.error('Transport does not support finishAuth', { serverName: serverInfo.name });
+      console.error('Transport does not support finishAuth', { serverName: serverInfo.name });
       return res
         .status(500)
         .send(

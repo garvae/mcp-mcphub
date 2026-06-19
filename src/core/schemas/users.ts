@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
-import { identifierSchema, listResponseSchema, mutationResultSchema, passthroughObjectSchema } from './common.js';
+import {
+  identifierSchema,
+  listResponseSchema,
+  mutationResultSchema,
+  passthroughObjectSchema,
+} from './common.js';
 
 export const usernameSchema = identifierSchema;
 export const userSchema = passthroughObjectSchema;

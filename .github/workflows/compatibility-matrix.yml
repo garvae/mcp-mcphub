@@ -3,23 +3,27 @@ name: compatibility-matrix
 on:
   pull_request:
     paths:
-      - 'src/**'
-      - 'scripts/**'
+      - 'src/core/compatibility/**'
+      - 'src/core/coverage/**'
+      - 'src/core/mcphub-client/**'
+      - 'src/mcp/**'
+      - 'src/transports/**'
       - 'tests/integration/**'
-      - 'tests/helpers/**'
+      - 'tests/helpers/upstream-stub.ts'
       - 'config/upstream-compatibility.json'
       - 'docs/compatibility.md'
       - 'docs/upstream-mcphub.md'
-      - 'pnpm-lock.yaml'
-      - 'pnpm-workspace.yaml'
-      - 'tsconfig*.json'
-      - 'vitest*.ts'
+      - 'vitest.integration.config.ts'
+      - '.github/workflows/compatibility-matrix.yml'
   schedule:
     - cron: '17 2 * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
+
+env:
+  NODE_VERSION: '22.13.0'
 
 jobs:
   matrix-config:
@@ -36,8 +40,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: '22.13.0'
-          package-manager-cache: false
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Read compatibility matrix versions
         id: read-matrix
@@ -65,23 +68,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: '22.13.0'
-          package-manager-cache: false
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install pnpm
         run: npm install --global pnpm@11.7.0
-
-      - name: Resolve pnpm store path
-        shell: bash
-        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
-
-      - name: Cache pnpm store
-        uses: actions/cache@v5
-        with:
-          path: ${{ env.PNPM_STORE_PATH }}
-          key: ${{ runner.os }}-node22-pnpm11-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node22-pnpm11-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

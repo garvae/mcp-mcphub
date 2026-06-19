@@ -48,7 +48,9 @@ function normalizeFetchUrl(input: Parameters<typeof fetch>[0]): URL {
   return new URL(input);
 }
 
-function readAuthorizationHeader(headers: RequestInit['headers'] | undefined): string | null | undefined {
+function readAuthorizationHeader(
+  headers: RequestInit['headers'] | undefined,
+): string | null | undefined {
   if (headers === undefined) {
     return undefined;
   }
@@ -145,7 +147,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ currentPassword: 'old', newPassword: 'new' }),
       expectedMethod: 'POST',
       expectedUrl: 'https://mcphub-site.com/api/auth/change-password',
-      invoke: (client) => client.auth.changePassword({ currentPassword: 'old', newPassword: 'new' }),
+      invoke: (client) =>
+        client.auth.changePassword({ currentPassword: 'old', newPassword: 'new' }),
       name: 'changes auth password',
       response: {},
     },
@@ -213,7 +216,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ content: 'Prompt body', name: 'Deploy checklist' }),
       expectedMethod: 'POST',
       expectedUrl: 'https://mcphub-site.com/api/prompts',
-      invoke: (client) => client.builtinPrompts.create({ content: 'Prompt body', name: 'Deploy checklist' }),
+      invoke: (client) =>
+        client.builtinPrompts.create({ content: 'Prompt body', name: 'Deploy checklist' }),
       name: 'creates a built-in prompt',
       response: {},
     },
@@ -242,7 +246,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ content: 'Updated prompt body' }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/prompts/prompt-1',
-      invoke: (client) => client.builtinPrompts.update('prompt-1', { content: 'Updated prompt body' }),
+      invoke: (client) =>
+        client.builtinPrompts.update('prompt-1', { content: 'Updated prompt body' }),
       name: 'updates a built-in prompt',
       response: {},
     },
@@ -250,7 +255,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ mimeType: 'text/plain', name: 'Readme' }),
       expectedMethod: 'POST',
       expectedUrl: 'https://mcphub-site.com/api/resources',
-      invoke: (client) => client.builtinResources.create({ mimeType: 'text/plain', name: 'Readme' }),
+      invoke: (client) =>
+        client.builtinResources.create({ mimeType: 'text/plain', name: 'Readme' }),
       name: 'creates a built-in resource',
       response: {},
     },
@@ -287,7 +293,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ description: 'Updated resource' }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/resources/resource-1',
-      invoke: (client) => client.builtinResources.update('resource-1', { description: 'Updated resource' }),
+      invoke: (client) =>
+        client.builtinResources.update('resource-1', { description: 'Updated resource' }),
       name: 'updates a built-in resource',
       response: {},
     },
@@ -302,7 +309,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ input: { query: 'status' } }),
       expectedMethod: 'POST',
       expectedUrl: 'https://mcphub-site.com/api/cloud/servers/cloud-a/tools/tool-a/call',
-      invoke: (client) => client.cloud.callTool('cloud-a', 'tool-a', { input: { query: 'status' } }),
+      invoke: (client) =>
+        client.cloud.callTool('cloud-a', 'tool-a', { input: { query: 'status' } }),
       name: 'calls a cloud tool',
       response: {},
     },
@@ -504,7 +512,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ tools: ['status'] }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/groups/group-1/server-configs/server-a/tools',
-      invoke: (client) => client.groups.updateServerTools('group-1', 'server-a', { tools: ['status'] }),
+      invoke: (client) =>
+        client.groups.updateServerTools('group-1', 'server-a', { tools: ['status'] }),
       name: 'updates group server tools',
       response: {},
     },
@@ -598,7 +607,11 @@ describe('createMcpHubClient', () => {
       expectedUrl: 'https://mcphub-site.com/api/mcpb/upload',
       invoke: (client) => {
         const formData = new FormData();
-        formData.set('bundle', new Blob(['bundle'], { type: 'application/octet-stream' }), 'bundle.mcpb');
+        formData.set(
+          'bundle',
+          new Blob(['bundle'], { type: 'application/octet-stream' }),
+          'bundle.mcpb',
+        );
         return client.mcpb.upload(formData);
       },
       name: 'uploads an MCPB bundle',
@@ -644,7 +657,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ redirectUris: ['https://example.com/callback'] }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/oauth/clients/client-1',
-      invoke: (client) => client.oauthClients.update('client-1', { redirectUris: ['https://example.com/callback'] }),
+      invoke: (client) =>
+        client.oauthClients.update('client-1', { redirectUris: ['https://example.com/callback'] }),
       name: 'updates an oauth client',
       response: {},
     },
@@ -692,7 +706,8 @@ describe('createMcpHubClient', () => {
     },
     {
       expectedMethod: 'GET',
-      expectedUrl: 'https://mcphub-site.com/api/registry/servers/version?name=server-a&version=1.0.0',
+      expectedUrl:
+        'https://mcphub-site.com/api/registry/servers/version?name=server-a&version=1.0.0',
       invoke: (client) => client.registry.getServerVersion({ name: 'server-a', version: '1.0.0' }),
       name: 'gets a registry server version',
       response: {},
@@ -729,20 +744,25 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ description: 'Visible prompt' }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/servers/server-a/prompts/prompt-a/description',
-      invoke: (client) => client.serverPrompts.updateDescription('server-a', 'prompt-a', { description: 'Visible prompt' }),
+      invoke: (client) =>
+        client.serverPrompts.updateDescription('server-a', 'prompt-a', {
+          description: 'Visible prompt',
+        }),
       name: 'updates a server prompt description',
       response: {},
     },
     {
       expectedMethod: 'DELETE',
-      expectedUrl: 'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/description',
+      expectedUrl:
+        'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/description',
       invoke: (client) => client.serverResources.resetDescription('server-a', 'file://resource-a'),
       name: 'resets a server resource description',
       response: {},
     },
     {
       expectedMethod: 'POST',
-      expectedUrl: 'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/toggle',
+      expectedUrl:
+        'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/toggle',
       invoke: (client) => client.serverResources.toggle('server-a', 'file://resource-a'),
       name: 'toggles a server resource',
       response: {},
@@ -750,8 +770,12 @@ describe('createMcpHubClient', () => {
     {
       expectedBody: JSON.stringify({ description: 'Readable resource' }),
       expectedMethod: 'PUT',
-      expectedUrl: 'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/description',
-      invoke: (client) => client.serverResources.updateDescription('server-a', 'file://resource-a', { description: 'Readable resource' }),
+      expectedUrl:
+        'https://mcphub-site.com/api/servers/server-a/resources/file%3A%2F%2Fresource-a/description',
+      invoke: (client) =>
+        client.serverResources.updateDescription('server-a', 'file://resource-a', {
+          description: 'Readable resource',
+        }),
       name: 'updates a server resource description',
       response: {},
     },
@@ -832,7 +856,8 @@ describe('createMcpHubClient', () => {
       expectedBody: JSON.stringify({ description: 'Visible tool' }),
       expectedMethod: 'PUT',
       expectedUrl: 'https://mcphub-site.com/api/servers/server-a/tools/tool-a/description',
-      invoke: (client) => client.serverTools.updateDescription('server-a', 'tool-a', { description: 'Visible tool' }),
+      invoke: (client) =>
+        client.serverTools.updateDescription('server-a', 'tool-a', { description: 'Visible tool' }),
       name: 'updates a server tool description',
       response: {},
     },
@@ -925,40 +950,43 @@ describe('createMcpHubClient', () => {
       name: 'updates a user',
       response: {},
     },
-  ])('$name', async ({ expectedBody, expectedBodyKind, expectedMethod, expectedUrl, invoke, response }) => {
-    let capturedCall: [Parameters<typeof fetch>[0], Parameters<typeof fetch>[1]?] | undefined;
-    const fetchMock = vi.fn<typeof fetch>((input, init) => {
-      capturedCall = [input, init];
-      return Promise.resolve(createJsonResponse(response));
-    });
-    const client = createClient(fetchMock);
+  ])(
+    '$name',
+    async ({ expectedBody, expectedBodyKind, expectedMethod, expectedUrl, invoke, response }) => {
+      let capturedCall: [Parameters<typeof fetch>[0], Parameters<typeof fetch>[1]?] | undefined;
+      const fetchMock = vi.fn<typeof fetch>((input, init) => {
+        capturedCall = [input, init];
+        return Promise.resolve(createJsonResponse(response));
+      });
+      const client = createClient(fetchMock);
 
-    await invoke(client);
+      await invoke(client);
 
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    if (capturedCall === undefined) {
-      throw new Error('Expected fetch to be called.');
-    }
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      if (capturedCall === undefined) {
+        throw new Error('Expected fetch to be called.');
+      }
 
-    const requestUrl: Parameters<typeof fetch>[0] = capturedCall[0];
-    const requestInit: RequestInit | undefined = capturedCall[1];
-    const actualUrl = normalizeFetchUrl(requestUrl);
-    const normalizedExpectedUrl = new URL(expectedUrl);
+      const requestUrl: Parameters<typeof fetch>[0] = capturedCall[0];
+      const requestInit: RequestInit | undefined = capturedCall[1];
+      const actualUrl = normalizeFetchUrl(requestUrl);
+      const normalizedExpectedUrl = new URL(expectedUrl);
 
-    expect(actualUrl.origin).toBe(normalizedExpectedUrl.origin);
-    expect(actualUrl.pathname).toBe(normalizedExpectedUrl.pathname);
-    expect(Array.from(actualUrl.searchParams.entries()).sort()).toEqual(
-      Array.from(normalizedExpectedUrl.searchParams.entries()).sort(),
-    );
-    expect(requestInit?.method).toBe(expectedMethod);
-    expect(readAuthorizationHeader(requestInit?.headers)).toBe('Bearer x');
+      expect(actualUrl.origin).toBe(normalizedExpectedUrl.origin);
+      expect(actualUrl.pathname).toBe(normalizedExpectedUrl.pathname);
+      expect(Array.from(actualUrl.searchParams.entries()).sort()).toEqual(
+        Array.from(normalizedExpectedUrl.searchParams.entries()).sort(),
+      );
+      expect(requestInit?.method).toBe(expectedMethod);
+      expect(readAuthorizationHeader(requestInit?.headers)).toBe('Bearer x');
 
-    if (expectedBodyKind === 'form-data') {
-      expect(requestInit?.body).toBeInstanceOf(FormData);
-    } else if (expectedBody === undefined) {
-      expect(requestInit?.body).toBeUndefined();
-    } else {
-      expect(requestInit?.body).toBe(expectedBody);
-    }
-  });
+      if (expectedBodyKind === 'form-data') {
+        expect(requestInit?.body).toBeInstanceOf(FormData);
+      } else if (expectedBody === undefined) {
+        expect(requestInit?.body).toBeUndefined();
+      } else {
+        expect(requestInit?.body).toBe(expectedBody);
+      }
+    },
+  );
 });

@@ -65,15 +65,22 @@ export const createBearerKey = async (req: Request, res: Response): Promise<void
       return;
     }
 
-    const { name, enabled, kind: requestedKind, owner, accessType, allowedGroups, allowedServers } =
-      req.body as Partial<BearerKey>;
+    const {
+      name,
+      enabled,
+      kind: requestedKind,
+      owner,
+      accessType,
+      allowedGroups,
+      allowedServers,
+    } = req.body as Partial<BearerKey>;
 
     if (!name || typeof name !== 'string') {
       res.status(400).json({ success: false, message: 'Key name is required' });
       return;
     }
 
-    const kind: BearerKeyKind = user.isAdmin ? requestedKind ?? 'system' : 'user';
+    const kind: BearerKeyKind = user.isAdmin ? (requestedKind ?? 'system') : 'user';
     if (!['system', 'user'].includes(kind)) {
       res.status(400).json({ success: false, message: 'Invalid key kind' });
       return;
@@ -103,10 +110,8 @@ export const createBearerKey = async (req: Request, res: Response): Promise<void
       kind,
       owner: resolvedOwner,
       accessType: resolvedAccessType ?? 'all',
-      allowedGroups:
-        kind === 'system' && Array.isArray(allowedGroups) ? allowedGroups : [],
-      allowedServers:
-        kind === 'system' && Array.isArray(allowedServers) ? allowedServers : [],
+      allowedGroups: kind === 'system' && Array.isArray(allowedGroups) ? allowedGroups : [],
+      allowedServers: kind === 'system' && Array.isArray(allowedServers) ? allowedServers : [],
     });
 
     res.status(201).json({

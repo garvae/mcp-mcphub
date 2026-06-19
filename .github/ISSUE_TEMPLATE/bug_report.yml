@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a reproducible defect in the MCP server
-title: "[Bug] "
+title: '[Bug] '
 labels:
   - bug
   - needs-repro
@@ -90,7 +90,7 @@ body:
   - type: textarea
     id: doctor_json
     attributes:
-      label: `doctor --json` output
+      label: '`doctor --json` output'
       description: Redact secrets before pasting.
       render: json
   - type: textarea

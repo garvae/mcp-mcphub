@@ -60,7 +60,8 @@ export const mcpHubProfileSchema = z
       (profile.oauthClientId !== undefined || profile.oauthClientIdEnv !== undefined) &&
       (profile.oauthClientSecret !== undefined || profile.oauthClientSecretEnv !== undefined) &&
       (profile.oauthTokenUrl !== undefined || profile.oauthTokenUrlEnv !== undefined);
-    const hasBetterAuthCookie = profile.betterAuthCookie !== undefined || profile.betterAuthCookieEnv !== undefined;
+    const hasBetterAuthCookie =
+      profile.betterAuthCookie !== undefined || profile.betterAuthCookieEnv !== undefined;
 
     if (!hasToken && !hasJwtCredentials && !hasOAuthCredentials && !hasBetterAuthCookie) {
       context.addIssue({
@@ -139,8 +140,12 @@ export const envSchema = z
     MCPHUB_OAUTH_TOKEN_URL: z.string().min(1).optional(),
     MCPHUB_PASSWORD: z.string().min(1).optional(),
     MCPHUB_PROFILES_JSON: z.string().optional(),
-    MCPHUB_REQUEST_RETRY_ATTEMPTS: positiveIntegerStringSchema.default(DEFAULT_MCPHUB_RETRY_ATTEMPTS),
-    MCPHUB_REQUEST_RETRY_BACKOFF_MS: positiveIntegerStringSchema.default(DEFAULT_MCPHUB_RETRY_BACKOFF_MS),
+    MCPHUB_REQUEST_RETRY_ATTEMPTS: positiveIntegerStringSchema.default(
+      DEFAULT_MCPHUB_RETRY_ATTEMPTS,
+    ),
+    MCPHUB_REQUEST_RETRY_BACKOFF_MS: positiveIntegerStringSchema.default(
+      DEFAULT_MCPHUB_RETRY_BACKOFF_MS,
+    ),
     MCPHUB_REQUEST_TIMEOUT_MS: positiveIntegerStringSchema.default(DEFAULT_MCPHUB_TIMEOUT_MS),
     MCPHUB_TOKEN: z.string().min(1).optional(),
     MCPHUB_TOKEN_KIND: tokenKindSchema.default('bearer'),
@@ -157,7 +162,8 @@ export const envSchema = z
     }
 
     const hasFlatToken = env.MCPHUB_TOKEN !== undefined;
-    const hasFlatJwtCredentials = env.MCPHUB_USERNAME !== undefined && env.MCPHUB_PASSWORD !== undefined;
+    const hasFlatJwtCredentials =
+      env.MCPHUB_USERNAME !== undefined && env.MCPHUB_PASSWORD !== undefined;
     const hasFlatOAuthCredentials =
       env.MCPHUB_OAUTH_CLIENT_ID !== undefined &&
       env.MCPHUB_OAUTH_CLIENT_SECRET !== undefined &&

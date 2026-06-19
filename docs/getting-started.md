@@ -11,12 +11,12 @@ The lightweight local path is the default mental model. Docker is optional.
 
 Use this decision table first:
 
-| Goal | Recommended mode | Why |
-| --- | --- | --- |
-| Connect one local MCP client on your workstation | `stdio` via `npx` | Smallest setup, no listener, no deployment layer |
-| Test the server locally from a browser, curl, or multiple clients | local HTTP via `npx` | Easy inspection and local debugging |
-| Run the server as a shared internal service | HTTP behind a reverse proxy | Stable network endpoint, token mapping, profile segmentation |
-| Package it for CI, Compose, or server deployment | Docker | Reproducible runtime and easier ops workflows |
+| Goal                                                              | Recommended mode            | Why                                                          |
+| ----------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------ |
+| Connect one local MCP client on your workstation                  | `stdio` via `npx`           | Smallest setup, no listener, no deployment layer             |
+| Test the server locally from a browser, curl, or multiple clients | local HTTP via `npx`        | Easy inspection and local debugging                          |
+| Run the server as a shared internal service                       | HTTP behind a reverse proxy | Stable network endpoint, token mapping, profile segmentation |
+| Package it for CI, Compose, or server deployment                  | Docker                      | Reproducible runtime and easier ops workflows                |
 
 ## Fastest Local Start
 
@@ -42,10 +42,10 @@ Recommended upstream credential:
 
 Minimal variables you actually need for this first run:
 
-| Variable | Required | Why |
-| --- | --- | --- |
-| `MCPHUB_URL` | yes | points this server at the MCPHub instance to manage |
-| `MCPHUB_TOKEN` | yes for bearer mode | authenticates to that MCPHub instance |
+| Variable       | Required            | Why                                                 |
+| -------------- | ------------------- | --------------------------------------------------- |
+| `MCPHUB_URL`   | yes                 | points this server at the MCPHub instance to manage |
+| `MCPHUB_TOKEN` | yes for bearer mode | authenticates to that MCPHub instance               |
 
 Defaults already applied in the normal bearer path:
 
@@ -74,8 +74,8 @@ Default bind:
 
 Additional variable needed for the smallest HTTP setup:
 
-| Variable | Required | Why |
-| --- | --- | --- |
+| Variable                                             | Required                                  | Why                                                                     |
+| ---------------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
 | `MCP_HTTP_AUTH_TOKEN` or `MCP_HTTP_AUTH_TOKENS_JSON` | yes for the default static HTTP auth mode | defines which local inbound token can access which MCP exposure profile |
 
 Important distinction:
@@ -119,12 +119,12 @@ The server exposes:
 
 ## Exposure Profiles
 
-| Profile | What it is for |
-| --- | --- |
-| `safe` | read-only inventory and diagnostics |
-| `ops` | reversible operational actions |
+| Profile | What it is for                                          |
+| ------- | ------------------------------------------------------- |
+| `safe`  | read-only inventory and diagnostics                     |
+| `ops`   | reversible operational actions                          |
 | `admin` | administrative CRUD and sensitive control-plane actions |
-| `all` | maximum supported API surface |
+| `all`   | maximum supported API surface                           |
 
 The practical guidance is simple:
 

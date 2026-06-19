@@ -37,15 +37,15 @@ Add `MCP_HTTP_AUTH_TOKEN` or `MCP_HTTP_AUTH_TOKENS_JSON` only when you run HTTP 
 
 These are the variables that matter for the normal single-upstream setup:
 
-| Variable | Required | What it is | Where to get it |
-| --- | --- | --- | --- |
-| `MCPHUB_URL` | yes | Base URL of the MCPHub instance to manage | MCPHub site URL, reverse proxy URL, ingress URL, or internal service URL |
+| Variable       | Required            | What it is                                                    | Where to get it                                                            |
+| -------------- | ------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `MCPHUB_URL`   | yes                 | Base URL of the MCPHub instance to manage                     | MCPHub site URL, reverse proxy URL, ingress URL, or internal service URL   |
 | `MCPHUB_TOKEN` | yes for bearer mode | Static credential used by this server to call upstream MCPHub | Create a bearer/system token in MCPHub or obtain it from your secret store |
 
 ### Required only for local HTTP mode
 
-| Variable | Required | What it is | Where to get it |
-| --- | --- | --- | --- |
+| Variable                                             | Required                           | What it is                                                               | Where to get it                                  |
+| ---------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------ |
 | `MCP_HTTP_AUTH_TOKEN` or `MCP_HTTP_AUTH_TOKENS_JSON` | yes for default `static` HTTP auth | Inbound token or token map for clients calling this MCP server over HTTP | You define and store these local tokens yourself |
 
 ### Optional for specialized setups
@@ -60,21 +60,21 @@ Everything else is optional and exists for one of these reasons:
 
 ## Upstream MCPHub Connection
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCPHUB_URL` | none | Base URL for a single upstream MCPHub instance |
-| `MCPHUB_TOKEN` | none | Static upstream token |
-| `MCPHUB_TOKEN_KIND` | `bearer` | `bearer` or `jwt` |
-| `MCPHUB_AUTH_HEADER` | `Authorization` | Upstream auth header selection |
-| `MCPHUB_USERNAME` | none | Username for JWT login mode |
-| `MCPHUB_PASSWORD` | none | Password for JWT login mode |
-| `MCPHUB_OAUTH_CLIENT_ID` | none | OAuth client id for upstream client-credentials mode |
-| `MCPHUB_OAUTH_CLIENT_SECRET` | none | OAuth client secret for upstream client-credentials mode |
-| `MCPHUB_OAUTH_TOKEN_URL` | none | OAuth token endpoint for upstream client-credentials mode |
-| `MCPHUB_OAUTH_SCOPE` | none | Optional upstream OAuth scope |
-| `MCPHUB_BETTER_AUTH_COOKIE` | none | Existing MCPHub Better Auth session cookie for passthrough mode |
-| `MCPHUB_PROFILES_JSON` | none | Named upstream profiles for multi-instance usage |
-| `MCPHUB_DEFAULT_PROFILE` | `default` | Default entry from `MCPHUB_PROFILES_JSON` |
+| Variable                     | Default         | Purpose                                                         |
+| ---------------------------- | --------------- | --------------------------------------------------------------- |
+| `MCPHUB_URL`                 | none            | Base URL for a single upstream MCPHub instance                  |
+| `MCPHUB_TOKEN`               | none            | Static upstream token                                           |
+| `MCPHUB_TOKEN_KIND`          | `bearer`        | `bearer` or `jwt`                                               |
+| `MCPHUB_AUTH_HEADER`         | `Authorization` | Upstream auth header selection                                  |
+| `MCPHUB_USERNAME`            | none            | Username for JWT login mode                                     |
+| `MCPHUB_PASSWORD`            | none            | Password for JWT login mode                                     |
+| `MCPHUB_OAUTH_CLIENT_ID`     | none            | OAuth client id for upstream client-credentials mode            |
+| `MCPHUB_OAUTH_CLIENT_SECRET` | none            | OAuth client secret for upstream client-credentials mode        |
+| `MCPHUB_OAUTH_TOKEN_URL`     | none            | OAuth token endpoint for upstream client-credentials mode       |
+| `MCPHUB_OAUTH_SCOPE`         | none            | Optional upstream OAuth scope                                   |
+| `MCPHUB_BETTER_AUTH_COOKIE`  | none            | Existing MCPHub Better Auth session cookie for passthrough mode |
+| `MCPHUB_PROFILES_JSON`       | none            | Named upstream profiles for multi-instance usage                |
+| `MCPHUB_DEFAULT_PROFILE`     | `default`       | Default entry from `MCPHUB_PROFILES_JSON`                       |
 
 Detailed guidance:
 
@@ -90,11 +90,11 @@ Detailed guidance:
 
 ## Request Behavior
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCPHUB_REQUEST_TIMEOUT_MS` | `30000` | Timeout for one upstream HTTP request |
-| `MCPHUB_REQUEST_RETRY_ATTEMPTS` | `2` | Retry count for transient upstream failures |
-| `MCPHUB_REQUEST_RETRY_BACKOFF_MS` | `250` | Delay between retries in milliseconds |
+| Variable                          | Default | Purpose                                     |
+| --------------------------------- | ------- | ------------------------------------------- |
+| `MCPHUB_REQUEST_TIMEOUT_MS`       | `30000` | Timeout for one upstream HTTP request       |
+| `MCPHUB_REQUEST_RETRY_ATTEMPTS`   | `2`     | Retry count for transient upstream failures |
+| `MCPHUB_REQUEST_RETRY_BACKOFF_MS` | `250`   | Delay between retries in milliseconds       |
 
 What most users need:
 
@@ -102,13 +102,13 @@ What most users need:
 
 ## MCP Exposure
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCP_DEFAULT_EXPOSURE` | `safe` | Default stdio exposure profile |
-| `MCP_EXPOSE_ENDPOINTS` | `safe,ops,admin,all` | HTTP profiles to expose |
-| `MCP_FORCE_READONLY` | `false` | Force read-only behavior even on elevated profiles |
-| `MCP_REDACT_SECRETS` | `true` | Enable output redaction |
-| `MCP_LOG_LEVEL` | `info` | `debug`, `info`, `warn`, `error` |
+| Variable               | Default              | Purpose                                            |
+| ---------------------- | -------------------- | -------------------------------------------------- |
+| `MCP_DEFAULT_EXPOSURE` | `safe`               | Default stdio exposure profile                     |
+| `MCP_EXPOSE_ENDPOINTS` | `safe,ops,admin,all` | HTTP profiles to expose                            |
+| `MCP_FORCE_READONLY`   | `false`              | Force read-only behavior even on elevated profiles |
+| `MCP_REDACT_SECRETS`   | `true`               | Enable output redaction                            |
+| `MCP_LOG_LEVEL`        | `info`               | `debug`, `info`, `warn`, `error`                   |
 
 Practical meaning:
 
@@ -120,11 +120,11 @@ Practical meaning:
 
 ## Audit Logging
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCP_AUDIT_FILE` | none | Optional NDJSON audit log file |
-| `MCP_AUDIT_MAX_BYTES` | `1048576` | Rotate audit file after this size |
-| `MCP_AUDIT_MAX_FILES` | `5` | Number of rotated audit files to retain |
+| Variable              | Default   | Purpose                                 |
+| --------------------- | --------- | --------------------------------------- |
+| `MCP_AUDIT_FILE`      | none      | Optional NDJSON audit log file          |
+| `MCP_AUDIT_MAX_BYTES` | `1048576` | Rotate audit file after this size       |
+| `MCP_AUDIT_MAX_FILES` | `5`       | Number of rotated audit files to retain |
 
 Use audit logging when:
 
@@ -136,26 +136,26 @@ Skip it when:
 
 ## HTTP Transport
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCP_HTTP_HOST` | `127.0.0.1` | HTTP bind host |
-| `MCP_HTTP_PORT` | `7345` | HTTP bind port |
-| `MCP_HTTP_MODE` | `stateful` | `stateful` for `2025-11-25`, `stateless` for `2026-07-28` |
-| `MCP_HTTP_AUTH_MODE` | `static` | `static`, `oauth`, `better-auth`, or `hybrid` |
-| `MCP_HTTP_AUTH_TOKEN` | none | Single inbound bearer token shortcut for the default static mode |
-| `MCP_HTTP_AUTH_EXPOSURE` | `safe` | Profile granted by `MCP_HTTP_AUTH_TOKEN` |
-| `MCP_HTTP_AUTH_TOKENS_JSON` | none | Bearer token to profile mapping |
-| `MCP_HTTP_OAUTH_INTROSPECTION_URL` | none | OAuth introspection endpoint for HTTP client tokens |
-| `MCP_HTTP_OAUTH_CLIENT_ID` | none | Optional OAuth client id used when introspecting HTTP client tokens |
-| `MCP_HTTP_OAUTH_CLIENT_SECRET` | none | Optional OAuth client secret used when introspecting HTTP client tokens |
-| `MCP_HTTP_OAUTH_REQUIRED_SCOPE` | none | Optional scope that every introspected HTTP client token must include |
-| `MCP_HTTP_OAUTH_EXPOSURE_FALLBACK` | `safe` | Fallback profile when introspection does not return `mcp_profile` |
-| `MCP_HTTP_OAUTH_UPSTREAM_PROFILE` | none | Optional upstream MCPHub profile bound to OAuth-authenticated HTTP clients |
-| `MCP_HTTP_BETTER_AUTH_EXPOSURE` | `safe` | Exposure granted to Better Auth cookie sessions |
-| `MCP_HTTP_BETTER_AUTH_UPSTREAM_PROFILE` | none | Optional upstream MCPHub profile bound to Better Auth sessions |
-| `MCP_HTTP_ALLOWED_HOSTS` | `127.0.0.1,localhost` | Accepted `Host` header values |
-| `MCP_HTTP_ALLOWED_ORIGINS` | empty | Accepted browser origins |
-| `MCP_HTTP_BODY_LIMIT` | `1048576` | Request body limit in bytes |
+| Variable                                | Default               | Purpose                                                                    |
+| --------------------------------------- | --------------------- | -------------------------------------------------------------------------- |
+| `MCP_HTTP_HOST`                         | `127.0.0.1`           | HTTP bind host                                                             |
+| `MCP_HTTP_PORT`                         | `7345`                | HTTP bind port                                                             |
+| `MCP_HTTP_MODE`                         | `stateful`            | `stateful` for `2025-11-25`, `stateless` for `2026-07-28`                  |
+| `MCP_HTTP_AUTH_MODE`                    | `static`              | `static`, `oauth`, `better-auth`, or `hybrid`                              |
+| `MCP_HTTP_AUTH_TOKEN`                   | none                  | Single inbound bearer token shortcut for the default static mode           |
+| `MCP_HTTP_AUTH_EXPOSURE`                | `safe`                | Profile granted by `MCP_HTTP_AUTH_TOKEN`                                   |
+| `MCP_HTTP_AUTH_TOKENS_JSON`             | none                  | Bearer token to profile mapping                                            |
+| `MCP_HTTP_OAUTH_INTROSPECTION_URL`      | none                  | OAuth introspection endpoint for HTTP client tokens                        |
+| `MCP_HTTP_OAUTH_CLIENT_ID`              | none                  | Optional OAuth client id used when introspecting HTTP client tokens        |
+| `MCP_HTTP_OAUTH_CLIENT_SECRET`          | none                  | Optional OAuth client secret used when introspecting HTTP client tokens    |
+| `MCP_HTTP_OAUTH_REQUIRED_SCOPE`         | none                  | Optional scope that every introspected HTTP client token must include      |
+| `MCP_HTTP_OAUTH_EXPOSURE_FALLBACK`      | `safe`                | Fallback profile when introspection does not return `mcp_profile`          |
+| `MCP_HTTP_OAUTH_UPSTREAM_PROFILE`       | none                  | Optional upstream MCPHub profile bound to OAuth-authenticated HTTP clients |
+| `MCP_HTTP_BETTER_AUTH_EXPOSURE`         | `safe`                | Exposure granted to Better Auth cookie sessions                            |
+| `MCP_HTTP_BETTER_AUTH_UPSTREAM_PROFILE` | none                  | Optional upstream MCPHub profile bound to Better Auth sessions             |
+| `MCP_HTTP_ALLOWED_HOSTS`                | `127.0.0.1,localhost` | Accepted `Host` header values                                              |
+| `MCP_HTTP_ALLOWED_ORIGINS`              | empty                 | Accepted browser origins                                                   |
+| `MCP_HTTP_BODY_LIMIT`                   | `1048576`             | Request body limit in bytes                                                |
 
 Detailed guidance:
 
@@ -206,13 +206,13 @@ or the object form for one-server, multi-upstream deployments:
 
 ## Dangerous Feature Flags
 
-| Variable | Default | Effect |
-| --- | --- | --- |
-| `ALLOW_SECRET_EXPORT` | `false` | Reserved for future explicit secret-export flows |
+| Variable                    | Default | Effect                                                          |
+| --------------------------- | ------- | --------------------------------------------------------------- |
+| `ALLOW_SECRET_EXPORT`       | `false` | Reserved for future explicit secret-export flows                |
 | `ALLOW_STDIO_SERVER_CREATE` | `false` | Allows upstream server definitions with local command execution |
-| `ALLOW_AUTH_ADMIN_TOOLS` | `false` | Enables bearer-key, OAuth-client, and user admin flows |
-| `ALLOW_MCPB_UPLOAD` | `false` | Enables MCPB bundle uploads |
-| `ALLOW_SYSTEM_CONFIG_WRITE` | `false` | Enables system config writes |
+| `ALLOW_AUTH_ADMIN_TOOLS`    | `false` | Enables bearer-key, OAuth-client, and user admin flows          |
+| `ALLOW_MCPB_UPLOAD`         | `false` | Enables MCPB bundle uploads                                     |
+| `ALLOW_SYSTEM_CONFIG_WRITE` | `false` | Enables system config writes                                    |
 
 These flags are optional and should stay `false` unless you have a specific operational reason:
 
@@ -226,26 +226,26 @@ These flags are optional and should stay `false` unless you have a specific oper
 
 These variables do not affect the runtime server itself. They exist only for repository test suites and release validation.
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `RUN_REAL_MCPHUB_TESTS` | unset | Enables live read-only tests |
-| `RUN_REAL_MCPHUB_MUTATION_TESTS` | unset | Enables live mutation tests |
-| `REAL_TEST_MCPHUB_URL` | none | Dedicated live MCPHub URL used by the test harness |
-| `REAL_TEST_MCPHUB_TOKEN` | none | Dedicated live MCPHub management token used by the test harness |
-| `REAL_TEST_HTTP_AUTH_TOKEN` | `real-safe-token` | Local token used by the temporary HTTP test server |
-| `REAL_TEST_MCPHUB_AUTH_HEADER` | `Authorization` | Upstream auth header override for the live test harness |
-| `REAL_TEST_MCPHUB_TOKEN_KIND` | `bearer` | Upstream auth mode override for the live test harness |
-| `REAL_TEST_MCPHUB_PROFILE` | `MCPHUB_DEFAULT_PROFILE` | Upstream profile selection for multi-profile tests |
-| `REAL_TEST_FIXTURE_PREFIX` | `mcp-mcphub-test` | Prefix used for live mutation fixtures and cleanup |
-| `RELEASE_REAL_TESTS_REQUIRED` | unset | Converts missing live-test secrets from skip into failure inside the release gate |
+| Variable                         | Default                  | Purpose                                                                           |
+| -------------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| `RUN_REAL_MCPHUB_TESTS`          | unset                    | Enables live read-only tests                                                      |
+| `RUN_REAL_MCPHUB_MUTATION_TESTS` | unset                    | Enables live mutation tests                                                       |
+| `REAL_TEST_MCPHUB_URL`           | none                     | Dedicated live MCPHub URL used by the test harness                                |
+| `REAL_TEST_MCPHUB_TOKEN`         | none                     | Dedicated live MCPHub management token used by the test harness                   |
+| `REAL_TEST_HTTP_AUTH_TOKEN`      | `real-safe-token`        | Local token used by the temporary HTTP test server                                |
+| `REAL_TEST_MCPHUB_AUTH_HEADER`   | `Authorization`          | Upstream auth header override for the live test harness                           |
+| `REAL_TEST_MCPHUB_TOKEN_KIND`    | `bearer`                 | Upstream auth mode override for the live test harness                             |
+| `REAL_TEST_MCPHUB_PROFILE`       | `MCPHUB_DEFAULT_PROFILE` | Upstream profile selection for multi-profile tests                                |
+| `REAL_TEST_FIXTURE_PREFIX`       | `mcp-mcphub-test`        | Prefix used for live mutation fixtures and cleanup                                |
+| `RELEASE_REAL_TESTS_REQUIRED`    | unset                    | Converts missing live-test secrets from skip into failure inside the release gate |
 
 Use these only when following [testing.md](./testing.md).
 
 ## Mutation Allowlist
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `MCP_ALLOWED_TARGET_HOSTS` | empty | Optional hostname allowlist for URL-bearing upstream server mutations |
+| Variable                   | Default | Purpose                                                               |
+| -------------------------- | ------- | --------------------------------------------------------------------- |
+| `MCP_ALLOWED_TARGET_HOSTS` | empty   | Optional hostname allowlist for URL-bearing upstream server mutations |
 
 Use `MCP_ALLOWED_TARGET_HOSTS` when:
 

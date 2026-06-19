@@ -21,7 +21,11 @@ import {
 } from '../services/groupService.js';
 
 const isValidCapabilitySelection = (value: unknown): boolean => {
-  return value === undefined || value === 'all' || (Array.isArray(value) && value.every((item) => typeof item === 'string'));
+  return (
+    value === undefined ||
+    value === 'all' ||
+    (Array.isArray(value) && value.every((item) => typeof item === 'string'))
+  );
 };
 
 // Get all groups

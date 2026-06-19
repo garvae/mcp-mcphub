@@ -12,12 +12,12 @@ It should feel lightweight when used as a workstation MCP server, but it also su
 
 ## Mode Summary
 
-| Mode | Best for | Docker required | Network listener |
-| --- | --- | --- | --- |
-| `stdio` | local MCP clients launched as child processes | no | no |
-| local HTTP | local testing or local multi-client use | no | yes |
-| self-hosted HTTP | shared internal service, CI, reverse proxy, automation | no, but often useful | yes |
-| Dockerized HTTP | reproducible deployment and ops workflows | yes, by choice | yes |
+| Mode             | Best for                                               | Docker required      | Network listener |
+| ---------------- | ------------------------------------------------------ | -------------------- | ---------------- |
+| `stdio`          | local MCP clients launched as child processes          | no                   | no               |
+| local HTTP       | local testing or local multi-client use                | no                   | yes              |
+| self-hosted HTTP | shared internal service, CI, reverse proxy, automation | no, but often useful | yes              |
+| Dockerized HTTP  | reproducible deployment and ops workflows              | yes, by choice       | yes              |
 
 ## `stdio`
 

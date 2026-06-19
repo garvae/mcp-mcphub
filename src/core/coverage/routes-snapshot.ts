@@ -14,7 +14,12 @@ const MODULE_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 function loadSnapshotRoutes(): SnapshotRoute[] {
   const candidatePaths = [
     resolve(MODULE_DIRECTORY, '../../fixtures/routes-snapshot', SNAPSHOT_VERSION, 'routes.json'),
-    resolve(MODULE_DIRECTORY, '../../../tests/fixtures/routes-snapshot', SNAPSHOT_VERSION, 'routes.json'),
+    resolve(
+      MODULE_DIRECTORY,
+      '../../../tests/fixtures/routes-snapshot',
+      SNAPSHOT_VERSION,
+      'routes.json',
+    ),
   ];
 
   for (const snapshotFile of candidatePaths) {
@@ -27,7 +32,9 @@ function loadSnapshotRoutes(): SnapshotRoute[] {
     }
   }
 
-  throw new Error(`Could not locate routes snapshot ${SNAPSHOT_VERSION} in runtime fixtures or test fixtures.`);
+  throw new Error(
+    `Could not locate routes snapshot ${SNAPSHOT_VERSION} in runtime fixtures or test fixtures.`,
+  );
 }
 
 export const ROUTES_SNAPSHOT = loadSnapshotRoutes();

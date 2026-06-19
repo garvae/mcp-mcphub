@@ -3,21 +3,51 @@
 import { createRequestClient } from './request.js';
 import type { McpHubClientOptions } from './types.js';
 import { settingsExportSchema, settingsSnapshotSchema } from '../schemas/settings.js';
-import { serverListSchema, serverConfigSchema, serverMutationResultSchema, batchCreateServersSchema } from '../schemas/servers.js';
+import {
+  serverListSchema,
+  serverConfigSchema,
+  serverMutationResultSchema,
+  batchCreateServersSchema,
+} from '../schemas/servers.js';
 import { serverToolMutationResultSchema } from '../schemas/server-tools.js';
 import { serverPromptMutationResultSchema } from '../schemas/server-prompts.js';
 import { serverResourceMutationResultSchema } from '../schemas/server-resources.js';
 import { groupListSchema, groupSchema, groupMutationResultSchema } from '../schemas/groups.js';
-import { userListSchema, userSchema, userStatsSchema, userMutationResultSchema } from '../schemas/users.js';
-import { oauthClientListSchema, oauthClientSchema, oauthClientMutationResultSchema } from '../schemas/oauth-clients.js';
+import {
+  userListSchema,
+  userSchema,
+  userStatsSchema,
+  userMutationResultSchema,
+} from '../schemas/users.js';
+import {
+  oauthClientListSchema,
+  oauthClientSchema,
+  oauthClientMutationResultSchema,
+} from '../schemas/oauth-clients.js';
 import { bearerKeyListSchema, bearerKeyMutationResultSchema } from '../schemas/bearer-keys.js';
-import { activityCleanupResultSchema, activityFiltersSchema, activityListSchema, activitySchema, activityStatsSchema } from '../schemas/activities.js';
+import {
+  activityCleanupResultSchema,
+  activityFiltersSchema,
+  activityListSchema,
+  activitySchema,
+  activityStatsSchema,
+} from '../schemas/activities.js';
 import { logClearResultSchema, logListSchema } from '../schemas/logs.js';
 import { systemConfigUpdateResultSchema } from '../schemas/system.js';
 import { groupCostSchema, serverCostSchema } from '../schemas/cost.js';
 import { templateExportSchema, templateImportResultSchema } from '../schemas/templates.js';
-import { marketCategoryListSchema, marketServerListSchema, marketServerSchema, marketTagListSchema } from '../schemas/market.js';
-import { cloudServerListSchema, cloudServerSchema, cloudToolCallResultSchema, cloudToolListSchema } from '../schemas/cloud.js';
+import {
+  marketCategoryListSchema,
+  marketServerListSchema,
+  marketServerSchema,
+  marketTagListSchema,
+} from '../schemas/market.js';
+import {
+  cloudServerListSchema,
+  cloudServerSchema,
+  cloudToolCallResultSchema,
+  cloudToolListSchema,
+} from '../schemas/cloud.js';
 import { registryServerListSchema, registryVersionSchema } from '../schemas/registry.js';
 import { changelogUpdateInfoSchema } from '../schemas/changelog.js';
 import {
@@ -25,8 +55,16 @@ import {
   downstreamOpenApiServerListSchema,
   downstreamOpenApiStatsSchema,
 } from '../schemas/openapi-introspection.js';
-import { builtinPromptListSchema, builtinPromptMutationResultSchema, builtinPromptSchema } from '../schemas/built-in-prompts.js';
-import { builtinResourceListSchema, builtinResourceMutationResultSchema, builtinResourceSchema } from '../schemas/built-in-resources.js';
+import {
+  builtinPromptListSchema,
+  builtinPromptMutationResultSchema,
+  builtinPromptSchema,
+} from '../schemas/built-in-prompts.js';
+import {
+  builtinResourceListSchema,
+  builtinResourceMutationResultSchema,
+  builtinResourceSchema,
+} from '../schemas/built-in-resources.js';
 import { betterAuthUserSchema } from '../schemas/better-auth.js';
 import { authLoginResultSchema, authUserSchema } from '../schemas/auth-user.js';
 import { mcpbUploadResultSchema } from '../schemas/mcpb.js';
@@ -91,13 +129,22 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async getFilters() {
-        return parseWith(activityFiltersSchema, await request.json({ method: 'GET', path: '/api/activities/filters' }));
+        return parseWith(
+          activityFiltersSchema,
+          await request.json({ method: 'GET', path: '/api/activities/filters' }),
+        );
       },
       async getStats() {
-        return parseWith(activityStatsSchema, await request.json({ method: 'GET', path: '/api/activities/stats' }));
+        return parseWith(
+          activityStatsSchema,
+          await request.json({ method: 'GET', path: '/api/activities/stats' }),
+        );
       },
       async isAvailable() {
-        return parseWith(activitySchema, await request.json({ method: 'GET', path: '/api/activities/available' }));
+        return parseWith(
+          activitySchema,
+          await request.json({ method: 'GET', path: '/api/activities/available' }),
+        );
       },
       async list(query?: Record<string, string | number | undefined>) {
         return parseWith(
@@ -110,11 +157,19 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async changePassword(body: Record<string, unknown>) {
         return parseWith(
           authLoginResultSchema,
-          await request.json({ body, method: 'POST', path: '/api/auth/change-password', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/auth/change-password',
+            idempotent: false,
+          }),
         );
       },
       async getCurrentUser() {
-        return parseWith(authUserSchema, await request.json({ method: 'GET', path: '/api/auth/user' }));
+        return parseWith(
+          authUserSchema,
+          await request.json({ method: 'GET', path: '/api/auth/user' }),
+        );
       },
       async login(body: Record<string, unknown>) {
         return parseWith(
@@ -125,7 +180,12 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async register(body: Record<string, unknown>) {
         return parseWith(
           authLoginResultSchema,
-          await request.json({ body, method: 'POST', path: '/api/auth/register', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/auth/register',
+            idempotent: false,
+          }),
         );
       },
     },
@@ -143,18 +203,28 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async list() {
-        return parseWith(bearerKeyListSchema, await request.json({ method: 'GET', path: '/api/auth/keys' }));
+        return parseWith(
+          bearerKeyListSchema,
+          await request.json({ method: 'GET', path: '/api/auth/keys' }),
+        );
       },
       async update(id: string, body: Record<string, unknown>) {
         return parseWith(
           bearerKeyMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/auth/keys/${encodePathSegment(id)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/auth/keys/${encodePathSegment(id)}`,
+          }),
         );
       },
     },
     betterAuth: {
       async getUser() {
-        return parseWith(betterAuthUserSchema, await request.json({ method: 'GET', path: '/api/better-auth/user' }));
+        return parseWith(
+          betterAuthUserSchema,
+          await request.json({ method: 'GET', path: '/api/better-auth/user' }),
+        );
       },
     },
     builtinPrompts: {
@@ -177,12 +247,19 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async list() {
-        return parseWith(builtinPromptListSchema, await request.json({ method: 'GET', path: '/api/prompts' }));
+        return parseWith(
+          builtinPromptListSchema,
+          await request.json({ method: 'GET', path: '/api/prompts' }),
+        );
       },
       async update(id: string, body: Record<string, unknown>) {
         return parseWith(
           builtinPromptMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/prompts/${encodePathSegment(id)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/prompts/${encodePathSegment(id)}`,
+          }),
         );
       },
     },
@@ -214,13 +291,22 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async read(body: Record<string, unknown>) {
         return parseWith(
           builtinResourceSchema,
-          await request.json({ body, method: 'POST', path: '/api/resources/read', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/resources/read',
+            idempotent: false,
+          }),
         );
       },
       async update(id: string, body: Record<string, unknown>) {
         return parseWith(
           builtinResourceMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/resources/${encodePathSegment(id)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/resources/${encodePathSegment(id)}`,
+          }),
         );
       },
     },
@@ -247,7 +333,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getByCategory(category: string) {
         return parseWith(
           cloudServerListSchema,
-          await request.json({ method: 'GET', path: `/api/cloud/categories/${encodePathSegment(category)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/cloud/categories/${encodePathSegment(category)}`,
+          }),
         );
       },
       async getByTag(tag: string) {
@@ -259,13 +348,19 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getServer(name: string) {
         return parseWith(
           cloudServerSchema,
-          await request.json({ method: 'GET', path: `/api/cloud/servers/${encodePathSegment(name)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/cloud/servers/${encodePathSegment(name)}`,
+          }),
         );
       },
       async getTools(serverName: string) {
         return parseWith(
           cloudToolListSchema,
-          await request.json({ method: 'GET', path: `/api/cloud/servers/${encodePathSegment(serverName)}/tools` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/cloud/servers/${encodePathSegment(serverName)}/tools`,
+          }),
         );
       },
       async listCategories() {
@@ -275,37 +370,59 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async listServers() {
-        return parseWith(cloudServerListSchema, await request.json({ method: 'GET', path: '/api/cloud/servers' }));
+        return parseWith(
+          cloudServerListSchema,
+          await request.json({ method: 'GET', path: '/api/cloud/servers' }),
+        );
       },
       async listTags() {
-        return parseWith(cloudServerListSchema, await request.json({ method: 'GET', path: '/api/cloud/tags' }));
+        return parseWith(
+          cloudServerListSchema,
+          await request.json({ method: 'GET', path: '/api/cloud/tags' }),
+        );
       },
       async search(query: string) {
         return parseWith(
           cloudServerListSchema,
-          await request.json({ method: 'GET', path: '/api/cloud/servers/search', query: { query } }),
+          await request.json({
+            method: 'GET',
+            path: '/api/cloud/servers/search',
+            query: { query },
+          }),
         );
       },
     },
     cost: {
       async getGroupCosts() {
-        return parseWith(groupCostSchema, await request.json({ method: 'GET', path: '/api/cost/groups' }));
+        return parseWith(
+          groupCostSchema,
+          await request.json({ method: 'GET', path: '/api/cost/groups' }),
+        );
       },
       async getServerCosts() {
-        return parseWith(serverCostSchema, await request.json({ method: 'GET', path: '/api/cost/servers' }));
+        return parseWith(
+          serverCostSchema,
+          await request.json({ method: 'GET', path: '/api/cost/servers' }),
+        );
       },
     },
     discovery: {
       async getServer(name: string) {
         return parseWith(
           discoveryServerSchema,
-          await request.json({ method: 'GET', path: `/discovery/servers/${encodePathSegment(name)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/discovery/servers/${encodePathSegment(name)}`,
+          }),
         );
       },
       async getServerInstall(name: string) {
         return parseWith(
           discoveryServerInstallSchema,
-          await request.json({ method: 'GET', path: `/discovery/servers/${encodePathSegment(name)}/install` }),
+          await request.json({
+            method: 'GET',
+            path: `/discovery/servers/${encodePathSegment(name)}/install`,
+          }),
         );
       },
       async listCategories() {
@@ -321,7 +438,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async listTags() {
-        return parseWith(discoveryTagListSchema, await request.json({ method: 'GET', path: '/discovery/tags' }));
+        return parseWith(
+          discoveryTagListSchema,
+          await request.json({ method: 'GET', path: '/discovery/tags' }),
+        );
       },
     },
     groups: {
@@ -339,7 +459,12 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async batchCreate(body: Record<string, unknown>) {
         return parseWith(
           groupMutationResultSchema,
-          await request.json({ body, method: 'POST', path: '/api/groups/batch', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/groups/batch',
+            idempotent: false,
+          }),
         );
       },
       async create(body: Record<string, unknown>) {
@@ -351,7 +476,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async delete(groupId: string) {
         return parseWith(
           groupMutationResultSchema,
-          await request.json({ method: 'DELETE', path: `/api/groups/${encodePathSegment(groupId)}` }),
+          await request.json({
+            method: 'DELETE',
+            path: `/api/groups/${encodePathSegment(groupId)}`,
+          }),
         );
       },
       async get(groupId: string) {
@@ -372,16 +500,25 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getServerConfigs(groupId: string) {
         return parseWith(
           groupListSchema,
-          await request.json({ method: 'GET', path: `/api/groups/${encodePathSegment(groupId)}/server-configs` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/groups/${encodePathSegment(groupId)}/server-configs`,
+          }),
         );
       },
       async list() {
-        return parseWith(groupListSchema, await request.json({ method: 'GET', path: '/api/groups' }));
+        return parseWith(
+          groupListSchema,
+          await request.json({ method: 'GET', path: '/api/groups' }),
+        );
       },
       async listServers(groupId: string) {
         return parseWith(
           groupListSchema,
-          await request.json({ method: 'GET', path: `/api/groups/${encodePathSegment(groupId)}/servers` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/groups/${encodePathSegment(groupId)}/servers`,
+          }),
         );
       },
       async removeServer(groupId: string, serverName: string) {
@@ -396,13 +533,21 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async replaceServers(groupId: string, body: Record<string, unknown>) {
         return parseWith(
           groupMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/groups/${encodePathSegment(groupId)}/servers/batch` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/groups/${encodePathSegment(groupId)}/servers/batch`,
+          }),
         );
       },
       async update(groupId: string, body: Record<string, unknown>) {
         return parseWith(
           groupMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/groups/${encodePathSegment(groupId)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/groups/${encodePathSegment(groupId)}`,
+          }),
         );
       },
       async updateServerTools(groupId: string, serverName: string, body: Record<string, unknown>) {
@@ -423,7 +568,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
     },
     logs: {
       async clear() {
-        return parseWith(logClearResultSchema, await request.json({ method: 'DELETE', path: '/api/logs' }));
+        return parseWith(
+          logClearResultSchema,
+          await request.json({ method: 'DELETE', path: '/api/logs' }),
+        );
       },
       async list() {
         return parseWith(logListSchema, await request.json({ method: 'GET', path: '/api/logs' }));
@@ -436,7 +584,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getByCategory(category: string) {
         return parseWith(
           marketServerListSchema,
-          await request.json({ method: 'GET', path: `/api/market/categories/${encodePathSegment(category)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/market/categories/${encodePathSegment(category)}`,
+          }),
         );
       },
       async getByTag(tag: string) {
@@ -448,7 +599,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getServer(name: string) {
         return parseWith(
           marketServerSchema,
-          await request.json({ method: 'GET', path: `/api/market/servers/${encodePathSegment(name)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/market/servers/${encodePathSegment(name)}`,
+          }),
         );
       },
       async listCategories() {
@@ -458,15 +612,25 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async listServers() {
-        return parseWith(marketServerListSchema, await request.json({ method: 'GET', path: '/api/market/servers' }));
+        return parseWith(
+          marketServerListSchema,
+          await request.json({ method: 'GET', path: '/api/market/servers' }),
+        );
       },
       async listTags() {
-        return parseWith(marketTagListSchema, await request.json({ method: 'GET', path: '/api/market/tags' }));
+        return parseWith(
+          marketTagListSchema,
+          await request.json({ method: 'GET', path: '/api/market/tags' }),
+        );
       },
       async search(query: string) {
         return parseWith(
           marketServerListSchema,
-          await request.json({ method: 'GET', path: '/api/market/servers/search', query: { query } }),
+          await request.json({
+            method: 'GET',
+            path: '/api/market/servers/search',
+            query: { query },
+          }),
         );
       },
     },
@@ -482,7 +646,12 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async upload(formData: FormData) {
         return parseWith(
           mcpbUploadResultSchema,
-          await request.json({ body: formData, method: 'POST', path: '/api/mcpb/upload', idempotent: false }),
+          await request.json({
+            body: formData,
+            method: 'POST',
+            path: '/api/mcpb/upload',
+            idempotent: false,
+          }),
         );
       },
     },
@@ -490,19 +659,30 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async create(body: Record<string, unknown>) {
         return parseWith(
           oauthClientMutationResultSchema,
-          await request.json({ body, method: 'POST', path: '/api/oauth/clients', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/oauth/clients',
+            idempotent: false,
+          }),
         );
       },
       async delete(clientId: string) {
         return parseWith(
           oauthClientMutationResultSchema,
-          await request.json({ method: 'DELETE', path: `/api/oauth/clients/${encodePathSegment(clientId)}` }),
+          await request.json({
+            method: 'DELETE',
+            path: `/api/oauth/clients/${encodePathSegment(clientId)}`,
+          }),
         );
       },
       async get(clientId: string) {
         return parseWith(
           oauthClientSchema,
-          await request.json({ method: 'GET', path: `/api/oauth/clients/${encodePathSegment(clientId)}` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/oauth/clients/${encodePathSegment(clientId)}`,
+          }),
         );
       },
       async list() {
@@ -536,7 +716,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async getGroupSpec(groupName: string) {
         return parseWith(
           downstreamOpenApiSchema,
-          await request.json({ method: 'GET', path: `/api/${encodePathSegment(groupName)}/openapi.json` }),
+          await request.json({
+            method: 'GET',
+            path: `/api/${encodePathSegment(groupName)}/openapi.json`,
+          }),
         );
       },
       async getSpec() {
@@ -606,7 +789,11 @@ export function createMcpHubClient(options: McpHubClientOptions) {
           }),
         );
       },
-      async updateDescription(serverName: string, promptName: string, body: Record<string, unknown>) {
+      async updateDescription(
+        serverName: string,
+        promptName: string,
+        body: Record<string, unknown>,
+      ) {
         return parseWith(
           serverPromptMutationResultSchema,
           await request.json({
@@ -637,7 +824,11 @@ export function createMcpHubClient(options: McpHubClientOptions) {
           }),
         );
       },
-      async updateDescription(serverName: string, resourceUri: string, body: Record<string, unknown>) {
+      async updateDescription(
+        serverName: string,
+        resourceUri: string,
+        body: Record<string, unknown>,
+      ) {
         return parseWith(
           serverResourceMutationResultSchema,
           await request.json({
@@ -679,7 +870,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async list() {
-        return parseWith(serverListSchema, await request.json({ method: 'GET', path: '/api/servers' }));
+        return parseWith(
+          serverListSchema,
+          await request.json({ method: 'GET', path: '/api/servers' }),
+        );
       },
       async reload(name: string) {
         return parseWith(
@@ -704,7 +898,11 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async update(name: string, body: Record<string, unknown>) {
         return parseWith(
           serverMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/servers/${encodePathSegment(name)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/servers/${encodePathSegment(name)}`,
+          }),
         );
       },
     },
@@ -747,7 +945,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async getSnapshot() {
-        return parseWith(settingsSnapshotSchema, await request.json({ method: 'GET', path: '/api/settings' }));
+        return parseWith(
+          settingsSnapshotSchema,
+          await request.json({ method: 'GET', path: '/api/settings' }),
+        );
       },
     },
     system: {
@@ -762,7 +963,12 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async exportConfig(body: Record<string, unknown>) {
         return parseWith(
           templateExportSchema,
-          await request.json({ body, method: 'POST', path: '/api/templates/export', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/templates/export',
+            idempotent: false,
+          }),
         );
       },
       async exportGroup(groupId: string) {
@@ -777,7 +983,12 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async importConfig(body: Record<string, unknown>) {
         return parseWith(
           templateImportResultSchema,
-          await request.json({ body, method: 'POST', path: '/api/templates/import', idempotent: false }),
+          await request.json({
+            body,
+            method: 'POST',
+            path: '/api/templates/import',
+            idempotent: false,
+          }),
         );
       },
     },
@@ -791,7 +1002,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async delete(username: string) {
         return parseWith(
           userMutationResultSchema,
-          await request.json({ method: 'DELETE', path: `/api/users/${encodePathSegment(username)}` }),
+          await request.json({
+            method: 'DELETE',
+            path: `/api/users/${encodePathSegment(username)}`,
+          }),
         );
       },
       async get(username: string) {
@@ -801,7 +1015,10 @@ export function createMcpHubClient(options: McpHubClientOptions) {
         );
       },
       async getStats() {
-        return parseWith(userStatsSchema, await request.json({ method: 'GET', path: '/api/users-stats' }));
+        return parseWith(
+          userStatsSchema,
+          await request.json({ method: 'GET', path: '/api/users-stats' }),
+        );
       },
       async list() {
         return parseWith(userListSchema, await request.json({ method: 'GET', path: '/api/users' }));
@@ -809,7 +1026,11 @@ export function createMcpHubClient(options: McpHubClientOptions) {
       async update(username: string, body: Record<string, unknown>) {
         return parseWith(
           userMutationResultSchema,
-          await request.json({ body, method: 'PUT', path: `/api/users/${encodePathSegment(username)}` }),
+          await request.json({
+            body,
+            method: 'PUT',
+            path: `/api/users/${encodePathSegment(username)}`,
+          }),
         );
       },
     },

@@ -53,7 +53,6 @@ function parseCliArgs(): FetchOptions {
     if (current === '--output-dir' && next !== undefined) {
       options.outputDir = next;
       index += 1;
-      continue;
     }
   }
 
@@ -93,7 +92,11 @@ async function fetchText(url: string): Promise<string> {
   return response.text();
 }
 
-async function writeSnapshotFile(outputDir: string, filePath: string, content: string): Promise<void> {
+async function writeSnapshotFile(
+  outputDir: string,
+  filePath: string,
+  content: string,
+): Promise<void> {
   const targetFile = resolve(outputDir, 'files', filePath);
   const normalizedContent = content.replace(/\r\n/g, '\n').replace(/\n{2,}$/u, '\n');
   await mkdir(dirname(targetFile), { recursive: true });
@@ -106,10 +109,15 @@ async function main(): Promise<void> {
   await mkdir(outputDir, { recursive: true });
 
   const routeSource = await fetchText(toRawGitHubUrl(options.ref, ROUTES_FILE));
-  const filesToFetch = [...new Set([ROUTES_FILE, ...extractLocalImports(routeSource), ...EXTRA_FILES])];
+  const filesToFetch = [
+    ...new Set([ROUTES_FILE, ...extractLocalImports(routeSource), ...EXTRA_FILES]),
+  ];
 
   for (const filePath of filesToFetch) {
-    const content = filePath === ROUTES_FILE ? routeSource : await fetchText(toRawGitHubUrl(options.ref, filePath));
+    const content =
+      filePath === ROUTES_FILE
+        ? routeSource
+        : await fetchText(toRawGitHubUrl(options.ref, filePath));
     await writeSnapshotFile(outputDir, filePath, content);
   }
 
@@ -123,8 +131,16 @@ async function main(): Promise<void> {
     versionLabel: options.versionLabel,
   };
 
-  await writeFile(resolve(outputDir, 'routes.json'), `${JSON.stringify(routes, null, 2)}\n`, 'utf8');
-  await writeFile(resolve(outputDir, 'metadata.json'), `${JSON.stringify(metadata, null, 2)}\n`, 'utf8');
+  await writeFile(
+    resolve(outputDir, 'routes.json'),
+    `${JSON.stringify(routes, null, 2)}\n`,
+    'utf8',
+  );
+  await writeFile(
+    resolve(outputDir, 'metadata.json'),
+    `${JSON.stringify(metadata, null, 2)}\n`,
+    'utf8',
+  );
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

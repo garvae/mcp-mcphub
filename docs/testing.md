@@ -1,27 +1,28 @@
 # Testing
 
-`@garvae/mcp-mcphub` now has four test layers:
+`@garvae/mcp-mcphub` now has five test layers:
 
 1. fast deterministic tests;
 2. local transport integration tests;
-3. ephemeral Docker compatibility tests;
-4. optional live MCPHub tests against a dedicated test instance.
+3. coverage reporting as a separate workflow concern;
+4. ephemeral Docker compatibility tests;
+5. optional live MCPHub tests against a dedicated test instance.
 
-The release path is intentionally stricter than the ordinary PR path.
+The release workflow is intentionally stricter than the ordinary PR path.
 
 ## Command Matrix
 
-| Command | Purpose | Secrets required | Docker required |
-| --- | --- | --- | --- |
-| `pnpm test` | unit tests and default deterministic suites | no | no |
-| `pnpm test:integration` | local `stdio` and Streamable HTTP transport smoke tests | no | no |
-| `pnpm test:coverage-matrix` | route coverage verification | no | no |
-| `pnpm test:compatibility` | real MCPHub containers via `testcontainers` | no | yes |
-| `pnpm test:package:installed` | build, pack, install tarball, and verify the published runtime surface | no | no |
-| `pnpm test:real:readonly` | live `doctor`, `stdio`, `http`, and safe-surface checks against a dedicated MCPHub | yes | no |
-| `pnpm test:real:mutation` | controlled create/delete lifecycle checks on namespaced fixtures | yes | no |
-| `pnpm cleanup:real-fixtures` | best-effort cleanup of live fixture groups | yes | no |
-| `pnpm test:release-gate` | publish-grade validation gate | optional live secrets, depending on policy | yes |
+| Command                       | Purpose                                                                            | Secrets required | Docker required |
+| ----------------------------- | ---------------------------------------------------------------------------------- | ---------------- | --------------- |
+| `pnpm test`                   | unit tests and default deterministic suites                                        | no               | no              |
+| `pnpm test:integration`       | local `stdio` and Streamable HTTP transport smoke tests                            | no               | no              |
+| `pnpm test:coverage-matrix`   | route coverage verification                                                        | no               | no              |
+| `pnpm test:compatibility`     | real MCPHub containers via `testcontainers`                                        | no               | yes             |
+| `pnpm test:coverage`          | coverage report generation for dedicated CI workflow                               | no               | no              |
+| `pnpm test:package:installed` | build, pack, install tarball, and verify the published runtime surface             | no               | no              |
+| `pnpm test:real:readonly`     | live `doctor`, `stdio`, `http`, and safe-surface checks against a dedicated MCPHub | yes              | no              |
+| `pnpm test:real:mutation`     | controlled create/delete lifecycle checks on namespaced fixtures                   | yes              | no              |
+| `pnpm cleanup:real-fixtures`  | best-effort cleanup of live fixture groups                                         | yes              | no              |
 
 ## Fast Local Checks
 
@@ -116,43 +117,40 @@ The cleanup script currently removes groups whose names start with `REAL_TEST_FI
 
 These variables are only for the test harness and release validation. They are not runtime server variables.
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `RUN_REAL_MCPHUB_TESTS` | yes for live read-only suites | opt-in switch for live read-only tests |
-| `RUN_REAL_MCPHUB_MUTATION_TESTS` | yes for mutation suites | opt-in switch for live mutation tests |
-| `REAL_TEST_MCPHUB_URL` | yes | dedicated MCPHub base URL used by the live test harness |
-| `REAL_TEST_MCPHUB_TOKEN` | yes | upstream MCPHub management credential used by the live test harness |
-| `REAL_TEST_HTTP_AUTH_TOKEN` | yes for HTTP live tests | local token used to call the temporary local HTTP MCP server started by the tests |
-| `REAL_TEST_MCPHUB_AUTH_HEADER` | optional | override upstream auth header if the test MCPHub expects `x-auth-token` |
-| `REAL_TEST_MCPHUB_TOKEN_KIND` | optional | override upstream auth mode, defaults to `bearer` |
-| `REAL_TEST_MCPHUB_PROFILE` | optional | choose one upstream profile name for multi-profile setups |
-| `REAL_TEST_FIXTURE_PREFIX` | optional | prefix used for mutation fixtures and cleanup |
-| `RELEASE_REAL_TESTS_REQUIRED` | optional | if set to `1`, the release gate fails instead of skipping live suites when secrets are missing |
+| Variable                         | Required                      | Purpose                                                                                            |
+| -------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| `RUN_REAL_MCPHUB_TESTS`          | yes for live read-only suites | opt-in switch for live read-only tests                                                             |
+| `RUN_REAL_MCPHUB_MUTATION_TESTS` | yes for mutation suites       | opt-in switch for live mutation tests                                                              |
+| `REAL_TEST_MCPHUB_URL`           | yes                           | dedicated MCPHub base URL used by the live test harness                                            |
+| `REAL_TEST_MCPHUB_TOKEN`         | yes                           | upstream MCPHub management credential used by the live test harness                                |
+| `REAL_TEST_HTTP_AUTH_TOKEN`      | yes for HTTP live tests       | local token used to call the temporary local HTTP MCP server started by the tests                  |
+| `REAL_TEST_MCPHUB_AUTH_HEADER`   | optional                      | override upstream auth header if the test MCPHub expects `x-auth-token`                            |
+| `REAL_TEST_MCPHUB_TOKEN_KIND`    | optional                      | override upstream auth mode, defaults to `bearer`                                                  |
+| `REAL_TEST_MCPHUB_PROFILE`       | optional                      | choose one upstream profile name for multi-profile setups                                          |
+| `REAL_TEST_FIXTURE_PREFIX`       | optional                      | prefix used for mutation fixtures and cleanup                                                      |
+| `RELEASE_REAL_TESTS_REQUIRED`    | optional                      | if set to `1`, the release workflow fails instead of skipping live suites when secrets are missing |
 
-## Release Gate
+## Release Workflow
 
-`pnpm test:release-gate` runs the publish-grade path:
+The manually triggered `release.yml` workflow runs the publish-grade path as explicit GitHub Actions steps:
 
-1. docs compatibility check;
-2. typecheck;
-3. lint;
-4. deterministic tests;
-5. integration tests;
-6. coverage matrix verification;
-7. clean build;
-8. Docker compatibility tests;
-9. tarball creation and audit;
-10. installed package runtime verification;
-11. npm publish dry-run;
-12. optional live read-only checks when configured.
+1. optional Docker compatibility tests;
+2. clean build;
+3. tarball creation and audit;
+4. installed package runtime verification;
+5. optional live read-only checks when configured;
+6. npm publish dry-run;
+7. optional changesets publish when `publish=true` and repository publishing is enabled.
 
-The `release.yml` workflow uses this gate before the `changesets` publish step.
+Baseline validation such as Biome, Prettier, deterministic tests, integration tests, and coverage reporting stays in the PR-oriented workflows instead of being duplicated in the release workflow.
 
 ## GitHub Actions
 
 Relevant workflows:
 
-- `ci.yml`: fast PR-grade validation plus installed tarball runtime verification;
+- `ci.yml`: fast PR-grade validation split into baseline validation and package validation;
+- `coverage.yml`: dedicated coverage reporting without duplicating the full release path;
+- `integration.yml`: local transport integration and coverage-matrix verification;
 - `compatibility-matrix.yml`: real Docker-based MCPHub version matrix;
 - `real-behavior.yml`: scheduled or manual live MCPHub checks against dedicated secrets;
-- `release.yml`: changesets release flow guarded by `pnpm test:release-gate`.
+- `release.yml`: manually triggered changesets release flow with publish disabled by default.

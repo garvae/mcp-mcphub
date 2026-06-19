@@ -19,13 +19,13 @@ function shouldRedactKey(key: string, allowlistedKeys: readonly string[]): boole
 }
 
 function redactString(value: string, placeholder: string): string {
-  return REDACTION_PATTERNS.reduce((current, pattern) => current.replaceAll(pattern, placeholder), value);
+  return REDACTION_PATTERNS.reduce(
+    (current, pattern) => current.replaceAll(pattern, placeholder),
+    value,
+  );
 }
 
-function redactJsonLike(
-  value: JsonLike,
-  options: Required<RedactorOptions>,
-): JsonLike {
+function redactJsonLike(value: JsonLike, options: Required<RedactorOptions>): JsonLike {
   if (typeof value === 'string') {
     return redactString(value, options.placeholder);
   }

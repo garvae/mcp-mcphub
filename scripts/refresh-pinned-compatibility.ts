@@ -43,11 +43,15 @@ async function resolveLatestStableRelease(repository: string): Promise<string> {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch GitHub releases for ${repository}: HTTP ${String(response.status)}`);
+    throw new Error(
+      `Failed to fetch GitHub releases for ${repository}: HTTP ${String(response.status)}`,
+    );
   }
 
   const releases = (await response.json()) as GithubRelease[];
-  const stableRelease = releases.find((release) => !release.draft && !release.prerelease && isStableSemver(release.tag_name));
+  const stableRelease = releases.find(
+    (release) => !release.draft && !release.prerelease && isStableSemver(release.tag_name),
+  );
 
   if (stableRelease === undefined) {
     throw new Error(`No stable GitHub release tags found for ${repository}.`);
@@ -61,7 +65,9 @@ async function main(): Promise<void> {
   const latestStableRelease = await resolveLatestStableRelease(config.upstreamRepository);
 
   if (latestStableRelease === config.pinnedReleaseTargetVersion) {
-    process.stdout.write(`Pinned compatibility target already up to date at ${latestStableRelease}.\n`);
+    process.stdout.write(
+      `Pinned compatibility target already up to date at ${latestStableRelease}.\n`,
+    );
     return;
   }
 
@@ -71,7 +77,9 @@ async function main(): Promise<void> {
   };
 
   writeFileSync(configPath, `${JSON.stringify(nextConfig, null, 2)}\n`, 'utf8');
-  process.stdout.write(`Updated pinned compatibility target from ${config.pinnedReleaseTargetVersion} to ${latestStableRelease}.\n`);
+  process.stdout.write(
+    `Updated pinned compatibility target from ${config.pinnedReleaseTargetVersion} to ${latestStableRelease}.\n`,
+  );
 }
 
 await main();
