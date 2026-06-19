@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '22.13.0'
           package-manager-cache: false
@@ -50,7 +50,7 @@ jobs:
           pnpm docs:compatibility
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/weekly-compatibility-target-refresh
           commit-message: 'chore: refresh pinned compatibility target'
