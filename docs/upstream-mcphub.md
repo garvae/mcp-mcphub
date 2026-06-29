@@ -28,7 +28,7 @@ It does not replace:
 ## Compatibility Baseline
 
 - Verified baseline: `samanhappy/mcphub@v1.0.15`
-- Weekly pinned release target: `1.0.16`
+- Weekly pinned release target: `1.0.20`
 - Fresh upstream smoke target: `latest`
 
 See [compatibility.md](./compatibility.md) for the generated matrix and [api-coverage.md](./api-coverage.md) for route-level classification.
