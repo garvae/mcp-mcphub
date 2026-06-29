@@ -1,6 +1,6 @@
 {
   "minimumBestEffortVersion": "1.0.15",
-  "pinnedReleaseTargetVersion": "1.0.16",
+  "pinnedReleaseTargetVersion": "1.0.20",
   "routeSnapshotBaselineVersion": "1.0.15",
   "upstreamRepository": "samanhappy/mcphub"
 }
